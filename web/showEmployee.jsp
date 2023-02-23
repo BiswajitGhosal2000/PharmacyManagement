@@ -88,6 +88,43 @@
                         </c:if>
                         <tr>
                             <th>Employee Id</th>
+<<<<<<< HEAD
+                            <th>Email Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>District</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Pincode</th>
+                            <th>Gender</th>
+                            <th>Phone Number</th>
+                            <th>Age</th>
+                            <th>Salary</th>
+                            <th>Aadhar No</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <c:forEach var="emp" items="${VerifiedEmployee}">   
+                            <tr>
+
+                                <td>${emp.getEmployeeId()}</td>
+                                <td>${emp.getEmailId()}</td>
+                                <td>${emp.getFirstName()}</td>
+                                <td>${emp.getLastName()}</td>
+                                <td>${emp.getDistrict()}</td>
+                                <td>${emp.getCity()}</td>
+                                <td>${emp.getState()}</td>
+                                <td>${emp.getPincode()}</td>
+                                <td>${emp.getGender()}</td>
+                                <td>${emp.getPhoneNumber()}</td>
+                                <td>${emp.getAge()}</td>
+                                <td>${emp.getSalary()}</td>
+                                <td>${emp.getAadharNo()}</td>
+                                <td>${emp.getPassword()}</td>
+=======
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Address</th>
@@ -106,6 +143,7 @@
                                 <td>${emp.getEmployeeId()}</td>
                                 <td>${emp.getFirstName()}</td>
                                 <td>${emp.getLastName()}</td>
+>>>>>>> origin/master
                                 
                                 
                                 <td>

@@ -13,21 +13,8 @@
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
         <!-- Bootstrap core CSS -->
-        <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="css/menu_css.css" rel="stylesheet">
-        <link href="css/product.css" rel="stylesheet">
-        <link href="css/signin.css" rel="stylesheet"> 
-        <link rel="stylesheet" href="css/style.css">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
-
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
-        <!-- Bootstrap core CSS -->
-        <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link  href="css/style.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="css/carousel.css" rel="stylesheet">
@@ -35,7 +22,7 @@
     <body>
 
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #4863A0;">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top"style="background-color: #4863A0;">
                 <a class="navbar-brand" href="#">CompanyA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,30 +39,27 @@
                             <a class="nav-link" href="VerifyEmployee.jsp">Verify Employee <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        LOGIN
-                    </button>
+                    <button class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter">LOGIN</button>
                 </div>
             </nav>
         </header>
 
         <main role="main">
-             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
 
                         <div class="modal-body" style="background-color: #e0feff">
-
-                            <!--BODY-->
 
                             <button type="button" class="close mx-2" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <form class="rounded bg-white shadow p-5" action="Login" method="post">
 
-                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to COMPANY-A</h3>
+                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
                                 <div class="fw-normal text-muted mb-4 text-center">
-                                    New Here? <a href="#" class="text-primary fw-bold text-decoration-none">Create an Account</a>
+                                    New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="emailId" name="emailId" placeholder="name@example.com">
@@ -112,7 +96,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="first-slide" src="https://img.freepik.com/free-photo/medication-time-with-copy-space_23-2148551033.jpg?w=1380&t=st=1676974624~exp=1676975224~hmac=cea2f1675eebd6ef5650ccb902c06cb714f4555c9a0a5326a5e6cb611208b26b" alt="First slide" height="512px" width="100%">
+                        <img class="first-slide" src="images/firstSlide.avif" alt="First slide" height="512px"width="100%">
                         <div class="container">
                             <div class="carousel-caption text-left">
                                 <h1>Pharmacy Management</h1>
@@ -230,7 +214,7 @@
                         <p class="lead">Sometimes, the medicines recommended by your doctor may react with your existing medications, food, beverage, or supplements. This is known as medicine interaction and may prevent your medicine to perform as expected. Hence, on CompanyA, we offer you an option to consult with a pharmacologist, an expert in medicine interactions, before you make any purchase.</p>
                     </div>
                     <div class="col-md-5">
-                        <img class="featurette-image img-fluid mx-auto" src="https://www.kanishkhospital.com/wp-content/uploads/2022/02/Dr.-Mukesh-Gupta-SIr-500x500.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                        <img class="featurette-image img-fluid mt-5 mx-auto" src="https://www.kanishkhospital.com/wp-content/uploads/2022/02/Dr.-Mukesh-Gupta-SIr-500x500.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
                     </div>
                 </div>
 
@@ -253,16 +237,9 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<!--        <script src="js/popper.min.js"></script>
+        <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/holder.min.js"></script>-->
         <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://getbootstrap.com/docs/4.0/js/vendor/popper.min.js"></script>
-        <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+        <script src="js/holder.min.js"></script>
     </body>
 </html>
