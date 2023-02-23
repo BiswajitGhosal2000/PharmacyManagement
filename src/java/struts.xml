@@ -1,0 +1,85 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="Login" class="com.exavalu.pharmacymgmt.models.Login" method="doLogin">
+            <result name="ADMIN">landingPage.jsp</result>
+            <result name="FAILURE">landingPage.jsp</result>
+        </action>
+        
+    </package>
+</struts>
+
+<!--        <action name="PreSignup" class="com.exavalu.models.User" method="doPreSignup">
+            <result name="SUCCESS">signup.jsp</result>
+            <result name="INSERTED">login.jsp</result>
+            <result name="STATE">province.jsp</result>
+            <result name="DISTRICT">district.jsp</result>
+        </action>
+        <action name="Signup" class="com.exavalu.models.User" method="doSignup">
+            <result name="SUCCESS">login.jsp</result>
+            <result name="FAILURE">landingPage.jsp</result>
+        </action>
+        <action name="Signup" class="com.exavalu.models.User" method="doSignup">
+            <result name="SUCCESS">login.jsp</result>
+            <result name="FAILURE">landingPage.jsp</result>
+        </action>
+        <action name="UserFnol" class="com.exavalu.models.User" method="doFnol">
+            <result name="SUCCESS">fnolform.jsp</result>
+            <result name="FAILURE">userLandingPage.jsp</result>
+        </action>
+        <action name="PolicySelect" class="com.exavalu.models.Policies" method="insertPolicy">
+            <result name="SUCCESS">userLandingPage.jsp</result>
+            <result name="FAILURE">userLandingPage.jsp</result>
+        </action>
+        <action name="SaveFnol" class="com.exavalu.models.CarPolicies" method="insertPolicy">
+            <result name="SUCCESS">fnolform.jsp</result>
+            <result name="FAILURE">fnolform.jsp</result>
+        </action>
+        <action name="DisplayPolicy" class="com.exavalu.models.CarPolicies" method="getPolicy">
+            <result name="SUCCESS">policylist.jsp</result>
+            <result name="FAILURE">userLandingPage.jsp</result>
+        </action>
+        <action name="UnderwriterLogin" class="com.exavalu.models.Underwriter" method="doLogin">
+            <result name="SUCCESS">underwriterLandingPage.jsp</result>
+            <result name="FAILURE">underwriterlogin.jsp</result>
+        </action>
+        <action name="UnderWriterSignup" class="com.exavalu.models.Underwriter" method="doSignup">
+            <result name="SUCCESS">underwriterlogin.jsp</result>
+            <result name="FAILURE">underwriterSignup.jsp</result>
+        </action>
+        <action name="DisplayUnderwriterPolicy" class="com.exavalu.models.CarPolicies" method="getunderwriterPolicy">
+            <result name="SUCCESS">underwriterPolicylist.jsp</result>
+            <result name="FAILURE">underwriterLandingPage.jsp</result>
+        </action>
+        <action name="UnderwriterAction" class="com.exavalu.services.consume.ConsumeJson" method="fun">
+            <result name="SUCCESS">underwriterActionPage.jsp</result>
+            <result name="FAILURE">underwriterLandingPage.jsp</result>
+        </action>
+        <action name="UnderwriterAccept" class="com.exavalu.models.Underwriter" method="doAccept">
+            <result name="SUCCESS">underwriterPolicylist.jsp</result>
+            <result name="FAILURE">underwriterLandingPage.jsp</result>
+        </action>
+        <action name="UnderwriterReject" class="com.exavalu.models.Underwriter" method="doReject">
+            <result name="SUCCESS">underwriterPolicylist.jsp</result>
+            <result name="FAILURE">underwriterLandingPage.jsp</result>
+        </action>
+        <action name="InsuranceofficerLogin" class="com.exavalu.models.Insuranceofficer" method="doLogin">
+            <result name="SUCCESS">insuranceofficerLandingPage.jsp</result>
+            <result name="FAILURE">insuranceofficerLogin.jsp</result>
+        </action>
+        <action name="DisplayInsuranceofficerPolicy" class="com.exavalu.models.CarPolicies" method="getinsuranceofficerPolicy">
+            <result name="SUCCESS">insuranceofficerPolicylist.jsp</result>
+            <result name="FAILURE">insuranceofficerLandingPage.jsp</result>
+        </action>
+        <action name="InsuranceofficerAccept" class="com.exavalu.models.Insuranceofficer" method="doAccept">
+            <result name="SUCCESS">insuranceofficerPolicylist.jsp</result>
+            <result name="FAILURE">insuranceofficerLandingPage.jsp</result>
+        </action>
+        <action name="InsuranceofficerReject" class="com.exavalu.models.Insuranceofficer" method="doReject">
+            <result name="SUCCESS">insuranceofficerPolicylist.jsp</result>
+            <result name="FAILURE">insuranceofficerLandingPage.jsp</result>
+        </action>-->
