@@ -10,6 +10,10 @@
             <result name="EMPLOYEE">homeEmployee.jsp</result>
             <result name="FAILURE">landingPage.jsp</result>
         </action>
+        <action name="AddEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doLogin">
+            <result name="ADMIN">landingPage.jsp</result>
+            <result name="FAILURE">landingPage.jsp</result>
+        </action>
         
     </package>
 </struts>
