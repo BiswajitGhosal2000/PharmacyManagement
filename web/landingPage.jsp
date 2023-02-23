@@ -73,9 +73,9 @@
                             </button>
                             <form class="rounded bg-white shadow p-5" action="Login" method="post">
 
-                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to COMPANY-A</h3>
+                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
                                 <div class="fw-normal text-muted mb-4 text-center">
-                                    New Here? <a href="#" class="text-primary fw-bold text-decoration-none">Create an Account</a>
+                                    New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="emailId" name="emailId" placeholder="name@example.com">

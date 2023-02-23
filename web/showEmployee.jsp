@@ -88,6 +88,7 @@
                         </c:if>
                         <tr>
                             <th>Employee Id</th>
+<<<<<<< HEAD
                             <th>Email Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -123,6 +124,26 @@
                                 <td>${emp.getSalary()}</td>
                                 <td>${emp.getAadharNo()}</td>
                                 <td>${emp.getPassword()}</td>
+=======
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Basic Salary</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <c:forEach var="emp" items="${VerifiedEmployee}">   
+                            <tr>
+
+                                <td>${emp.getEmployeeId()}</td>
+                                <td>${emp.getFirstName()}</td>
+                                <td>${emp.getLastName()}</td>
+>>>>>>> origin/master
                                 
                                 
                                 <td>
