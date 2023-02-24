@@ -49,7 +49,6 @@ addMedicineBtn.addEventListener("click", () => {
   const quantity = document.getElementById("quantity").value;
 
   addMedicine(medicine, quantity);
-
   medicineCount++;
 });
 

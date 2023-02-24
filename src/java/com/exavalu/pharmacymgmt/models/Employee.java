@@ -41,7 +41,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     private String aadharNo;
     
     
-     public static Employee employee = null;
+    public static Employee employee = null;
 
     public static Employee getInstance() {
         if (employee == null) {
@@ -67,7 +67,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             ArrayList empList = EmployeeService.getInstance().getAllEmployees();
             sessionMap.put("EmpList", empList);
 
-            System.out.println("returning Success from doSearch method");
+            System.out.println("returning Success from doEmployeeUpdate method");
             result = "SUCCESS";
 
         }

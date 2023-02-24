@@ -35,13 +35,13 @@ public class EmployeeService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO pharmacydb.employee(firstName,lastName,district,state,pincode,gender,phoneNumber,age,salary,emailId,password,aadharNo,startDate,endDate)\n"
-                    + "VALUES(? ,? ,? ,? ,? ,? ? ,? ,? ,? ,? ,? ,?);";
+            String sql = "INSERT INTO pharmacydb.employee(firstName,lastName,city,state,pincode,gender,phoneNumber,age,salary,emailId,password,aadharNo,startDate,endDate)\n"
+                    + "VALUES(? ,? ,? ,? ,? ,?, ? ,? ,? ,? ,? ,? ,?,?);";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, emp.getFirstName());
             preparedStatement.setString(2, emp.getLastName());
-            preparedStatement.setString(3, emp.getDistrict());
+            preparedStatement.setString(3, emp.getCity());
             preparedStatement.setString(4, emp.getState());
             preparedStatement.setString(5, emp.getPincode());
             preparedStatement.setString(6, emp.getGender());
@@ -54,17 +54,19 @@ public class EmployeeService {
             preparedStatement.setString(13, emp.getStartdate());
             preparedStatement.setString(14, emp.getEndDate());
 
-            System.out.println(sql);
+           
+             System.out.println(sql);
             int row = preparedStatement.executeUpdate();
-
+            
             if (row == 1) {
                 result = true;
             }
-
+            System.out.println(sql);
         } catch (SQLException ex) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             // Construct the error message with date and time
             String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
             log.error(errorMessage);
         }
 
@@ -78,7 +80,7 @@ public class EmployeeService {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "UPDATE pharmacydb.employee\n"
                     + "SET firstName = ? ,lastName = ? ,district = ? ,state = ? ,phoneNumber = ? ,age = ? ,\n"
-                    + "salary = ? ,emailId = ? ,password = ?,city = ? WHERE employeeId = ?;";
+                    + "salary = ? ,emailId = ? ,password = ?,city = ?,pincode = ?  WHERE employeeId = ?;";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, emp.getFirstName());
@@ -91,6 +93,7 @@ public class EmployeeService {
             preparedStatement.setString(8, emp.getEmailId());
             preparedStatement.setString(9, emp.getPassword());
             preparedStatement.setString(10, emp.getCity());
+            preparedStatement.setString(11, emp.getPincode());
             preparedStatement.setString(11, emp.getEmployeeId());
 
             int row = preparedStatement.executeUpdate();
@@ -134,7 +137,8 @@ public class EmployeeService {
 
     }
 
-    public ArrayList getAllEmployees() {
+    public static ArrayList getAllEmployees() {
+        
         ArrayList empList = new ArrayList();
         String sql = "SELECT * FROM pharmacydb.employee where status = 1; ";
         try {

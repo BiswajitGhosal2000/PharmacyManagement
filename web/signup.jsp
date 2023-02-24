@@ -36,32 +36,32 @@
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" required/>
+                                            <input type="text" name="firstName" class="form-control" placeholder="First Name *" value="" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" required/>
+                                            <input type="text" name="lastName" class="form-control" placeholder="Last Name *" value="" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" id="password" placeholder="Password *" value="" required />
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Password *" value="" required />
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password *" value="" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" class="form-control"  placeholder="Age *" value="" required/>
+                                            <input type="number" name="age" class="form-control"  placeholder="Age *" value="" required/>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="maxl">
-                                                Gender*: 
+                                                Gender: 
                                                 <div class="form-check form-check-inline mb-0 me-4">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                                                    <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="femaleGender"
                                                            value="Female" />
                                                     <label class="form-check-label" for="femaleGender">Female</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline mb-0 me-4">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                                                    <input class="form-check-input" name="gender" type="radio" name="inlineRadioOptions" id="maleGender"
                                                            value="Male" />
                                                     <label class="form-check-label" for="maleGender">Male</label>
                                                 </div>
@@ -70,26 +70,26 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email *" value="" required/>
+                                            <input type="email" name="emailId" class="form-control" placeholder="Your Email *" value="" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" required/>
+                                            <input type="text" name="phoneNumber" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Pincode *" value="" required/>
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode *" value="" required/>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <input type="text" class="form-control" placeholder="State *" value="" required />
+                                                <input type="text"name="state" class="form-control" placeholder="State *" value="" required />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="text" class="form-control" placeholder="City *" value="" required/>
+                                                <input type="text" name="city" class="form-control" placeholder="City *" value="" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Aadhar Number *" value="" required/>
+                                            <input type="text" name="aadharNo" class="form-control" placeholder="Aadhar Number *" value="" required/>
                                         </div>
 
                                         <!--<input type="submit" class="btnRegister"  value="Register"/>-->
