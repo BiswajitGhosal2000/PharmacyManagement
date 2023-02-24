@@ -70,25 +70,13 @@
         <main role="main">
             <div class="jumbotron">
                 <table class="table table-bordered table-striped text-center " id="example">
-                    <thead class="bg-info
-                           ">
-                        <c:choose>
-                            <c:when test = "${requestScope.noData != null}">
-                                <tr>
-                                    <td colspan="5">
-                                        <h2 style="background-color: #4863A0;">
-                                            <c:out value="${requestScope.noData}"> </c:out>
-                                            </h2>
-                                        </td>
-                                    </tr>
-                            </c:when>
-                        </c:choose>
+                    <thead class="bg-info">    
+
                         <c:if test="${not empty EmpMsg}">
                             <c:out value="${EmpMsg}"/>
                         </c:if>
                         <tr>
                             <th>Employee Id</th>
-<<<<<<< HEAD
                             <th>Email Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -101,7 +89,6 @@
                             <th>Age</th>
                             <th>Salary</th>
                             <th>Aadhar No</th>
-                            <th>Password</th>
                             <th>Action</th>
                         </tr>
 
@@ -123,29 +110,6 @@
                                 <td>${emp.getAge()}</td>
                                 <td>${emp.getSalary()}</td>
                                 <td>${emp.getAadharNo()}</td>
-                                <td>${emp.getPassword()}</td>
-=======
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Gender</th>
-                            <th>Age</th>
-                            <th>Basic Salary</th>
-                            <th>Action</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <c:forEach var="emp" items="${VerifiedEmployee}">   
-                            <tr>
-
-                                <td>${emp.getEmployeeId()}</td>
-                                <td>${emp.getFirstName()}</td>
-                                <td>${emp.getLastName()}</td>
->>>>>>> origin/master
-                                
-                                
                                 <td>
                                     <a href=doEdit?employeeId=${emp.getEmployeeId()} class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
@@ -161,17 +125,16 @@
 
                 </table>
             </div>
-
+            <script src =  "js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#example').DataTable();
+                });
+            </script>
         </main>
-        <script src =  "js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#example').DataTable();
-            });
-        </script>
     </body>
 
 
