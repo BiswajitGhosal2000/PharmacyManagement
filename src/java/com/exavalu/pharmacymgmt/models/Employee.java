@@ -83,8 +83,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = new ArrayList();
-            empList = EmployeeService.getInstance().getAllEmployees();
+            ArrayList empList = EmployeeService.getInstance().getAllEmployees();
             sessionMap.put("EmpList", empList);
 
             result = "SUCCESS";
@@ -94,15 +93,20 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     }
         
      public String doEmployeeAdd() throws SQLException {
-        String result = "SUCCESS";
-        EmployeeService.addEmployee(this);
-        String createdMsg = "Employee created successfully!!";
-        sessionMap.put("CreatedMsg", createdMsg);
-        ArrayList empList = new ArrayList();
-        empList = EmployeeService.getInstance().getAllEmployees();
-        sessionMap.put("EmpList", empList);
-        System.out.println("returning Success from doEmployeeAdd method");
-        result = "SUCCESS";
+        String result = "FAILURE";
+        boolean success = EmployeeService.addEmployee(this);
+        if (success){
+            String createdMsg = "Employee created successfully!!";
+            sessionMap.put("CreatedMsg", createdMsg);
+            result = "SUCCESS";
+            System.out.println("returning Success from doEmployeeAdd method");
+        }else{
+            System.out.println("returning Failure from doEmployeeAdd method");
+        }
+//        ArrayList empList = EmployeeService.getInstance().getAllEmployees();
+//        sessionMap.put("EmpList", empList);
+        
+        
         return result;
     }
     public String getEmployeeId() {
