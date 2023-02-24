@@ -96,11 +96,11 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-<<<<<<< HEAD
+
                         <img class="first-slide" src="images/firstSlide.avif" alt="First slide" height="512px"width="100%">
-=======
+
                         <img class="first-slide" src="images/firstSlide.png" alt="First slide" height="512px"width="100%">
->>>>>>> origin/master
+
                         <div class="container">
                             <div class="carousel-caption text-left">
                                 <h1>Pharmacy Management</h1>
