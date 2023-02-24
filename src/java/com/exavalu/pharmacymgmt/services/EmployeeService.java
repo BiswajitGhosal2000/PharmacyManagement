@@ -137,7 +137,8 @@ public class EmployeeService {
 
     }
 
-    public ArrayList getAllEmployees() {
+    public static ArrayList getAllEmployees() {
+        
         ArrayList empList = new ArrayList();
         String sql = "SELECT * FROM pharmacydb.employee where status = 1; ";
         try {

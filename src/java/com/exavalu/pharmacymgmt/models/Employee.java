@@ -41,7 +41,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     private String aadharNo;
     
     
-     public static Employee employee = null;
+    public static Employee employee = null;
 
     public static Employee getInstance() {
         if (employee == null) {
