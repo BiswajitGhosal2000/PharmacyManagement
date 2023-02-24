@@ -28,7 +28,7 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
     
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-    private static final Logger logger = Logger.getLogger(Login.class.getName());
+    static Logger logger = Logger.getLogger(Login.class.getName());
 
     @Override
     public void setApplication(Map<String, Object> application) {

@@ -57,9 +57,9 @@
                             </button>
                             <form class="rounded bg-white shadow p-5" action="Login" method="post">
 
-                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to COMPANY-A</h3>
+                                <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
                                 <div class="fw-normal text-muted mb-4 text-center">
-                                    New Here? <a href="#" class="text-primary fw-bold text-decoration-none">Create an Account</a>
+                                    New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="emailId" name="emailId" placeholder="name@example.com">
@@ -96,7 +96,11 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
+<<<<<<< HEAD
                         <img class="first-slide" src="images/firstSlide.avif" alt="First slide" height="512px"width="100%">
+=======
+                        <img class="first-slide" src="images/firstSlide.png" alt="First slide" height="512px"width="100%">
+>>>>>>> origin/master
                         <div class="container">
                             <div class="carousel-caption text-left">
                                 <h1>Pharmacy Management</h1>
