@@ -70,47 +70,34 @@
         <main role="main">
             <div class="jumbotron">
                 <table class="table table-bordered table-striped text-center " id="example">
-                    <thead class="bg-info
-                           ">
-                        <c:choose>
-                            <c:when test = "${requestScope.noData != null}">
-                                <tr>
-                                    <td colspan="5">
-                                        <h2 style="background-color: #4863A0;">
-                                            <c:out value="${requestScope.noData}"> </c:out>
-                                            </h2>
-                                        </td>
-                                    </tr>
-                            </c:when>
-                        </c:choose>
+                    <thead class="bg-info">
+                        
                         <c:if test="${not empty EmpMsg}">
                             <c:out value="${EmpMsg}"/>
                         </c:if>
                         <tr>
                             <th>Employee Id</th>
-<<<<<<< HEAD
+                            <th>Aadhar No</th>
                             <th>Email Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>District</th>
                             <th>City</th>
                             <th>State</th>
-                            <th>Pincode</th>
+                            <th>Pin Code</th>
                             <th>Gender</th>
                             <th>Phone Number</th>
                             <th>Age</th>
                             <th>Salary</th>
-                            <th>Aadhar No</th>
-                            <th>Password</th>
                             <th>Action</th>
                         </tr>
-
                     </thead>
                     <tbody>
                         <c:forEach var="emp" items="${VerifiedEmployee}">   
                             <tr>
 
                                 <td>${emp.getEmployeeId()}</td>
+                                <td>${emp.getAadharNo()}</td>
                                 <td>${emp.getEmailId()}</td>
                                 <td>${emp.getFirstName()}</td>
                                 <td>${emp.getLastName()}</td>
@@ -122,35 +109,11 @@
                                 <td>${emp.getPhoneNumber()}</td>
                                 <td>${emp.getAge()}</td>
                                 <td>${emp.getSalary()}</td>
-                                <td>${emp.getAadharNo()}</td>
-                                <td>${emp.getPassword()}</td>
-=======
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Gender</th>
-                            <th>Age</th>
-                            <th>Basic Salary</th>
-                            <th>Action</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <c:forEach var="emp" items="${VerifiedEmployee}">   
-                            <tr>
-
-                                <td>${emp.getEmployeeId()}</td>
-                                <td>${emp.getFirstName()}</td>
-                                <td>${emp.getLastName()}</td>
->>>>>>> origin/master
-                                
-                                
                                 <td>
-                                    <a href=doEdit?employeeId=${emp.getEmployeeId()} class=" text-decoration-none">
+                                    <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
-                                    <a href=Delete?employeeId=${emp.getEmployeeId()} class=" text-decoration-none">
+                                    <a href="DeleteEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
                                     </a>
                                 </td>

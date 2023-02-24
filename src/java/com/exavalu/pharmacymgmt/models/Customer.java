@@ -19,7 +19,18 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author Biswajit
  */
 public class Customer extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
-    private String phoneNumber, customerName,emailId,doctorName,gender,address;
+    
+    public static Customer customer = null;
+
+    public static Customer getInstance() {
+        if (customer == null) {
+            return new Customer();
+        } else {
+            return customer;
+        }
+    }
+    
+    private String phoneNumber, customerName,emailId,gender,address;
     private int age;
     
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
@@ -78,20 +89,6 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     }
 
     /**
-     * @return the doctorName
-     */
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    /**
-     * @param doctorName the doctorName to set
-     */
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
-    /**
      * @return the gender
      */
     public String getGender() {
@@ -135,7 +132,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     public String addCustomer()
     {
         String result = "FAILURE";
-        boolean success = true; //CustomerService.addCustomer(this);
+        boolean success = CustomerService.addCustomer(this);
         if(success){
             result="SUCCESS";
         }
@@ -147,7 +144,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     public String getCustomerByNumber()
     {
         String result = "FAILURE";
-        boolean success = true; //CustomerService.addCustomer(this);
+        boolean success = CustomerService.addCustomer(this);
         if(success){
             sessionMap.put("Customer", this);
             result="SUCCESS";
@@ -160,7 +157,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     public String updateCustomer()
     {
         String result = "FAILURE";
-        boolean success = true; //CustomerService.addCustomer(this);
+        boolean success = CustomerService.addCustomer(this);
         if(success){
             sessionMap.put("Customer", this);
             result="SUCCESS";
