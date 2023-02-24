@@ -12,10 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medicine Order System</title>
     <link rel="stylesheet" href="css/orderMedicine.css" />
+    <script src="https://kit.fontawesome.com/ee5fe365d2.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h1>Order Medicine</h1>
+    
     <div class="container">
+        <h1>Order Medicine <i class="fa-solid fa-syringe"></i> </h1>
+
       <form id="order-form">
       <div class="form-group">
         <label for="name">Name:</label>
@@ -46,9 +49,11 @@
       <div class="buttons">
          
       <div id="medicines-container"></div>
-      <button type="submit" id="submit-order">Submit Order</button>
-      <button type="submit" id="print">Print</button>
+      
+<!--      <button type="submit" id="print">Print</button>-->
       </div>
+         <div class="submit"><button type="submit" id="submit-order">Submit Order</button></div>
+         
     </form>
     </div>
     
