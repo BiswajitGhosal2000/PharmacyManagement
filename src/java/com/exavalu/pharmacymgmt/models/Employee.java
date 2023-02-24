@@ -67,7 +67,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             ArrayList empList = EmployeeService.getInstance().getAllEmployees();
             sessionMap.put("EmpList", empList);
 
-            System.out.println("returning Success from doSearch method");
+            System.out.println("returning Success from doEmployeeUpdate method");
             result = "SUCCESS";
 
         }

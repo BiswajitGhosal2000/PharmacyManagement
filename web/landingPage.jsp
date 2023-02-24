@@ -96,7 +96,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="first-slide" src="images/firstSlide.avif" alt="First slide" height="512px"width="100%">
+                        <img class="first-slide" src="images/firstSlide.png" alt="First slide" height="512px"width="100%">
                         <div class="container">
                             <div class="carousel-caption text-left">
                                 <h1>Pharmacy Management</h1>
