@@ -24,12 +24,13 @@
 
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/menuAdmin.css">
   </head>
 
   <body class="text-center" style='background-image: url("images/pharmacy1.jpg"); background-size: 100% 100%;'>
       
      
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+<!--    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #4863A0;">
         <a class="navbar-brand" href="#">Carousel</a>
@@ -54,15 +55,13 @@
           </form>
         </div>
       </nav>
-    </header>
+    </header>-->
+<jsp:include page="menuAdmin.jsp"></jsp:include>
 
        <main role="main"  class="inner cover">
            
            
       </main>
-
-      
-    </div>
 
     
     <!-- Bootstrap core JavaScript

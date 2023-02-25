@@ -94,7 +94,7 @@ public class CustomerService {
 
     }
     
-    public static boolean getCustomerByNumber(Customer customer) {
+    public static boolean getCustomerByNumber(String phoneNumber) {
 
         boolean result = false;
         try {
@@ -102,7 +102,7 @@ public class CustomerService {
             String sql = "select * from customer where  phoneNumber= ? ";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, customer.getPhoneNumber());
+            preparedStatement.setString(1, phoneNumber);
            
 
             ResultSet rs = preparedStatement.executeQuery();

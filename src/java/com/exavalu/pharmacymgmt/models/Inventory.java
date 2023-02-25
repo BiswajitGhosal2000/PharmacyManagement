@@ -21,82 +21,35 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author lenovo
  */
 public class Inventory extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
-    
+
+    public static Inventory inventory = null;
+
+    public static Inventory getInstance() {
+        if (inventory == null) {
+            return new Inventory();
+        }
+        return inventory;
+    }
+
     private int productNumber;
     private String productName;
     private int quantity;
     private double unitPrice;
     private String expiryDate;
     private String shelfNumber;
-    
+
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
+
     
-    
-    public String doInventoryAdd() throws SQLException {
-        String result = "FAILURE";
-        boolean success = InventoryService.addInventory(this);
-        if (success){
-            String createdMsg = "Item Added successfully!!";
-            sessionMap.put("CreatedMsg", createdMsg);
-            result = "SUCCESS";
-            System.out.println("returning Success from doInventoryAdd method");
-        }else{
-            System.out.println("returning Failure from doInventoryAdd method");
-        }
-        
-        ArrayList inventoryList = InventoryService.getInstance().getAllInventory();
-        sessionMap.put("InventoryList", inventoryList);
-        
-        return result;
-    }
-    
-    
-    public String doInvenoryUpdate() throws Exception {
-
-        String result = "FAILURE";
-        boolean success = InventoryService.updateInventory(this);
-
-        if (success) {
-            String updateMsg = "updated Inventory of ProductNumber :"+this.productNumber;
-            sessionMap.put("UpdateMsg", updateMsg);
-
-            ArrayList inventoryList = InventoryService.getInstance().getAllInventory();
-            sessionMap.put("InventoryList", inventoryList);
-
-            System.out.println("returning Success from doInvenoryUpdate method");
-            result = "SUCCESS";
-
-        }
-        return result;
-    }
-    
-    public String doInventoryDelete() throws Exception {
-
-        String result = "FAILURE";
-        boolean success = InventoryService.deleteInventory(this);
-
-        if (success) {
-            String updateMsg = "Inventory item deleted successfully!";
-            sessionMap.put("UpdateMsg", updateMsg);
-
-            ArrayList inventoryList = InventoryService.getInstance().getAllInventory();
-            sessionMap.put("InventoryList", inventoryList);
-
-            result = "SUCCESS";
-
-        }
-        return result;
-    }
-    
-     @Override
+    @Override
     public void setApplication(Map<String, Object> application) {
-         setMap((ApplicationMap) application);
+        setMap((ApplicationMap) application);
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
-        setSessionMap((SessionMap<String, Object>) (SessionMap) session);   
+        setSessionMap((SessionMap<String, Object>) (SessionMap) session);
     }
 
     /**
@@ -210,6 +163,93 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
     public void setShelfNumber(String shelfNumber) {
         this.shelfNumber = shelfNumber;
     }
+
+    public String getAllInventory() throws SQLException {
+        String result = "FAILURE";
+        ArrayList inventoryList = InventoryService.getAllInventory();
+        if (!inventoryList.isEmpty()) {
+            String createdMsg = "Item Added successfully!!";
+            sessionMap.put("CreatedMsg", createdMsg);
+            result = "SUCCESS";
+            System.out.println("returning Success from doInventoryAdd method");
+        } else {
+            System.out.println("returning Failure from doInventoryAdd method");
+        }
+        sessionMap.put("InventoryList", inventoryList);
+
+        return result;
+    }
     
-    
+    public String doInventoryAdd() throws SQLException {
+        String result = "FAILURE";
+        boolean success = InventoryService.addInventory(this);
+        if (success) {
+            String createdMsg = "Item Added successfully!!";
+            sessionMap.put("CreatedMsg", createdMsg);
+            result = "SUCCESS";
+            System.out.println("returning Success from doInventoryAdd method");
+        } else {
+            System.out.println("returning Failure from doInventoryAdd method");
+        }
+
+        ArrayList inventoryList = InventoryService.getAllInventory();
+        sessionMap.put("InventoryList", inventoryList);
+
+        return result;
+    }
+
+    public String doInvenoryUpdate() throws Exception {
+
+        String result = "FAILURE";
+        boolean success = InventoryService.updateInventory(this);
+
+        if (success) {
+            String updateMsg = "updated Inventory of ProductNumber :" + this.productNumber;
+            sessionMap.put("UpdateMsg", updateMsg);
+
+            ArrayList inventoryList = InventoryService.getAllInventory();
+            sessionMap.put("InventoryList", inventoryList);
+
+            System.out.println("returning Success from doInvenoryUpdate method");
+            result = "SUCCESS";
+
+        }
+        return result;
+    }
+
+    public String doInventoryDelete() throws Exception {
+
+        String result = "FAILURE";
+        boolean success = InventoryService.deleteInventory(this);
+
+        if (success) {
+            String updateMsg = "Inventory item deleted successfully!";
+            sessionMap.put("UpdateMsg", updateMsg);
+
+            ArrayList inventoryList = InventoryService.getAllInventory();
+            sessionMap.put("InventoryList", inventoryList);
+
+            result = "SUCCESS";
+
+        }
+        return result;
+    }
+
+    public String getProductByNumber() throws Exception {
+
+        String result = "FAILURE";
+        boolean success = InventoryService.getProduct(this.getProductNumber());
+
+        if (success) {
+            String updateMsg = "Inventory item deleted successfully!";
+            sessionMap.put("UpdateMsg", updateMsg);
+
+            sessionMap.put("Product", this);
+
+            result = "SUCCESS";
+
+        }
+        return result;
+    }
+
 }

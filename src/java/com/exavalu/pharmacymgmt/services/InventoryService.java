@@ -20,21 +20,12 @@ import org.apache.log4j.Logger;
  */
 public class InventoryService {
     
-    public static InventoryService inventoryService = null;
     private static final Logger log = Logger.getLogger(InventoryService.class);
-
-    public static InventoryService getInstance() {
-        if (inventoryService == null) {
-            return new InventoryService();
-        } else {
-            return inventoryService;
-        }
-    }
     
-    public ArrayList getAllInventory(){
+    public static ArrayList getAllInventory(){
         
         ArrayList inventoryList = new ArrayList();
-        String sql = "SELECT * FROM pharmacydb.inventory";
+        String sql = "SELECT * FROM inventory";
         
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -71,7 +62,7 @@ public class InventoryService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO pharmacydb.inventory(productName,quantity,unitPrice,expiryDate,shelfNumber) "
+            String sql = "INSERT INTO inventory(productName,quantity,unitPrice,expiryDate,shelfNumber) "
                     + "VALUES(? ,? ,? ,? ,?)";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -104,7 +95,7 @@ public class InventoryService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE pharmacydb.inventory\n"
+            String sql = "UPDATE inventory\n"
                     + "SET productName = ? ,quantity = ? ,unitPrice = ? ,expiryDate = ? ,shelfNumber = ? where productNumber = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -137,7 +128,7 @@ public class InventoryService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE pharmacydb.inventory SET status = 0 WHERE productNumber = ?";
+            String sql = "UPDATE inventory SET status = 0 WHERE productNumber = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setInt(1, inventory.getProductNumber());
@@ -154,6 +145,32 @@ public class InventoryService {
         }
         return result;
 
+    }
+    public static boolean getProduct(int productNumber) {
+        boolean result = false;
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT * from inventory WHERE productNumber = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, productNumber);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                Inventory.getInstance().setProductName(rs.getString("productName"));
+                Inventory.getInstance().setQuantity(rs.getInt("quantity"));
+                Inventory.getInstance().setProductName(rs.getString("productName"));
+                Inventory.getInstance().setProductName(rs.getString("productName"));
+                Inventory.getInstance().setProductName(rs.getString("productName"));
+                result = true;
+            }
+        } catch (SQLException ex) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            // Construct the error message with date and time
+            String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
+            log.error(errorMessage);
+        }
+        return result;
     }
     
 }
