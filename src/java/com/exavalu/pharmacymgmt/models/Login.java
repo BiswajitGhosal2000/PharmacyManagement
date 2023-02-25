@@ -4,11 +4,13 @@
  */
 package com.exavalu.pharmacymgmt.models;
 
+import com.exavalu.pharmacymgmt.services.EmployeeService;
 import com.exavalu.pharmacymgmt.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
@@ -72,14 +74,16 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
 
         String result = LoginService.doLogin(this.emailId, this.password);
         if (result.equalsIgnoreCase("ADMIN")) {
-            //ArrayList verifiedEmpList = EmployeeService.getAllEmployee();
+            ArrayList verifiedEmpList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmployee", verifiedEmpList);
             System.out.println("Returning Success From ADMIN Login");
             sessionMap.put("ADMIN", Admin.getInstance());
-            //sessionMap.put("VerifiedEmployee", verifiedEmpList);
+            ArrayList empList = EmployeeService.getAllEmployees();
+            sessionMap.put("EmpList", empList);
             result = "ADMIN";
         } else if (result.equalsIgnoreCase("EMPLOYEE")) {
             System.out.println("Returning Success From EMPLOYEE Login");
-            //sessionMap.put("EMPLOYEE", Employee.getInstance());
+            sessionMap.put("EMPLOYEE", Employee.getInstance());
             result = "EMPLOYEE";
         }else{
             logger.error("Something error in login page. TIME:"+ LocalDateTime.now());

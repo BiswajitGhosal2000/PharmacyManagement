@@ -20,22 +20,13 @@ import org.apache.log4j.Logger;
  */
 public class EmployeeService {
 
-    public static EmployeeService employeeService = null;
     private static final Logger log = Logger.getLogger(EmployeeService.class);
-
-    public static EmployeeService getInstance() {
-        if (employeeService == null) {
-            return new EmployeeService();
-        } else {
-            return employeeService;
-        }
-    }
 
     public static boolean addEmployee(Employee emp) {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO pharmacydb.employee(firstName,lastName,city,state,pincode,gender,phoneNumber,age,salary,emailId,password,aadharNo,startDate,endDate)\n"
+            String sql = "INSERT INTO employee(firstName,lastName,city,state,pincode,gender,phoneNumber,age,salary,emailId,password,aadharNo,startDate,endDate)\n"
                     + "VALUES(? ,? ,? ,? ,? ,?, ? ,? ,? ,? ,? ,? ,?,?);";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -78,7 +69,7 @@ public class EmployeeService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE pharmacydb.employee\n"
+            String sql = "UPDATE employee\n"
                     + "SET firstName = ? ,lastName = ? ,district = ? ,state = ? ,phoneNumber = ? ,age = ? ,\n"
                     + "salary = ? ,emailId = ? ,password = ?,city = ?,pincode = ?  WHERE employeeId = ?;";
 
@@ -118,7 +109,7 @@ public class EmployeeService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE pharmacydb.employee SET status = 0 WHERE employeeId = ?;";
+            String sql = "UPDATE employee SET status = 0 ,isDeleted=1 WHERE employeeId = ?;";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, emp.getEmployeeId());
@@ -137,9 +128,52 @@ public class EmployeeService {
 
     }
 
-    public ArrayList getAllEmployees() {
+    public static ArrayList getAllEmployees() {
+        
         ArrayList empList = new ArrayList();
-        String sql = "SELECT * FROM pharmacydb.employee where status = 1; ";
+        String sql = "SELECT * FROM employee where status = 0 and isDeleted=0; ";
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            System.out.println(sql);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(sql);
+            while (rs.next()) {
+                Employee emp = new Employee();
+                emp.setEmailId(rs.getString("emailId"));
+                emp.setEmployeeId(rs.getString("employeeId"));
+                emp.setFirstName(rs.getString("firstName"));
+                emp.setLastName(rs.getString("lastName"));
+//                emp.setDistrict(rs.getString("district"));
+                emp.setCity(rs.getString("city"));
+                emp.setState(rs.getString("state"));
+                emp.setPincode(rs.getString("pincode"));
+                emp.setGender(rs.getString("gender"));
+                emp.setPhoneNumber(rs.getString("phoneNumber"));
+                emp.setAge(rs.getString("age"));
+//                emp.setSalary(rs.getString("salary"));
+//                emp.setEndDate(rs.getString("endDate"));
+//                emp.setStartdate(rs.getString("startDate"));
+                emp.setAadharNo(rs.getString("aadharNo"));
+//                emp.setPassword(rs.getString("password"));
+                empList.add(emp);
+
+            }
+
+        } catch (SQLException ex) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            // Construct the error message with date and time
+            String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
+            log.error(errorMessage);
+        }
+        System.err.println("Total rows:" + empList.size());
+        return empList;
+    }
+    public static ArrayList getAllVerfiedEmployees() {
+        
+        ArrayList empList = new ArrayList();
+        String sql = "SELECT * FROM employee where status = 1 and isDeleted=0; ";
         try {
             Connection con = JDBCConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -163,7 +197,7 @@ public class EmployeeService {
                 emp.setEndDate(rs.getString("endDate"));
                 emp.setStartdate(rs.getString("startDate"));
                 emp.setAadharNo(rs.getString("aadharNo"));
-                emp.setPassword(rs.getString("password"));
+//                emp.setPassword(rs.getString("password"));
                 empList.add(emp);
 
             }

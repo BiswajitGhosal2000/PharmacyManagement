@@ -56,7 +56,7 @@
             }
             .wrapper{
                 padding: 0 0 100px;
-                background-image: url("images/images/bg.png");
+                background-image: url("images/bg.png");
                 background-position: bottom center;
                 background-repeat: no-repeat;
                 background-size: contain;
@@ -120,9 +120,21 @@
                         <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value=Doe>
                         <label for="floatingInput">Last Name</label>
                     </div>
-                    <div class="form-floating">
+<!--                    <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="address" name="address" value=Kolkata>
                         <label for="floatingInput">Address</label>
+                    </div>-->
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="pincode" name="pincode" value=700065>
+                        <label for="floatingInput">Pin Code</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="state" name="state" value=WestBengal>
+                        <label for="floatingInput">State</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city" value=Kolkata>
+                        <label for="floatingInput">City</label>
                     </div>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="phone" name="phoneNumber" value=8777053689>
@@ -137,6 +149,15 @@
                         </select>
                         <label for="floatingInput">Gender</label>
                     </div> 
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="age" name="age" value=23>
+                        <label for="floatingInput">Age</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="aadhar" name="aadharNo" value=62394568712>
+                        <label for="floatingInput">Aadhar Number</label>
+                    </div>
 
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="basicSalary" name="basicSalary" value=12000>

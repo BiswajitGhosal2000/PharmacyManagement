@@ -22,7 +22,7 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author gaura
  */
 public class Employee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
-    
+
     private String employeeId;
     private String firstName;
     private String lastName;
@@ -39,9 +39,8 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     private String startdate;
     private String endDate;
     private String aadharNo;
-    
-    
-     public static Employee employee = null;
+
+    public static Employee employee = null;
 
     public static Employee getInstance() {
         if (employee == null) {
@@ -50,21 +49,21 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             return employee;
         }
     }
-    
+
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     private static final Logger log = Logger.getLogger(Admin.class);
-    
-        public String doEmployeeUpdate() throws Exception {
+
+    public String doEmployeeUpdate() throws Exception {
 
         String result = "FAILURE";
         boolean success = EmployeeService.updateEmployee(this);
 
         if (success) {
-            String updateMsg = "updated Employee of EmployeeId :"+this.employeeId;
+            String updateMsg = "updated Employee of EmployeeId :" + this.employeeId;
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = EmployeeService.getInstance().getAllEmployees();
+            ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
 
             System.out.println("returning Success from doEmployeeUpdate method");
@@ -73,8 +72,8 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         }
         return result;
     }
-        
-        public String doEmployeeDelete() throws Exception {
+
+    public String doEmployeeDelete() throws Exception {
 
         String result = "FAILURE";
         boolean success = EmployeeService.deleteEmployee(this);
@@ -83,7 +82,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = EmployeeService.getInstance().getAllEmployees();
+            ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
 
             result = "SUCCESS";
@@ -91,24 +90,24 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         }
         return result;
     }
-        
-     public String doEmployeeAdd() throws SQLException {
+
+    public String doEmployeeAdd() throws SQLException {
         String result = "FAILURE";
         boolean success = EmployeeService.addEmployee(this);
-        if (success){
+        if (success) {
             String createdMsg = "Employee created successfully!!";
             sessionMap.put("CreatedMsg", createdMsg);
             result = "SUCCESS";
             System.out.println("returning Success from doEmployeeAdd method");
-        }else{
+        } else {
             System.out.println("returning Failure from doEmployeeAdd method");
         }
 //        ArrayList empList = EmployeeService.getInstance().getAllEmployees();
 //        sessionMap.put("EmpList", empList);
-        
-        
+
         return result;
     }
+
     public String getEmployeeId() {
         return employeeId;
     }
@@ -207,12 +206,12 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
 
     @Override
     public void setApplication(Map<String, Object> application) {
-         map = (ApplicationMap) application;
+        map = (ApplicationMap) application;
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
-     sessionMap = (SessionMap) session;   
+        sessionMap = (SessionMap) session;
     }
 
     public String getStartdate() {
@@ -247,5 +246,4 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         this.aadharNo = aadharNo;
     }
 
-    
 }

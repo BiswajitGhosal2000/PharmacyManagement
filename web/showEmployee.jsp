@@ -38,7 +38,6 @@
         </style>
     </head>
     <body class="text-center">
-
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #4863A0;">
                 <a class="navbar-brand" href="#">Carousel</a>
@@ -64,14 +63,10 @@
                 </div>
             </nav>
         </header>
-
-
-
         <main role="main">
             <div class="jumbotron">
                 <table class="table table-bordered table-striped text-center " id="example">
                     <thead class="bg-info">
-                        
                         <c:if test="${not empty EmpMsg}">
                             <c:out value="${EmpMsg}"/>
                         </c:if>
@@ -81,7 +76,6 @@
                             <th>Email Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>District</th>
                             <th>City</th>
                             <th>State</th>
                             <th>Pin Code</th>
@@ -89,6 +83,7 @@
                             <th>Phone Number</th>
                             <th>Age</th>
                             <th>Salary</th>
+                            <th>Aadhar No</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -101,7 +96,6 @@
                                 <td>${emp.getEmailId()}</td>
                                 <td>${emp.getFirstName()}</td>
                                 <td>${emp.getLastName()}</td>
-                                <td>${emp.getDistrict()}</td>
                                 <td>${emp.getCity()}</td>
                                 <td>${emp.getState()}</td>
                                 <td>${emp.getPincode()}</td>
@@ -109,6 +103,7 @@
                                 <td>${emp.getPhoneNumber()}</td>
                                 <td>${emp.getAge()}</td>
                                 <td>${emp.getSalary()}</td>
+                                <td>${emp.getAadharNo()}</td>
                                 <td>
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
@@ -119,23 +114,18 @@
                                 </td>
                             </tr>
                         </c:forEach>
-                    </tbody>                         
-
-
+                    </tbody>
                 </table>
             </div>
-
+            <script src =  "js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#example').DataTable();
+                });
+            </script>
         </main>
-        <script src =  "js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#example').DataTable();
-            });
-        </script>
     </body>
-
-
 </html>

@@ -13,6 +13,7 @@ import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
+import com.exavalu.pharmacymgmt.services.CustomerService;
 
 /**
  *
@@ -144,7 +145,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     public String getCustomerByNumber()
     {
         String result = "FAILURE";
-        boolean success = CustomerService.addCustomer(this);
+        boolean success = CustomerService.getCustomerByNumber(this.getPhoneNumber());
         if(success){
             sessionMap.put("Customer", this);
             result="SUCCESS";
@@ -157,7 +158,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     public String updateCustomer()
     {
         String result = "FAILURE";
-        boolean success = CustomerService.addCustomer(this);
+        boolean success = CustomerService.updateCustomer(this);
         if(success){
             sessionMap.put("Customer", this);
             result="SUCCESS";

@@ -22,22 +22,13 @@
     <body>
 
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top"style="background-color: #4863A0;">
-                <a class="navbar-brand" href="#">CompanyA</a>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #4863A0;">
+                <a class="navbar-brand" href="#">MedEasy<i class="fa-solid fa-house-medical"></i></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="VerifyEmployee.jsp">Verify Employee <span class="sr-only">(current)</span></a>
-                        </li>
                     </ul>
                     <button class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter">LOGIN</button>
                 </div>
@@ -45,7 +36,6 @@
         </header>
 
         <main role="main">
-
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -96,7 +86,9 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="first-slide" src="images/firstSlide.png" alt="First slide" height="512px"width="100%">
+
+                        <img class="first-slide" src="images/firstSlide.png" alt="First slide" style="width: 100%">
+
                         <div class="container">
                             <div class="carousel-caption text-left">
                                 <h1>Pharmacy Management</h1>
@@ -108,7 +100,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="second-slide" src="https://img.freepik.com/free-photo/white-blue-candy-capsules-forming-frame-cyan-background_23-2147877563.jpg?w=900&t=st=1676966561~exp=1676967161~hmac=137add49b2fffe92f3d3b3f7a1a2bd15ff1422a0c4a263e2790226602d2f2c9d" width="100%" alt="Second slide">
+                        <img class="second-slide" src="https://img.freepik.com/free-photo/white-blue-candy-capsules-forming-frame-cyan-background_23-2147877563.jpg?w=900&t=st=1676966561~exp=1676967161~hmac=137add49b2fffe92f3d3b3f7a1a2bd15ff1422a0c4a263e2790226602d2f2c9d" style="width:100%" alt="Second slide">
                         <div class="container">
                             <div class="carousel-caption">
                                 <h1>Upto 30% discount</h1>
@@ -121,7 +113,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="third-slide" src="https://img.freepik.com/free-photo/minimalistic-science-banner-with-pills_23-2149431123.jpg?w=1380&t=st=1676966427~exp=1676967027~hmac=51a5fcf24f398d7ad34798086118f612d9302ca611a863b1ec7a86d51021dc59" width="100%"alt="Third slide">
+                        <img class="third-slide" src="https://img.freepik.com/free-photo/minimalistic-science-banner-with-pills_23-2149431123.jpg?w=1380&t=st=1676966427~exp=1676967027~hmac=51a5fcf24f398d7ad34798086118f612d9302ca611a863b1ec7a86d51021dc59" style= "width:100%" alt="Third slide">
                         <div class="container">
                             <div class="carousel-caption text-right">
                                 <h1>Contact us</h1>
@@ -187,7 +179,7 @@
                         </p>
                     </div>
                     <div class="col-md-5">
-                        <img class="featurette-image img-fluid mx-auto" src="https://www.signalprime.com/wp-content/uploads/2019/05/pharmacy-glass-display-cabinet-showcase-medical-store-500x500.jpg"data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                        <img class="featurette-image img-fluid mx-auto" src="https://www.signalprime.com/wp-content/uploads/2019/05/pharmacy-glass-display-cabinet-showcase-medical-store-500x500.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
                     </div>
                 </div>
 
@@ -202,7 +194,7 @@
                         </p>
                     </div>
                     <div class="col-md-5 order-md-1">
-                        <img class="featurette-image img-fluid mx-auto" src="https://assets-global.website-files.com/5ef38c31b69ea712667d2e24/6078474fcacc7fecc48f61dc_Asset%2015.jpg"data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                        <img class="featurette-image img-fluid mx-auto" src="https://assets-global.website-files.com/5ef38c31b69ea712667d2e24/6078474fcacc7fecc48f61dc_Asset%2015.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
                     </div>
                 </div>
 
