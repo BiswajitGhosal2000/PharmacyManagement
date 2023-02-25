@@ -21,10 +21,6 @@
             <result name="SUCCESS">landingPage.jsp</result>
             <result name="FAILURE">signup.jsp</result>
         </action>
-        <action name="ShowEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeUpdate">
-            <result name="SUCCESS">landingPage.jsp</result>
-            <result name="FAILURE">signup.jsp</result>
-        </action>
         <action name="VerifyEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeUpdate">
             <result name="SUCCESS">landingPage.jsp</result>
             <result name="FAILURE">signup.jsp</result>

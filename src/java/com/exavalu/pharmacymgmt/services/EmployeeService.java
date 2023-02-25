@@ -173,7 +173,7 @@ public class EmployeeService {
     public static ArrayList getAllVerfiedEmployees() {
         
         ArrayList empList = new ArrayList();
-        String sql = "SELECT * FROM employee where status = 1 and isDeleted=0; ";
+        String sql = "SELECT * FROM employee where status = 1; ";
         try {
             Connection con = JDBCConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -186,7 +186,7 @@ public class EmployeeService {
                 emp.setEmployeeId(rs.getString("employeeId"));
                 emp.setFirstName(rs.getString("firstName"));
                 emp.setLastName(rs.getString("lastName"));
-                emp.setDistrict(rs.getString("district"));
+//                emp.setDistrict(rs.getString("district"));
                 emp.setCity(rs.getString("city"));
                 emp.setState(rs.getString("state"));
                 emp.setPincode(rs.getString("pincode"));

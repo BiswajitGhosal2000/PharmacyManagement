@@ -5,6 +5,7 @@
 package com.exavalu.pharmacymgmt.models;
 
 import com.exavalu.pharmacymgmt.services.EmployeeService;
+import com.exavalu.pharmacymgmt.services.InventoryService;
 import com.exavalu.pharmacymgmt.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -74,16 +75,22 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
 
         String result = LoginService.doLogin(this.emailId, this.password);
         if (result.equalsIgnoreCase("ADMIN")) {
-            ArrayList verifiedEmpList = EmployeeService.getAllVerfiedEmployees();
-            sessionMap.put("VerifiedEmployee", verifiedEmpList);
             System.out.println("Returning Success From ADMIN Login");
             sessionMap.put("ADMIN", Admin.getInstance());
+            ArrayList verifiedEmpList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmpList", verifiedEmpList);
+            System.out.println("VerifiedEMPLIST"+verifiedEmpList.size());
             ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
+            System.out.println("EMPLIST"+empList.size());
+            ArrayList inventoryList = InventoryService.getAllInventory();
+            sessionMap.put("InventoryList", inventoryList);
             result = "ADMIN";
         } else if (result.equalsIgnoreCase("EMPLOYEE")) {
             System.out.println("Returning Success From EMPLOYEE Login");
             sessionMap.put("EMPLOYEE", Employee.getInstance());
+            ArrayList inventoryList = InventoryService.getAllInventory();
+            sessionMap.put("InventoryList", inventoryList);
             result = "EMPLOYEE";
         }else{
             logger.error("Something error in login page. TIME:"+ LocalDateTime.now());

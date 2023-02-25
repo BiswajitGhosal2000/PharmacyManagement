@@ -88,7 +88,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="emp" items="${VerifiedEmployee}">   
+                        <c:forEach var="emp" items="${VerifiedEmpList}">   
                             <tr>
 
                                 <td>${emp.getEmployeeId()}</td>

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="hero">
+<header>
     <nav>
         <h2 class="logo">MedEasy<i class="fa-solid fa-house-medical"></i></h2>
         <ul>
@@ -44,7 +44,7 @@
                     <span> > </span>
                 </a>
 
-                <a href="#" class="sub-menu-link">
+                <a href="Logout" class="sub-menu-link">
                     <img src="images/logout.png">
                     <p>Logout</p>
                     <span> > </span>
@@ -53,7 +53,7 @@
             </div>
         </div>
     </nav>
-</div>
+</header>
 <script>
     let subMenu = document.getElementById("subMenu");
 

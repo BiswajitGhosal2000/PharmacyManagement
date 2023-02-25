@@ -170,13 +170,12 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
         if (!inventoryList.isEmpty()) {
             String createdMsg = "Item Added successfully!!";
             sessionMap.put("CreatedMsg", createdMsg);
+            sessionMap.put("InventoryList", inventoryList);
             result = "SUCCESS";
-            System.out.println("returning Success from doInventoryAdd method");
+            System.out.println("returning Success from getAllInventory method");
         } else {
-            System.out.println("returning Failure from doInventoryAdd method");
+            System.out.println("returning Failure from getAllInventory method");
         }
-        sessionMap.put("InventoryList", inventoryList);
-
         return result;
     }
     

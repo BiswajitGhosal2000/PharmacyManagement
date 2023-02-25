@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="product" items="${Products}">   
+                        <c:forEach var="product" items="${InventoryList}">   
                             <tr>
 
                                 <td>${product.getProductNumber()}</td>
