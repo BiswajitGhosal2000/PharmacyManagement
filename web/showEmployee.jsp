@@ -10,26 +10,26 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Inventory Pharmacy management</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-
-        <title>Pharmacy Management</title>
-
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
         <!-- Bootstrap core CSS -->
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/carousel.css" rel="stylesheet">
+        <!--<link href="css/carousel.css" rel="stylesheet">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         <style>
+            body{
+            }
             #example_wrapper{
                 width: 100%;
                 display: block;
@@ -37,36 +37,12 @@
             }
         </style>
     </head>
-    <body class="text-center">
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #4863A0;">
-                <a class="navbar-brand" href="#">Carousel</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Show Employee <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline mt-2 mt-md-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </header>
-        <main role="main">
-            <div class="jumbotron">
-                <table class="table table-bordered table-striped text-center " id="example">
-                    <thead class="bg-info">
+    <body>
+        <jsp:include page="menuAdmin.jsp"></jsp:include>
+            <main>
+                <div class="container row justify-content-center" id="example_wrapper">
+                    <table class="table table-bordered table-striped text-center  table-responsive" id="example">
+                        <thead class="bg-info">
                         <c:if test="${not empty EmpMsg}">
                             <c:out value="${EmpMsg}"/>
                         </c:if>
@@ -83,8 +59,8 @@
                             <th>Phone Number</th>
                             <th>Age</th>
                             <th>Salary</th>
-                            <th>Aadhar No</th>
-                            <th>Action</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,13 +79,14 @@
                                 <td>${emp.getPhoneNumber()}</td>
                                 <td>${emp.getAge()}</td>
                                 <td>${emp.getSalary()}</td>
-                                <td>${emp.getAadharNo()}</td>
                                 <td>
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
-                                        <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
+                                        <button class="w-20 btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
+                                </td>
+                                <td>
                                     <a href="DeleteEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
-                                        <button class="w-20 btn btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
+                                        <button class="w-20 btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
                                     </a>
                                 </td>
                             </tr>

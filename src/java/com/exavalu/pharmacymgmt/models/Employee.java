@@ -19,40 +19,261 @@ import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
- * @author gaura
+ * @author gaurav
  */
 public class Employee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-    private String employeeId;
-    private String firstName;
-    private String lastName;
-    private String district;
-    private String city;
-    private String state;
-    private String pincode;
-    private String gender;
-    private String phoneNumber;
-    private String age;
-    private String salary;
-    private String emailId;
-    private String password;
-    private String startdate;
-    private String endDate;
-    private String aadharNo;
+    static Logger logger = Logger.getLogger(Employee.class.getName());
 
-    public static Employee employee = null;
+    private int employeeId;
+    private String firstName, lastName, city, state, pincode, gender, phoneNumber, age, salary, emailId, password;
+    private String startdate, endDate, aadharNo;
+
+    private static Employee employee = null;
 
     public static Employee getInstance() {
         if (employee == null) {
             return new Employee();
-        } else {
-            return employee;
         }
+        return employee;
     }
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-    private static final Logger log = Logger.getLogger(Admin.class);
+
+    @Override
+    public void setApplication(Map<String, Object> application) {
+        map = (ApplicationMap) application;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        sessionMap = (SessionMap) session;
+    }
+
+    /**
+     * @return the employeeId
+     */
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    /**
+     * @param employeeId the employeeId to set
+     */
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the pincode
+     */
+    public String getPincode() {
+        return pincode;
+    }
+
+    /**
+     * @param pincode the pincode to set
+     */
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    /**
+     * @return the phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * @param phoneNumber the phoneNumber to set
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * @return the age
+     */
+    public String getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    /**
+     * @return the salary
+     */
+    public String getSalary() {
+        return salary;
+    }
+
+    /**
+     * @param salary the salary to set
+     */
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * @return the emailId
+     */
+    public String getEmailId() {
+        return emailId;
+    }
+
+    /**
+     * @param emailId the emailId to set
+     */
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the startdate
+     */
+    public String getStartdate() {
+        return startdate;
+    }
+
+    /**
+     * @param startdate the startdate to set
+     */
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * @return the aadharNo
+     */
+    public String getAadharNo() {
+        return aadharNo;
+    }
+
+    /**
+     * @param aadharNo the aadharNo to set
+     */
+    public void setAadharNo(String aadharNo) {
+        this.aadharNo = aadharNo;
+    }
+
+    /**
+     * @return the employee
+     */
+    public static Employee getEmployee() {
+        return employee;
+    }
+
+    /**
+     * @param aEmployee the employee to set
+     */
+    public static void setEmployee(Employee aEmployee) {
+        employee = aEmployee;
+    }
 
     public String doEmployeeUpdate() throws Exception {
 
@@ -60,11 +281,12 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         boolean success = EmployeeService.updateEmployee(this);
 
         if (success) {
-            String updateMsg = "updated Employee of EmployeeId :" + this.employeeId;
+            String updateMsg = "updated Employee of EmployeeId :" + this.getEmployeeId();
+            System.out.println(updateMsg);
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = EmployeeService.getAllEmployees();
-            sessionMap.put("EmpList", empList);
+            ArrayList empList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmpList", empList);
 
             System.out.println("returning Success from doEmployeeUpdate method");
             result = "SUCCESS";
@@ -82,8 +304,29 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
+            ArrayList empList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmpList", empList);
+
+            result = "SUCCESS";
+
+        }
+        return result;
+    }
+    public String doEmployeeHardDelete() throws Exception {
+
+        String result = "FAILURE";
+        boolean success = EmployeeService.hardDeleteEmployee(this);
+
+        if (success) {
+            String updateMsg = "deleted successfully!";
+            sessionMap.put("UpdateMsg", updateMsg);
+
             ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
+            System.out.println("EMPLIST"+empList.size());
+            
+            ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmpList", vempList);
 
             result = "SUCCESS";
 
@@ -100,150 +343,46 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             result = "SUCCESS";
             System.out.println("returning Success from doEmployeeAdd method");
         } else {
+            logger.error("Something went error");
             System.out.println("returning Failure from doEmployeeAdd method");
         }
-//        ArrayList empList = EmployeeService.getInstance().getAllEmployees();
-//        sessionMap.put("EmpList", empList);
+        ArrayList empList = EmployeeService.getAllEmployees();
+        sessionMap.put("EmpList", empList);
 
         return result;
     }
-
-    public String getEmployeeId() {
-        return employeeId;
+    public String getEmployeeById() throws SQLException {
+        String result = "FAILURE";
+        Employee emp = EmployeeService.getEmployeeById(this.getEmployeeId());
+        if (emp != null) {
+            sessionMap.put("Emp", emp);
+            result = "SUCCESS";
+            System.out.println("returning Success from getEmployee By Id method");
+        } else {
+            logger.error("Something went error");
+            System.out.println("returning Failure from getEmployee By Id method");
+        }
+        return result;
     }
+    
+    public String doVerifyEmployee() throws Exception {
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+        String result = "FAILURE";
+        boolean success = EmployeeService.verifyEmployee(this);
+
+        if (success) {
+            
+            ArrayList empList = EmployeeService.getAllEmployees();
+            sessionMap.put("EmpList", empList);
+            System.out.println("EMPLIST"+empList.size());
+            
+            ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
+            sessionMap.put("VerifiedEmpList", vempList);
+
+            System.out.println("returning Success from doVerifyEmployee method");
+            result = "SUCCESS";
+
+        }
+        return result;
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        sessionMap = (SessionMap) session;
-    }
-
-    public String getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAadharNo() {
-        return aadharNo;
-    }
-
-    public void setAadharNo(String aadharNo) {
-        this.aadharNo = aadharNo;
-    }
-
 }

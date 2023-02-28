@@ -74,20 +74,20 @@
                                             <input type="text" name="phoneNumber" minlength="10" maxlength="10" class="form-control" placeholder="Your Phone *" value="" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode *" value="" required/>
+                                            <input type="number" name="pincode" onchange="getCity()" id="pincode" class="form-control" placeholder="Pincode *" value="" required/>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <input type="text" name="state" class="form-control" placeholder="State *" value="" required />
+                                                <input type="text" name="state" id="state" class="form-control" placeholder="State *" value="" required />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="text" name="city" class="form-control" placeholder="City *" value="" required/>
+                                                <input type="text" name="city" id="city" class="form-control" placeholder="City *" value="" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" name="aadharNo" class="form-control" placeholder="Aadhar Number *" value="" required/>
+                                            <input type="text" name="aadharNo" minlength="12" class="form-control" placeholder="Aadhar Number *" required/>
                                         </div>
 
                                         <!--<input type="submit" class="btnRegister"  value="Register"/>-->
@@ -110,6 +110,26 @@
 
         </div>
         <script src="js/validatePassword/validatePassword.js"></script>
+         <script>
+            function getCity(){
+          
+            let pincode = document.getElementById("pincode").value;
+            const url = `https://api.postalpincode.in/pincode/`+pincode;
+            let state = document.getElementById("state");
+            let city = document.getElementById("city");            
+            fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                         state.value = data[0].PostOffice[0].State;
+                         city.value = data[0].PostOffice[0].District;
+                     
+                        console.log(`The pincode ${pincode} is located in ${city}, ${state}.`);
+                    })
+                   .catch(error => alert("Please Enter Correct Pincode", error));
+                    
+            }
+        </script>
     </body>
 
 

@@ -17,13 +17,42 @@
             <result name="SUCCESS">landingPage.jsp</result>
             <result name="FAILURE">signup.jsp</result>
         </action>
-        <action name="UpdateEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeUpdate">
-            <result name="SUCCESS">landingPage.jsp</result>
-            <result name="FAILURE">signup.jsp</result>
+        <action name="EditEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="getEmployeeById">
+            <result name="SUCCESS">editEmployee.jsp</result>
+            <result name="FAILURE">showEmployee.jsp</result>
         </action>
-        <action name="VerifyEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeUpdate">
-            <result name="SUCCESS">landingPage.jsp</result>
-            <result name="FAILURE">signup.jsp</result>
+        <action name="UpdateEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeUpdate">
+            <result name="SUCCESS">showEmployee.jsp</result>
+            <result name="FAILURE">editEmployee.jsp</result>
+        </action>
+        <action name="DeleteEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeDelete">
+            <result name="SUCCESS">showEmployee.jsp</result>
+            <result name="FAILURE">showEmployee.jsp</result>
+        </action>
+        <action name="GetAllOrder" class="com.exavalu.pharmacymgmt.models.Order" method="getAllOrder">
+            <result name="SUCCESS">orderHistory.jsp</result>
+            <result name="FAILURE">homeAdmin.jsp</result>
+        </action>
+        <action name="AddProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="doInventoryAdd">
+            <result name="SUCCESS">inventory.jsp</result>
+            <result name="FAILURE">addProduct.jsp</result>
+        </action>
+        <action name="EditProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="getProductByNumber">
+            <result name="SUCCESS">editProduct.jsp</result>
+            <result name="FAILURE">inventory.jsp</result>
+        </action>
+        <action name="UpdateProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="doInvenoryUpdate">
+            <result name="SUCCESS">inventory.jsp</result>
+            <result name="FAILURE">editProduct.jsp</result>
+        </action>
+        <action name="ApiCall" class="com.exavalu.pharmacymgmt.models.ApiEmployee" method="getApiEmployee">
+            <result name="SUCCESS">modal.jsp</result>
+        </action>
+        <action name="Approve" class="com.exavalu.pharmacymgmt.models.Employee" method="doVerifyEmployee">
+            <result name="SUCCESS">VerifyEmployee.jsp</result>
+        </action>
+        <action name="Reject" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeHardDelete">
+            <result name="SUCCESS">VerifyEmployee.jsp</result>
         </action>
     </package>
 </struts>

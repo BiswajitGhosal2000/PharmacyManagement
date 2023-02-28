@@ -72,32 +72,6 @@
     </head>
     <body  class="wrapper">
 
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">Carousel</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline mt-2 mt-md-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </header>
-
         <main role="main">
             <section>
             <div  style="margin-top: 100px"  >
@@ -105,68 +79,66 @@
                 <div class="text-center">
                     <img  src="images/logo4.jpg" alt="" width="280" height="200" class="mb-3">
                 </div>
-                <form action="Update" method="Post" class="rounded bg-white shadow p-5" >              
+                <form action="UpdateEmployee" method="Post" class="rounded bg-white shadow p-5" >              
 
                     <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Please edit employee data</h3>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Employee ID" name="employeeId" value=1 readonly>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Employee ID" name="employeeId" value="${Emp.getEmployeeId()}" readonly>
                         <label for="floatingInput">Employee ID</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="first name" name="firstName" value=John>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="first name" name="firstName" value="${Emp.getFirstName()}">
                         <label for="floatingInput">First Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value=Doe>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value="${Emp.getLastName()}">
                         <label for="floatingInput">Last Name</label>
                     </div>
-<!--                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="address" name="address" value=Kolkata>
-                        <label for="floatingInput">Address</label>
-                    </div>-->
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="pincode" name="pincode" value=700065>
+                        <input type="email" class="form-control" id="floatingInput" placeholder="emailId" name="emailId" value="${Emp.getEmailId()}">
+                        <label for="floatingInput">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="pincode" name="pincode" value="${Emp.getPincode()}">
                         <label for="floatingInput">Pin Code</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="state" name="state" value=WestBengal>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="state" name="state" value="${Emp.getState()}">
                         <label for="floatingInput">State</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city" value=Kolkata>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city" value="${Emp.getCity()}">
                         <label for="floatingInput">City</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="phone" name="phoneNumber" value=8777053689>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="phoneNumber" name="phoneNumber" value="${Emp.getPhoneNumber()}">
                         <label for="floatingInput">Phone</label>
                     </div>
 
                     <div class="form-floating">
                         <select name="gender" class="form-select" id="gender" required>
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>  
-                            <option value="female">Female</option>                        
+                            <option value="" hidden>Select Gender</option>
+                            <option value="Male" <c:if test="${Emp.getGender().equalsIgnoreCase('Male')}">selected</c:if>>Male</option>  
+                            <option value="Female" <c:if test="${Emp.getGender().equalsIgnoreCase('Female')}">selected</c:if>>Female</option>                        
                         </select>
                         <label for="floatingInput">Gender</label>
                     </div> 
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="age" name="age" value=23>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="age" name="age" value="${Emp.getAge()}">
                         <label for="floatingInput">Age</label>
                     </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="aadhar" name="aadharNo" value=62394568712>
+<!--                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="aadhar" name="aadharNo" value="${Emp.getAadharNo()}">
                         <label for="floatingInput">Aadhar Number</label>
-                    </div>
+                    </div>-->
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="basicSalary" name="basicSalary" value=12000>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Salary" name="salary" value="${Emp.getSalary()}">
                         <label for="floatingInput">Basic Salary</label>
-                    </div>             
-
-
-
-                    <button class="btn btn-primary submit_btn w-100 my-4" type="submit">SAVE</button>
+                    </div>
+                    <button class="btn btn-primary submit_btn w-100" type="submit">SAVE</button>
+                    <a class="btn btn-danger submit_btn w-100 mt-2" href="showEmployee.jsp">Cancel</a>
 
                 </form>
             </div>

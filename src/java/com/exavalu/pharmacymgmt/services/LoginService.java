@@ -5,6 +5,7 @@
 package com.exavalu.pharmacymgmt.services;
 
 import com.exavalu.pharmacymgmt.models.Admin;
+import com.exavalu.pharmacymgmt.models.Employee;
 import com.exavalu.pharmacymgmt.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,12 +39,16 @@ public class LoginService {
             if (rs.next())
             {
                 if (rs.getInt("roleId")== 1){
-                    Admin.getInstance().setAdminName(rs.getString("name"));
-                    Admin.getInstance().setEmailId(rs.getString("emailId"));
+                    Admin admin = Admin.getInstance();
+                    admin.setFirstName(rs.getString("firstName"));
+                    admin.setLastName(rs.getString("lastName"));
+                    admin.setEmailId(rs.getString("emailId"));
                     res = "ADMIN";
                 }else{
-                    //Employee.getInstance().setEmployeeName(rs.getString("name"));
-                    //Employee.getInstance().setEmailId(rs.getInt("emailId"));
+                   Employee employee = Employee.getInstance();
+                    employee.setFirstName(rs.getString("firstName"));
+                    employee.setLastName(rs.getString("lastName"));
+                    employee.setEmailId(rs.getString("emailId"));
                     res = "EMPLOYEE";
                 }
             }

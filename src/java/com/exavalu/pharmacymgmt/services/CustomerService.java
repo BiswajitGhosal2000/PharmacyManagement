@@ -18,17 +18,7 @@ import org.apache.log4j.Logger;
  * @author lokes
  */
 public class CustomerService {
-    
-     public static CustomerService customerservice = null;
     private static final Logger log = Logger.getLogger(CustomerService.class);
-
-    public static CustomerService getInstance() {
-        if (customerservice == null) {
-            return new CustomerService();
-        } else {
-            return customerservice;
-        }
-    }
     
     public static boolean addCustomer(Customer customer) {
         boolean result = false;

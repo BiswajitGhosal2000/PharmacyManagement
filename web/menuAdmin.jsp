@@ -4,17 +4,32 @@
     Author     : sandeep kamila
 --%>
 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    function goTo(method){
+        alert(method);
+                $.ajax({
+                url: method,
+                success: function (responseText) {
+                console.log(responseText);
+                $("#changeableArea").html(responseText);
+                }
+                });
+            }
+</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<header>
+<link rel="stylesheet" href="css/menuAdmin.css">
+<div class="hero">
+    <header>
     <nav>
         <h2 class="logo">MedEasy<i class="fa-solid fa-house-medical"></i></h2>
         <ul>
-            <li> <a href="#"> Home </a></li>
-            <li> <a href="#"> Inventory</a></li>
+            <li> <a href="homeAdmin.jsp"> Home </a></li>
+            <li> <a href="inventory.jsp"> Inventory</a></li>
             <li> <a href="showEmployee.jsp"> Show Employee </a></li>
             <li> <a href="VerifyEmployee.jsp"> Verify Employee </a></li>
-            <li> <a href="#"> Sales Report </a></li>
-            <li> <a href="#"> Order </a></li>
+            <li> <a href="salesReport.jsp"> Sales Report </a></li>
+            <li> <a href="GetAllOrder"> Order </a></li>
         </ul>
         <img src="images/avijit sir.jpeg" class="user-pic" onclick="toggleMenu()">
 
@@ -54,6 +69,8 @@
         </div>
     </nav>
 </header>
+</div>
+
 <script>
     let subMenu = document.getElementById("subMenu");
 

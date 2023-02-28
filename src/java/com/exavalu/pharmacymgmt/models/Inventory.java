@@ -22,7 +22,7 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Inventory extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-    public static Inventory inventory = null;
+    private static Inventory inventory = null;
 
     public static Inventory getInstance() {
         if (inventory == null) {
@@ -41,7 +41,6 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
-    
     @Override
     public void setApplication(Map<String, Object> application) {
         setMap((ApplicationMap) application);
@@ -178,27 +177,26 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
         }
         return result;
     }
-    
+
     public String doInventoryAdd() throws SQLException {
+        System.out.println("doInventoryAdd method");
         String result = "FAILURE";
         boolean success = InventoryService.addInventory(this);
         if (success) {
             String createdMsg = "Item Added successfully!!";
             sessionMap.put("CreatedMsg", createdMsg);
+            ArrayList inventoryList = InventoryService.getAllInventory();
+            sessionMap.put("InventoryList", inventoryList);
             result = "SUCCESS";
             System.out.println("returning Success from doInventoryAdd method");
         } else {
             System.out.println("returning Failure from doInventoryAdd method");
         }
-
-        ArrayList inventoryList = InventoryService.getAllInventory();
-        sessionMap.put("InventoryList", inventoryList);
-
         return result;
     }
 
     public String doInvenoryUpdate() throws Exception {
-
+        System.out.println(this.productNumber);
         String result = "FAILURE";
         boolean success = InventoryService.updateInventory(this);
 
@@ -237,13 +235,13 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
     public String getProductByNumber() throws Exception {
 
         String result = "FAILURE";
-        boolean success = InventoryService.getProduct(this.getProductNumber());
+        Inventory inventory = InventoryService.getProduct(this.getProductNumber());
 
-        if (success) {
+        if (inventory != null) {
             String updateMsg = "Inventory item deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
-            sessionMap.put("Product", this);
+            sessionMap.put("Product", inventory);
 
             result = "SUCCESS";
 

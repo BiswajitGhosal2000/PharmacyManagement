@@ -76,7 +76,8 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
         String result = LoginService.doLogin(this.emailId, this.password);
         if (result.equalsIgnoreCase("ADMIN")) {
             System.out.println("Returning Success From ADMIN Login");
-            sessionMap.put("ADMIN", Admin.getInstance());
+            sessionMap.put("Admin", Admin.getInstance());
+            System.out.println(Admin.getInstance().getFirstName());
             ArrayList verifiedEmpList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", verifiedEmpList);
             System.out.println("VerifiedEMPLIST"+verifiedEmpList.size());
@@ -85,13 +86,12 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
             System.out.println("EMPLIST"+empList.size());
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-            result = "ADMIN";
         } else if (result.equalsIgnoreCase("EMPLOYEE")) {
             System.out.println("Returning Success From EMPLOYEE Login");
-            sessionMap.put("EMPLOYEE", Employee.getInstance());
+            sessionMap.put("Employee", Employee.getInstance());
+            System.out.println(Employee.getInstance().getEmailId());
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-            result = "EMPLOYEE";
         }else{
             logger.error("Something error in login page. TIME:"+ LocalDateTime.now());
             result="FAILURE";

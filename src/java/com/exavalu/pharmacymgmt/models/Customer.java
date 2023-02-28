@@ -21,14 +21,13 @@ import com.exavalu.pharmacymgmt.services.CustomerService;
  */
 public class Customer extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
     
-    public static Customer customer = null;
+    private static Customer customer = null;
 
     public static Customer getInstance() {
         if (customer == null) {
             return new Customer();
-        } else {
-            return customer;
         }
+            return customer;
     }
     
     private String phoneNumber, customerName,emailId,gender,address;

@@ -21,7 +21,7 @@
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/carousel.css" rel="stylesheet">
+        <!--<link href="css/carousel.css" rel="stylesheet">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
@@ -30,26 +30,30 @@
             #example_wrapper{
                 width: 100%;
                 display: block;
-                margin: auto;
+                /*margin: auto;*/
             }
         </style>
     </head>
     <body>
+        <jsp:include page="menuAdmin.jsp"></jsp:include>
+        <div class="text-center">
+            <a class="btn btn-success w-25 p-2 " href="addProduct.jsp">Add Product</a>
+        </div>
         <main>
-            <div class="jumbotron">
+            <div class="container">
                 <table class="table table-bordered table-striped text-center " id="inventoryTable">
                     <thead class="bg-warning">
                         <c:if test="${not empty ProductMsg}">
                             <c:out value="${ProductMsg}"/>
                         </c:if>
                         <tr>
-                            <th>Product Number</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Expiry Date</th>
-                            <th>Shelf Number</th>
-                            <th>Edit</th>
+                            <th class="text-center">Product Number</th>
+                            <th class="text-center">Product Name</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Unit Price</th>
+                            <th class="text-center">Expiry Date</th>
+                            <th class="text-center">Shelf Number</th>
+                            <th class="text-center">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,10 +64,10 @@
                                 <td>${product.getProductName()}</td>
                                 <td>${product.getQuantity()}</td>
                                 <td>${product.getUnitPrice()}</td>
-                                <td>${product.getexpiryDate()}</td>
+                                <td>${product.getExpiryDate()}</td>
                                 <td>${product.getShelfNumber()}</td>
                                 <td>
-                                    <a href="doProductEdit?productNumber=${product.getProductNumber()}" class=" text-decoration-none">
+                                    <a href="EditProduct?productNumber=${product.getProductNumber()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
                                 </td>
