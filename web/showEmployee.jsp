@@ -57,7 +57,8 @@
                             <th>Pin Code</th>
                             <th>Gender</th>
                             <th>Phone Number</th>
-                            <th>Age</th>
+                            <th>D.O.B</th>
+                            <th>Qualification</th>
                             <th>Salary</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -77,7 +78,8 @@
                                 <td>${emp.getPincode()}</td>
                                 <td>${emp.getGender()}</td>
                                 <td>${emp.getPhoneNumber()}</td>
-                                <td>${emp.getAge()}</td>
+                                <td>${emp.getDob()}</td>
+                                <td>${emp.getQualification()}</td>
                                 <td>${emp.getSalary()}</td>
                                 <td>
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">

@@ -61,7 +61,7 @@
                                         <input type="text" class="form-control" placeholder="Price" name="unitPrice" value="${Product.getUnitPrice()}">
                                     </div> 
                                     <div class="form-group last mb-2">
-                                        <label for="expiryDate">Expiry Date</label>
+                                        <label for="expiryDate">Expiry Date(YYYY-MM-DD)</label>
                                         <input type="text" class="form-control" name="expiryDate" value= "${Product.getExpiryDate()}" >
                                     </div> 
                                     <div class="form-group last mb-2">

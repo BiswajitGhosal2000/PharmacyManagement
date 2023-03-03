@@ -27,7 +27,7 @@ public class APIService {
         ArrayList<ApiEmployee> apiEmpList = new ArrayList();
          try {
 
-		URL url = new URL("https://mocki.io/v1/df30d4e3-07ee-4564-bd03-e879ae1b45dd");
+		URL url = new URL("https://mocki.io/v1/30b0678d-a307-4375-ba80-9db07a62f1f8");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Accept", "application/json");
@@ -59,6 +59,7 @@ public class APIService {
                         String city = obj.get("city").toString();
                         String state = obj.get("state").toString();
                         String gender = obj.get("gender").toString();
+                        String dob = obj.get("dob").toString();
                         
                         apiEmployee.setAadharNo(aadharNo);
                         apiEmployee.setFirstName(firstName);
@@ -67,6 +68,7 @@ public class APIService {
                         apiEmployee.setCity(city);
                         apiEmployee.setState(state);
                         apiEmployee.setGender(gender);
+                        apiEmployee.setDob(dob);
                         
                         apiEmpList.add(apiEmployee);
                     }
@@ -103,6 +105,7 @@ public class APIService {
                         emp.setCity(apiEmpList.get(i).getCity());
                         emp.setState(apiEmpList.get(i).getState());
                         emp.setGender(apiEmpList.get(i).getGender());
+                        emp.setDob(apiEmpList.get(i).getDob());
                 }
             }
         } catch (ParseException ex) {
@@ -117,6 +120,7 @@ public class APIService {
                         emp.setCity("NA");
                         emp.setState("NA");
                         emp.setGender("NA");
+                        emp.setDob("NA");
         }
         return emp;
     }

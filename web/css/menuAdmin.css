@@ -7,8 +7,8 @@
 .hero{
     width: 100%;
     min-height: 100px;
-/*    background: #eceaff;*/
-    color: #525252;
+    /*background: #eceaff;*/
+    /*color: #525252;*/
 }
 nav{
     background-image: linear-gradient(to top right, #05204b, #4c7bc7, #031a40);

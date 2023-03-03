@@ -29,6 +29,7 @@ public class ApiEmployee extends ActionSupport implements ApplicationAware, Sess
     private String city;
     private String state;
     private String gender;
+    private String dob;
     private int index;
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
@@ -192,5 +193,19 @@ public class ApiEmployee extends ActionSupport implements ApplicationAware, Sess
      */
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    /**
+     * @return the dob
+     */
+    public String getDob() {
+        return dob;
+    }
+
+    /**
+     * @param dob the dob to set
+     */
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

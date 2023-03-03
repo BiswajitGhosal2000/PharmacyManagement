@@ -108,9 +108,7 @@
                                     <form class="rounded bg-white shadow p-5" action="Login" method="post">
 
                                         <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
-                                        <div class="fw-normal text-muted mb-4 text-center">
-                                            New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
-                                        </div>
+                                        
                                         <div class="form-floating mb-3">
                                             <input type="email" class="form-control" id="emailId" name="emailId" placeholder="name@example.com">
                                             <label for="emailId">Email address</label>
@@ -119,16 +117,19 @@
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                             <label for="password">Password</label>
                                         </div>
-                                        <div class="mt-2 text-end">
+<!--                                        <div class="mt-2 text-end">
                                             <a href="#" class="text-primary fw-bold text-decoration-none">Forget Password?</a>
-                                        </div>
+                                        </div>-->
                                         <button type="submit" class="btn btn-primary submit_btn w-100 my-4">LOG IN</button>
+                                        <div class="fw-normal text-muted mb-4 text-center">
+                                            New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
+                                        </div>
 
-                                        <div class="text-center text-muted text-uppercase mb-3">OR</div>
+<!--                                        <div class="text-center text-muted text-uppercase mb-3">OR</div>
 
                                         <a href="#" class="btn btn-light login_with w-100 mb-3">
                                             <img src="images/google-icon.png" alt="G" class="img-fluid me-3">Continue with Google
-                                        </a>
+                                        </a>-->
 
                                     </form>
 

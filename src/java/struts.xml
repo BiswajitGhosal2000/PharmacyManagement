@@ -54,5 +54,29 @@
         <action name="Reject" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeHardDelete">
             <result name="SUCCESS">VerifyEmployee.jsp</result>
         </action>
+        <action name="GetCustomer" class="com.exavalu.pharmacymgmt.models.Customer" method="getCustomerByNumber">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="AddCustomer" class="com.exavalu.pharmacymgmt.models.Customer" method="addCustomer">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="UpdateCustomer" class="com.exavalu.pharmacymgmt.models.Customer" method="updateCustomer">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="GetProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="getProductByNumber">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="AddOrder" class="com.exavalu.pharmacymgmt.models.Order" method="addOrder">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="AddProduct" class="com.exavalu.pharmacymgmt.models.Product" method="addProduct">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
     </package>
 </struts>

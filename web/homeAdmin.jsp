@@ -23,31 +23,30 @@
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
 
-        <!-- Custom styles for this template -->
-        <link href="css/cover.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/menuAdmin.css">
+        <link rel="stylesheet" href="css/homeAdmin.css">
+        
     </head>
 
-    <body class="text-center" style='background-image: url("images/pharmacy1.jpg"); background-size: 100% 100%;'>
+    <body class="text-center">
         <jsp:include page="menuAdmin.jsp"></jsp:include>
 
-        <main >
-            <div id="changeableArea">
-                
+        <main id="changeableArea">
+            <div class="quote">
+                <h1 class="title">Welcome to MedEasy</h1>
             </div>
         </main>
 
         <script>
-            function change(){
+            function change() {
                 $.ajax({
-                url: method,
-                data: {
-                    claimId: data
-                },
-                success: function (responseText) {
-                console.log(responseText);
-                $("#changeableArea").html(responseText);
-                }
+                    url: method,
+                    data: {
+                        claimId: data
+                    },
+                                    success: function (responseText) {
+                        console.log(responseText);
+                                        $("#changeableArea").html(responseText);
+                                    }
                 });
             }
         </script>

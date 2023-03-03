@@ -14,8 +14,8 @@ h1 {
 
 main {
 	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
+	margin:0 auto;
+	padding: 10px;
 }
 
 
@@ -88,7 +88,7 @@ form {
 }
 body {
     font-family: 'Roboto', sans-serif;
-	background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+    background: linear-gradient(to bottom, #f0f8ff, #ffffff);
     background-image: url(https://info.nhanow.com/hs-fs/hubfs/campaigns/2020/access/Expanding-the-Role-of-Pharmacy-Technicians.jpg?width=2250&height=1050&name=Expanding-the-Role-of-Pharmacy-Technicians.jpg);
     background-size: auto 113%;
 }

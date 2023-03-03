@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,7 +14,6 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-
         <script>
             $(document).ready(function () {
                 $('input[type="checkbox"], input[type="radio"]').iCheck({
@@ -29,6 +29,9 @@
             <!-- <h1>Add Product</h1> -->
         </header>
         <main>
+            <c:if test="${not empty Error}">
+                <h3 class="text-center text-danger">${Error}</h3>
+            </c:if>
             
             <form action="AddProduct" method="POST">
 
@@ -56,9 +59,7 @@
                 <div class="form-group last mb-2">
                     <label for="shelfNumber">Shelf Number</label>
                     <input type="text" class="form-control" placeholder="Shelf Number" name="shelfNumber" required>
-                </div> 
-
-
+                </div>
                 <div class="container text-center ">
                     <button type="submit" class="btn py-2 btn-success w-25  mt-2">ADD</button>
                 <a class="btn py-2 btn-danger w-25  mt-2" href="inventory.jsp">Cancel</a>

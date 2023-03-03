@@ -32,14 +32,16 @@
                     <div class="tab-content" id="myTabContent">
                         <form action="SignUp" method="POST">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h3 class="register-heading">Apply as a Employee</h3>
+                                <h3 class="register-heading">Apply as an Employee</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="firstName" class="form-control" placeholder="First Name *" value="" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" name="lastName" class="form-control" placeholder="Last Name *" value="" required/>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <input type="text" name="firstName" class="form-control" placeholder="First Name *" value="" required/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="text" name="lastName" class="form-control" placeholder="Last Name *" value="" required/>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" minlength="8" class="form-control" id="password" placeholder="Password *" value="" required />
@@ -48,7 +50,17 @@
                                             <input type="password" class="form-control" minlength="8" id="confirm_password" placeholder="Confirm Password *" value="" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" name="age" class="form-control"  placeholder="Age *" value="" required/>
+                                            <input type="number" name="pincode" onchange="getCity()" id="pincode" class="form-control" placeholder="Pincode *" value="" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="qualification" class="form-control" id="qualification" required>
+                                                <option value="" hidden>Select Highest Qualification*</option>
+                                                <option value="class10">10th pass</option>  
+                                                <option value="class12">12th pass </option>
+                                                <option value="diploma">Diploma</option>
+                                                <option value="graduate">Graduate</option>
+                                            </select>
+                                            <!--<label for="floatingInput">Gender</label>-->
                                         </div>
 
                                         <div class="form-group">
@@ -73,8 +85,9 @@
                                         <div class="form-group">
                                             <input type="text" name="phoneNumber" minlength="10" maxlength="10" class="form-control" placeholder="Your Phone *" value="" required/>
                                         </div>
+
                                         <div class="form-group">
-                                            <input type="number" name="pincode" onchange="getCity()" id="pincode" class="form-control" placeholder="Pincode *" value="" required/>
+                                            <input type="text" name="dob" class="form-control"  placeholder="DOB (YYYY-MM-DD) *" value="" required/>
                                         </div>
 
                                         <div class="row">
@@ -97,9 +110,9 @@
 
                                         <!--<div class="text-center text-muted text-uppercase mb-3">OR</div>-->
 
-                                        <a href="#" class="btn btn-light login_with w-auto">
+<!--                                        <a href="#" class="btn btn-light login_with w-auto">
                                             <img src="images/google-icon.png" alt="G" class="img-fluid me-4">Continue with Google
-                                        </a>
+                                        </a>-->
                                     </div>
                                 </div>
                             </div>
@@ -110,25 +123,25 @@
 
         </div>
         <script src="js/validatePassword/validatePassword.js"></script>
-         <script>
-            function getCity(){
-          
-            let pincode = document.getElementById("pincode").value;
-            const url = `https://api.postalpincode.in/pincode/`+pincode;
-            let state = document.getElementById("state");
-            let city = document.getElementById("city");            
-            fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                         state.value = data[0].PostOffice[0].State;
-                         city.value = data[0].PostOffice[0].District;
-                     
-                        console.log(`The pincode ${pincode} is located in ${city}, ${state}.`);
-                    })
-                   .catch(error => alert("Please Enter Correct Pincode", error));
-                    
-            }
+        <script>
+                                                function getCity() {
+
+                                                    let pincode = document.getElementById("pincode").value;
+                                                    const url = `https://api.postalpincode.in/pincode/` + pincode;
+                                                    let state = document.getElementById("state");
+                                                    let city = document.getElementById("city");
+                                                    fetch(url)
+                                                            .then(response => response.json())
+                                                            .then(data => {
+                                                                console.log(data);
+                                                                state.value = data[0].PostOffice[0].State;
+                                                                city.value = data[0].PostOffice[0].District;
+
+                                                                console.log(`The pincode ${pincode} is located in ${city}, ${state}.`);
+                                                            })
+                                                            .catch(error => alert("Please Enter Correct Pincode", error));
+
+                                                }
         </script>
     </body>
 

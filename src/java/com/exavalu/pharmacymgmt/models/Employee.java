@@ -26,7 +26,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     static Logger logger = Logger.getLogger(Employee.class.getName());
 
     private int employeeId;
-    private String firstName, lastName, city, state, pincode, gender, phoneNumber, age, salary, emailId, password;
+    private String firstName, lastName, city, state, pincode, gender, phoneNumber, dob, salary, emailId, password,qualification;
     private String startdate, endDate, aadharNo;
 
     private static Employee employee = null;
@@ -164,17 +164,17 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     }
 
     /**
-     * @return the age
+     * @return the dob
      */
-    public String getAge() {
-        return age;
+    public String getDob() {
+        return dob;
     }
 
     /**
-     * @param age the age to set
+     * @param dob the dob to set
      */
-    public void setAge(String age) {
-        this.age = age;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     /**
@@ -273,6 +273,20 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
      */
     public static void setEmployee(Employee aEmployee) {
         employee = aEmployee;
+    }
+    
+    /**
+     * @return the qualification
+     */
+    public String getQualification() {
+        return qualification;
+    }
+
+    /**
+     * @param qualification the qualification to set
+     */
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
     }
 
     public String doEmployeeUpdate() throws Exception {

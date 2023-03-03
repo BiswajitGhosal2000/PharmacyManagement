@@ -18,23 +18,27 @@
         <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script>
 
-            function show(aadharNo, i,empId)
+            function show(aadharNo, i, empId)
             {
+                alert('responseText');
                 $.ajax({
                                         url: 'ApiCall',
                     type: 'post',
                                         data: {
                                                 'aadharNo': aadharNo,
-                                                'index': i
+                        'index': i
                                         },
                                         success: function (responseText) {
+                        alert(responseText);
                         $("#modalText").html(responseText);
+                        
                     }                                        
                                 });
-                
+
                 $("#eid").val(empId);
             }
             function reject()
@@ -65,7 +69,7 @@
                                 <th>Pin Code</th>
                                 <th>Gender</th>
                                 <th>Phone Number</th>
-                                <th>Age</th>
+                                <th>D.O.B</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -83,7 +87,7 @@
                                 <td>${emp.getPincode()}</td>
                                 <td>${emp.getGender()}</td>
                                 <td>${emp.getPhoneNumber()}</td>
-                                <td>${emp.getAge()}</td>
+                                <td>${emp.getDob()}</td>
                                 <td>
                                     <button class="btn btn-sm btn-success" data-toggle="modal" onclick="show(${emp.getAadharNo()},<%=i%>,${emp.getEmployeeId()})" data-target="#exampleModalCenter">Verify</button>
                                     <%i++;%>
@@ -112,39 +116,34 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <form id="modalForm" class="rounded bg-white shadow p-3" action="Approve" method="POST">
-
                                 <h3 class="text-dark fw-bolder fs-2 mb-4 text-center">Verify Details</h3>
-
                                 <div id="modalText">
                                 </div>
-                                
                                 <div class="form-floating mb-1">
-                                    <input type="number" class="form-control" id="floatingInput" min="1000" name="salary">
+                                    <input type="number" class="form-control" id="floatingInput" min="12000" name="salary" required>
                                     <label for="floatingInput">Salary</label>
                                 </div>
-                                
-                                <input type="number" class="form-control" id="eid" name="employeeId" hidden="true">
-                                
-                                <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Approve</button>
-                                <button type="submit" onclick="reject()" class="btn btn-danger submit_btn w-100 my-2">Reject</button>
+                                <input type="number" class="form-control" id="eid" name="employeeId" hidden>
+                                <button type="submit" class="btn btn-lg btn-primary submit_btn w-100 my-3">Approve</button>
+                                <button type="submit" onclick="reject()" class="btn btn-lg btn-danger submit_btn w-100">Reject</button>
                             </form>
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
 
 
         <!--Modal End-->
 
-    </div>
-    <!-- Bootstrap core JavaScript
-================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-</body>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+    </body>
 </html>

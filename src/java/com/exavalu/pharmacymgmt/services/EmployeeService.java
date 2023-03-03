@@ -27,8 +27,8 @@ public class EmployeeService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO employee(firstName,lastName,city,state,pincode,gender,phoneNumber,age,salary,emailId,password,aadharNo,startDate,endDate)\n"
-                    + "VALUES(?,? ,? ,? ,? ,?, ? ,? ,? ,? ,? ,? ,?,?);";
+            String sql = "INSERT INTO employee(firstName,lastName,city,state,pincode,gender,phoneNumber,dob,salary,emailId,password,aadharNo,startDate,endDate,qualification)\n"
+                    + "VALUES(?,? ,? ,? ,? ,?, ? ,? ,? ,? ,? ,? ,?,?,?);";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, emp.getFirstName());
@@ -38,13 +38,14 @@ public class EmployeeService {
             preparedStatement.setString(5, emp.getPincode());
             preparedStatement.setString(6, emp.getGender());
             preparedStatement.setString(7, emp.getPhoneNumber());
-            preparedStatement.setString(8, emp.getAge());
+            preparedStatement.setString(8, emp.getDob());
             preparedStatement.setString(9, emp.getSalary());
             preparedStatement.setString(10, emp.getEmailId());
             preparedStatement.setString(11, emp.getPassword());
             preparedStatement.setString(12, emp.getAadharNo());
             preparedStatement.setString(13, emp.getStartdate());
             preparedStatement.setString(14, emp.getEndDate());
+            preparedStatement.setString(15, emp.getQualification());
 
            
              System.out.println(sql);
@@ -70,21 +71,22 @@ public class EmployeeService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE employee SET firstName = ? ,lastName = ?,state = ? ,phoneNumber = ? ,age = ? ,\n"
-                    + "salary = ? ,emailId = ?,city = ?,pincode = ?,gender = ?  WHERE employeeId = ?;";
+            String sql = "UPDATE employee SET firstName = ? ,lastName = ?,state = ? ,phoneNumber = ? ,dob = ? ,\n"
+                    + "salary = ? ,emailId = ?,city = ?,pincode = ?,gender = ?,qualification=?  WHERE employeeId = ?;";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, emp.getFirstName());
             preparedStatement.setString(2, emp.getLastName());
             preparedStatement.setString(3, emp.getState());
             preparedStatement.setString(4, emp.getPhoneNumber());
-            preparedStatement.setString(5, emp.getAge());
+            preparedStatement.setString(5, emp.getDob());
             preparedStatement.setString(6, emp.getSalary());
             preparedStatement.setString(7, emp.getEmailId());
             preparedStatement.setString(8, emp.getCity());
             preparedStatement.setString(9, emp.getPincode());
             preparedStatement.setString(10, emp.getGender());
-            preparedStatement.setInt(11, emp.getEmployeeId());
+            preparedStatement.setString(11, emp.getQualification());
+            preparedStatement.setInt(12, emp.getEmployeeId());
             
 
             int row = preparedStatement.executeUpdate();
@@ -152,8 +154,9 @@ public class EmployeeService {
                 emp.setPincode(rs.getString("pincode"));
                 emp.setGender(rs.getString("gender"));
                 emp.setPhoneNumber(rs.getString("phoneNumber"));
-                emp.setAge(rs.getString("age"));
+                emp.setDob(rs.getString("dob"));
                 emp.setAadharNo(rs.getString("aadharNo"));
+                emp.setQualification(rs.getString("qualification"));
                 empList.add(emp);
 
             }
@@ -189,11 +192,12 @@ public class EmployeeService {
                 emp.setPincode(rs.getString("pincode"));
                 emp.setGender(rs.getString("gender"));
                 emp.setPhoneNumber(rs.getString("phoneNumber"));
-                emp.setAge(rs.getString("age"));
+                emp.setDob(rs.getString("dob"));
                 emp.setSalary(rs.getString("salary"));
                 emp.setEndDate(rs.getString("endDate"));
                 emp.setStartdate(rs.getString("startDate"));
                 emp.setAadharNo(rs.getString("aadharNo"));
+                emp.setQualification(rs.getString("qualification"));
 //                emp.setPassword(rs.getString("password"));
                 empList.add(emp);
 
@@ -228,11 +232,12 @@ public class EmployeeService {
                 emp.setPincode(rs.getString("pincode"));
                 emp.setGender(rs.getString("gender"));
                 emp.setPhoneNumber(rs.getString("phoneNumber"));
-                emp.setAge(rs.getString("age"));
+                emp.setDob(rs.getString("dob"));
                 emp.setSalary(rs.getString("salary"));
                 //emp.setEndDate(rs.getString("endDate"));
                 //emp.setStartdate(rs.getString("startDate"));
                 emp.setAadharNo(rs.getString("aadharNo"));
+                emp.setQualification(rs.getString("qualification"));
             }
         } catch (SQLException ex) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());

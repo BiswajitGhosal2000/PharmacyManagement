@@ -143,10 +143,11 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     }
     public String getCustomerByNumber()
     {
+        System.out.println("Getting your customer....");
         String result = "FAILURE";
-        boolean success = CustomerService.getCustomerByNumber(this.getPhoneNumber());
-        if(success){
-            sessionMap.put("Customer", this);
+        Customer customer = CustomerService.getCustomerByNumber(this.getPhoneNumber());
+        if(customer != null){
+            sessionMap.put("Customer", customer);
             result="SUCCESS";
         }
         else{

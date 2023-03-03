@@ -8,6 +8,7 @@ import com.exavalu.pharmacymgmt.services.OrderService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -33,7 +34,8 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             return order;
         }
     }
-    private String productName, customerName, orderDateTime, phoneNumber, doctorName,emailId;
+    private String customerName, phoneNumber, doctorName,employeeName;
+    private String orderDateTime= LocalDateTime.now().toString();
     private int orderId;
     private double totalPrice;
 
@@ -62,20 +64,6 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    /**
-     * @return the productName
-     */
-    public String getProductName() {
-        return productName;
-    }
-
-    /**
-     * @param productName the productName to set
-     */
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     /**
@@ -150,25 +138,26 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     
     
     /**
-     * @return the emailId
+     * @return the employeeName
      */
-    public String getEmailId() {
-        return emailId;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
     /**
-     * @param emailId the emailId to set
+     * @param employeeName the employeeName to set
      */
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public String addOrder() {
+        System.out.println("Add Order");
         String result = "FAILURE";
-        boolean success = OrderService.addOrder(this);
-        if (success) {
-            ArrayList orderList = OrderService.getAllOrder();
-            sessionMap.put("OrderList", orderList);
+        Order order2 = OrderService.addOrder(this);
+        if (order2 != null) {
+            System.out.println("Order ID"+order2.getOrderId());
+            sessionMap.put("Order",order2);
             result = "SUCCESS";
         } else {
             logger.error("Something error Occured");

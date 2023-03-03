@@ -190,6 +190,8 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
             result = "SUCCESS";
             System.out.println("returning Success from doInventoryAdd method");
         } else {
+            String error = "Item Already there !";
+            sessionMap.put("Error", error);
             System.out.println("returning Failure from doInventoryAdd method");
         }
         return result;
@@ -220,8 +222,8 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
         boolean success = InventoryService.deleteInventory(this);
 
         if (success) {
-            String updateMsg = "Inventory item deleted successfully!";
-            sessionMap.put("UpdateMsg", updateMsg);
+            String deleteMsg = "Inventory item deleted successfully!";
+            sessionMap.put("DeleteMsg", deleteMsg);
 
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);

@@ -125,13 +125,13 @@
                     </div> 
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="age" name="age" value="${Emp.getAge()}">
-                        <label for="floatingInput">Age</label>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dob" name="dob" value="${Emp.getDob()}">
+                        <label for="floatingInput">D.O.B</label>
                     </div>
-<!--                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="aadhar" name="aadharNo" value="${Emp.getAadharNo()}">
-                        <label for="floatingInput">Aadhar Number</label>
-                    </div>-->
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="qualification" name="qualification" value="${Emp.getQualification()}" readonly>
+                        <label for="floatingInput">qualification</label>
+                    </div>
 
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Salary" name="salary" value="${Emp.getSalary()}">
