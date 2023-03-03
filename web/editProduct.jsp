@@ -40,33 +40,33 @@
                                     <h3 class="text-uppercase">EDIT PRODUCT DETAILS</h3>
                                 </div>
                                 
-                                <form action="" method="POST">
+                                <form action="UpdateProduct" method="POST">
                                    
 
                                     <div class="form-group first">
                                         <label for="productId">Product Number</label>
-                                        <input type="text" class="form-control" placeholder="Product Number" name="productId" value=1289 readonly>
+                                        <input type="text" class="form-control" placeholder="Product Number" name="productNumber" value="${Product.getProductNumber()}" readonly>
                                     </div>
 
                                     <div class="form-group last mb-2">
                                         <label for="productName">Product Name</label>
-                                        <input type="text" class="form-control" placeholder="Product Name" name="productName" value=Amoxicillin>
+                                        <input type="text" class="form-control" placeholder="Product Name" name="productName" value="${Product.getProductName()}" required>
                                     </div>   
                                     <div class="form-group last mb-2">
                                         <label for="quantity">Quantity</label>
-                                        <input type="number" class="form-control" placeholder="Quantity" name="quantity" value=6>
+                                        <input type="text" class="form-control" placeholder="Quantity" name="quantity" value="${Product.getQuantity()}" required>
                                     </div> 
                                     <div class="form-group last mb-2">
                                         <label for="unitPrice">Price</label>
-                                        <input type="number" class="form-control" placeholder="Price" name="unitPrice" value=69>
+                                        <input type="text" class="form-control" placeholder="Price" name="unitPrice" value="${Product.getUnitPrice()}">
                                     </div> 
                                     <div class="form-group last mb-2">
-                                        <label for="expiryDate">Expiry Date</label>
-                                        <input type="date" class="form-control" placeholder="Expiry date" name="expiryDate" value=10/03/2023>
+                                        <label for="expiryDate">Expiry Date(YYYY-MM-DD)</label>
+                                        <input type="text" class="form-control" name="expiryDate" value= "${Product.getExpiryDate()}" >
                                     </div> 
                                     <div class="form-group last mb-2">
                                         <label for="shelfNumber">Shelf Number</label>
-                                        <input type="text" class="form-control" placeholder="Shelf Number" name="shelfNumber" value=21E>
+                                        <input type="text" class="form-control" placeholder="Shelf Number" name="shelfNumber" value="${Product.getShelfNumber()}">
                                     </div> 
                                     
 

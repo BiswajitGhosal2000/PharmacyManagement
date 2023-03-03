@@ -73,25 +73,31 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
 
     public String doLogin() {
 
-        String result = LoginService.doLogin(this.emailId, this.password);
+        ArrayList login = LoginService.doLogin(this.emailId, this.password);
+        String result = login.get(1).toString();
         if (result.equalsIgnoreCase("ADMIN")) {
             System.out.println("Returning Success From ADMIN Login");
-            sessionMap.put("ADMIN", Admin.getInstance());
+            Admin admin = (Admin) login.get(0);
+            sessionMap.put("Admin", admin);
+            System.out.println(admin.getFirstName());
+            
             ArrayList verifiedEmpList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", verifiedEmpList);
             System.out.println("VerifiedEMPLIST"+verifiedEmpList.size());
+            
             ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
             System.out.println("EMPLIST"+empList.size());
+            
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-            result = "ADMIN";
         } else if (result.equalsIgnoreCase("EMPLOYEE")) {
             System.out.println("Returning Success From EMPLOYEE Login");
-            sessionMap.put("EMPLOYEE", Employee.getInstance());
+            Employee employee = (Employee) login.get(0);
+            sessionMap.put("Employee", employee);
+            System.out.println(employee.getEmailId());
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-            result = "EMPLOYEE";
         }else{
             logger.error("Something error in login page. TIME:"+ LocalDateTime.now());
             result="FAILURE";

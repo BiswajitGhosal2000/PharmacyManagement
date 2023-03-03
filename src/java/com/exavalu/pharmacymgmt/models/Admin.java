@@ -4,132 +4,97 @@
  */
 package com.exavalu.pharmacymgmt.models;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import java.io.Serializable;
-import java.util.Map;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
-import org.apache.struts2.interceptor.SessionAware;
-
 /**
  *
- * @author gaura
+ * @author gaurav
  */
-public class Admin extends ActionSupport implements ApplicationAware, SessionAware, Serializable{
-     
- public static Admin admin = null;
+public class Admin{
+    private static Admin admin = null;
 
     public static Admin getInstance() {
         if (admin == null) {
             return new Admin();
-        } else {
-            return admin;
         }
-    }
-    
-    private String emailId;
-    private String password;
-    private String adminName;
-    private String phoneNumber;
-
-    
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
-    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-    private static final Logger log = Logger.getLogger(Admin.class);
-    
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-         map = (ApplicationMap) application;
+        return admin;
     }
 
-    @Override
-    public void setSession(Map<String, Object> session) {
-     sessionMap = (SessionMap) session;   
-    }
-    
-    
-    
-    
-      
-//    public String doInventoryAdd() throws SQLException {
-//        String result = "SUCCESS";
-//        InvertoryService.addInventory(this);
-//        String createdMsg = "Inventory created successfully!!";
-//        sessionMap.put("CreatedMsg", createdMsg);
-//        ArrayList invList = new ArrayList();
-//        invList = InventoryService.getInstance().getAllInventory();
-//        sessionMap.put("InvList", invList);
-//        System.out.println("returning Success from doSearch method");
-//        result = "SUCCESS";
-//        return result;
-//    }
-//    
-//        public String doInventoryUpdate() throws SQLException {
-//        String result = "SUCCESS";
-//        InvertoryService.updateInventory(this);
-//        String createdMsg = "Inventory created successfully!!";
-//        sessionMap.put("CreatedMsg", createdMsg);
-//        ArrayList invList = new ArrayList();
-//        invList = InventoryService.getInstance().getAllInventory();
-//        sessionMap.put("InvList", invList);
-//        System.out.println("returning Success from doInventoryUpdate method");
-//        result = "SUCCESS";
-//        return result;
-//    }
-//        
-//        public String doInventoryDelete() throws SQLException {
-//        String result = "SUCCESS";
-//        InvertoryService.deleteInventory(this);
-//        String createdMsg = "Inventory deleted!!";
-//        sessionMap.put("CreatedMsg", createdMsg);
-//        ArrayList invList = new ArrayList();
-//        invList = InventoryService.getInstance().getAllInventory();
-//        sessionMap.put("InvList", invList);
-//        System.out.println("returning Success from doInventoryDelete method");
-//        result = "SUCCESS";
-//        return result;
-//    }
-    
-    
+    private String emailId,password,firstName,lastName,phoneNumber;
 
+    /**
+     * @return the emailId
+     */
     public String getEmailId() {
         return emailId;
     }
 
+    /**
+     * @param emailId the emailId to set
+     */
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
 
+    /**
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password the password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getAdminName() {
-        return adminName;
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the phoneNumber
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * @param phoneNumber the phoneNumber to set
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-   
-  
-    
-    
+    /**
+     * @return the admin
+     */
+    public static Admin getAdmin() {
+        return admin;
+    }
+
 }

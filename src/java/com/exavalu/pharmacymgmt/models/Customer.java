@@ -21,14 +21,13 @@ import com.exavalu.pharmacymgmt.services.CustomerService;
  */
 public class Customer extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
     
-    public static Customer customer = null;
+    private static Customer customer = null;
 
     public static Customer getInstance() {
         if (customer == null) {
             return new Customer();
-        } else {
-            return customer;
         }
+            return customer;
     }
     
     private String phoneNumber, customerName,emailId,gender,address;
@@ -144,10 +143,11 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
     }
     public String getCustomerByNumber()
     {
+        System.out.println("Getting your customer....");
         String result = "FAILURE";
-        boolean success = CustomerService.getCustomerByNumber(this.getPhoneNumber());
-        if(success){
-            sessionMap.put("Customer", this);
+        Customer customer = CustomerService.getCustomerByNumber(this.getPhoneNumber());
+        if(customer != null){
+            sessionMap.put("Customer", customer);
             result="SUCCESS";
         }
         else{
