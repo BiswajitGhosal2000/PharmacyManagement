@@ -18,32 +18,63 @@
         <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+
+            function show(aadharNo, i, empId)
+            {
+                alert('responseText');
+                $.ajax({
+                                        url: 'ApiCall',
+                    type: 'post',
+                                        data: {
+                                                'aadharNo': aadharNo,
+                        'index': i
+                                        },
+                                        success: function (responseText) {
+                        alert(responseText);
+                        $("#modalText").html(responseText);
+                        
+                    }                                        
+                                });
+
+                $("#eid").val(empId);
+            }
+            function reject()
+            {
+                $("#modalForm").attr('action', 'Reject');
+                $("#eid").val(empId);
+            }
+
+
+        </script>
         <script defer src="js/script.js"></script>
     </head>
     <body>
-        <header>
-            <div class="container p-5">
-                <!--        Table-->
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Employee Id</th>
-                            <th>Aadhar No</th>
-                            <th>Email Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Pin Code</th>
-                            <th>Gender</th>
-                            <th>Phone Number</th>
-                            <th>Age</th>
-                            <th>Aadhar No</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
+        <jsp:include page="menuAdmin.jsp"></jsp:include>
+            <header>
+                <div class="container">
+                    <!--        Table-->
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead class="bg-warning">
+                            <tr>
+                                <th>Employee Id</th>
+                                <th>Aadhar No</th>
+                                <th>Email Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Pin Code</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>D.O.B</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <%int i = 0;%>
                         <c:forEach var="emp" items="${EmpList}">
                             <tr>
                                 <td>${emp.getEmployeeId()}</td>
@@ -56,12 +87,10 @@
                                 <td>${emp.getPincode()}</td>
                                 <td>${emp.getGender()}</td>
                                 <td>${emp.getPhoneNumber()}</td>
-                                <td>${emp.getAge()}</td>
-                                <td>${emp.getAadharNo()}</td>
+                                <td>${emp.getDob()}</td>
                                 <td>
-                                    <a style="text-decoration: none;" href='#'>
-                                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModalCenter">Verify</button>
-                                    </a>
+                                    <button class="btn btn-sm btn-success" data-toggle="modal" onclick="show(${emp.getAadharNo()},<%=i%>,${emp.getEmployeeId()})" data-target="#exampleModalCenter">Verify</button>
+                                    <%i++;%>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -86,51 +115,19 @@
                             <button type="button" class="close mx-2 float-end" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <form class="rounded bg-white shadow p-3">
-
+                            <form id="modalForm" class="rounded bg-white shadow p-3" action="Approve" method="POST">
                                 <h3 class="text-dark fw-bolder fs-2 mb-4 text-center">Verify Details</h3>
-
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col fw-normal text-muted mb-4">
-                                            Name: <span class="text-primary fw-bold text-decoration-none">Pratik Biswas</span>
-                                        </div>
-                                        <div class="col fw-normal text-muted mb-4">
-                                            API Name: <span class="text-primary fw-bold text-decoration-none">Pratik Biswas</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col fw-normal text-muted mb-4">
-                                            Gender: <span class="text-primary fw-bold text-decoration-none">Male</span>
-                                        </div>
-                                        <div class="col fw-normal text-muted mb-4">
-                                            API Gender: <span class="text-primary fw-bold text-decoration-none">Male</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col fw-normal text-muted mb-4">
-                                            Address: <span class="text-primary fw-bold text-decoration-none">Lalit lane</span>
-                                        </div>
-                                        <div class="col fw-normal text-muted mb-4">
-                                            API Address: <span class="text-primary fw-bold text-decoration-none">Lalit lane</span>
-                                        </div>
-                                    </div>
-
+                                <div id="modalText">
                                 </div>
-
                                 <div class="form-floating mb-1">
-                                    <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                    <input type="number" class="form-control" id="floatingInput" min="12000" name="salary" required>
                                     <label for="floatingInput">Salary</label>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Submit</button>
-
+                                <input type="number" class="form-control" id="eid" name="employeeId" hidden>
+                                <button type="submit" class="btn btn-lg btn-primary submit_btn w-100 my-3">Approve</button>
+                                <button type="submit" onclick="reject()" class="btn btn-lg btn-danger submit_btn w-100">Reject</button>
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -139,15 +136,14 @@
 
         <!--Modal End-->
 
-    </div>
-    <!-- Bootstrap core JavaScript
-================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-</body>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+        <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+    </body>
 </html>

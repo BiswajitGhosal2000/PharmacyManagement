@@ -32,9 +32,8 @@ public class InventoryService {
             PreparedStatement ps = con.prepareStatement(sql);
             System.out.println(sql);
             ResultSet rs = ps.executeQuery();
-            System.out.println(sql);
             while (rs.next()) {
-                Inventory inventory = new Inventory();
+                Inventory inventory = Inventory.getInstance();
                 inventory.setProductNumber(rs.getInt("productNumber"));
                 inventory.setProductName(rs.getString("productName"));
                 inventory.setQuantity(rs.getInt("quantity"));
@@ -95,8 +94,7 @@ public class InventoryService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE inventory\n"
-                    + "SET productName = ? ,quantity = ? ,unitPrice = ? ,expiryDate = ? ,shelfNumber = ? where productNumber = ?";
+            String sql = "UPDATE inventory SET productName = ? ,quantity = ? ,unitPrice = ? ,expiryDate = ? ,shelfNumber = ? where productNumber = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, inventory.getProductName());
@@ -107,10 +105,10 @@ public class InventoryService {
             preparedStatement.setInt(6, inventory.getProductNumber());
 
             int row = preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
 
             if (row == 1) {
                 result = true;
-                System.out.println(sql);
             }
 
         } catch (SQLException ex) {
@@ -146,8 +144,8 @@ public class InventoryService {
         return result;
 
     }
-    public static boolean getProduct(int productNumber) {
-        boolean result = false;
+    public static Inventory getProduct(int productNumber) {
+        Inventory inventory = new Inventory();
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT * from inventory WHERE productNumber = ?";
@@ -156,12 +154,12 @@ public class InventoryService {
             preparedStatement.setInt(1, productNumber);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                Inventory.getInstance().setProductName(rs.getString("productName"));
-                Inventory.getInstance().setQuantity(rs.getInt("quantity"));
-                Inventory.getInstance().setProductName(rs.getString("productName"));
-                Inventory.getInstance().setProductName(rs.getString("productName"));
-                Inventory.getInstance().setProductName(rs.getString("productName"));
-                result = true;
+                inventory.setProductNumber(rs.getInt("productNumber"));
+                inventory.setProductName(rs.getString("productName"));
+                inventory.setQuantity(rs.getInt("quantity"));
+                inventory.setExpiryDate(rs.getString("expiryDate"));
+                inventory.setUnitPrice(rs.getDouble("unitPrice"));
+                inventory.setShelfNumber(rs.getString("shelfNumber"));
             }
         } catch (SQLException ex) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -170,7 +168,7 @@ public class InventoryService {
             System.out.println(errorMessage);
             log.error(errorMessage);
         }
-        return result;
+        return inventory;
     }
     
 }

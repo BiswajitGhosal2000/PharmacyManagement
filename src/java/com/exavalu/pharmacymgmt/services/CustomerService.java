@@ -18,17 +18,7 @@ import org.apache.log4j.Logger;
  * @author lokes
  */
 public class CustomerService {
-    
-     public static CustomerService customerservice = null;
     private static final Logger log = Logger.getLogger(CustomerService.class);
-
-    public static CustomerService getInstance() {
-        if (customerservice == null) {
-            return new CustomerService();
-        } else {
-            return customerservice;
-        }
-    }
     
     public static boolean addCustomer(Customer customer) {
         boolean result = false;
@@ -45,7 +35,7 @@ public class CustomerService {
             preparedStatement.setString(6, customer.getAddress());
            
 
-            System.out.println(sql);
+            System.out.println(preparedStatement);
             int row = preparedStatement.executeUpdate();
 
             if (row == 1) {
@@ -81,7 +71,7 @@ public class CustomerService {
 
             if (row == 1) {
                 result = true;
-                System.out.println(sql);
+                System.out.println(preparedStatement);
             }
 
         } catch (SQLException ex) {
@@ -94,9 +84,11 @@ public class CustomerService {
 
     }
     
-    public static boolean getCustomerByNumber(String phoneNumber) {
+    public static Customer getCustomerByNumber(String phoneNumber) {
 
-        boolean result = false;
+                Customer customer = Customer.getInstance();
+                customer.setPhoneNumber(phoneNumber);
+                
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "select * from customer where  phoneNumber= ? ";
@@ -108,22 +100,22 @@ public class CustomerService {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next() ) {
-                Customer.getInstance().setCustomerName(rs.getString("customerName"));
-                Customer.getInstance().setEmailId(rs.getString("emailId"));
-                Customer.getInstance().setAge(rs.getInt("age"));
-                Customer.getInstance().setGender(rs.getString("gender"));
-                Customer.getInstance().setAddress(rs.getString("address"));
-                result = true;
-                System.out.println(sql);
+                customer.setCustomerName(rs.getString("customerName"));
+                customer.setEmailId(rs.getString("emailId"));
+                customer.setAge(rs.getInt("age"));
+                customer.setGender(rs.getString("gender"));
+                customer.setAddress(rs.getString("address"));
+                System.out.println(preparedStatement);
             }
 
         } catch (SQLException ex) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             // Construct the error message with date and time
             String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
             log.error(errorMessage);
         }
-        return result;
+        return customer;
 
     }
     

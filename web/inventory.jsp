@@ -17,13 +17,12 @@
         <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
-        <!-- Bootstrap core CSS -->
+         <!--Bootstrap core CSS--> 
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="css/carousel.css" rel="stylesheet">
+         <!--Custom styles for this template--> 
+        <!--<link href="css/carousel.css" rel="stylesheet">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
-
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         <style>
@@ -35,21 +34,26 @@
         </style>
     </head>
     <body>
+        <jsp:include page="menuAdmin.jsp"></jsp:include>
+
         <main>
-            <div class="jumbotron">
+            <div class="text-center">
+                <a class="btn btn-success w-25 p-2 " href="addProduct.jsp">Add Product</a>
+            </div>
+            <div class="container">
                 <table class="table table-bordered table-striped text-center " id="inventoryTable">
                     <thead class="bg-warning">
-                        <c:if test="${not empty ProductMsg}">
-                            <c:out value="${ProductMsg}"/>
+                        <c:if test="${not empty CreatedMsg}">
+                            <c:out value="${CreatedMsg}"/>
                         </c:if>
                         <tr>
-                            <th>Product Number</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Expiry Date</th>
-                            <th>Shelf Number</th>
-                            <th>Edit</th>
+                            <th class="text-center">Product Number</th>
+                            <th class="text-center">Product Name</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Unit Price</th>
+                            <th class="text-center">Expiry Date</th>
+                            <th class="text-center">Shelf Number</th>
+                            <th class="text-center">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,10 +64,10 @@
                                 <td>${product.getProductName()}</td>
                                 <td>${product.getQuantity()}</td>
                                 <td>${product.getUnitPrice()}</td>
-                                <td>${product.getexpiryDate()}</td>
+                                <td>${product.getExpiryDate()}</td>
                                 <td>${product.getShelfNumber()}</td>
                                 <td>
-                                    <a href="doProductEdit?productNumber=${product.getProductNumber()}" class=" text-decoration-none">
+                                    <a href="EditProduct?productNumber=${product.getProductNumber()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
                                 </td>
@@ -73,14 +77,14 @@
                 </table>
             </div>
             <script src =  "js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#inventoryTable').DataTable();
-            });
-        </script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#inventoryTable').DataTable();
+                });
+            </script>
         </main>
     </body>
 </html>
