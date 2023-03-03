@@ -87,6 +87,7 @@ public class CustomerService {
     public static Customer getCustomerByNumber(String phoneNumber) {
 
                 Customer customer = new Customer();
+
                 customer.setPhoneNumber(phoneNumber);
                 
         try {
