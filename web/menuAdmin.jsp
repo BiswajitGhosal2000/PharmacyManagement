@@ -43,7 +43,7 @@
                     <a class="nav-link text-light" href="salesReport.jsp">Sales Report</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" onclick="goTo('GetAllOrder')">Order History</a>
+                    <a class="nav-link text-light" href="GetAllOrder">Order History</a>
                 </li>
             </ul>
             <div class="nav-item dropdown ">

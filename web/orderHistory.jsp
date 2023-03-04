@@ -42,13 +42,12 @@
                         </c:if>
                         <tr>
                             <th>Order Id</th>
-                            <th>Product Name</th>
                             <th>Customer Name</th>
                             <th>Order Date Time</th>
                             <th>Phone Number</th>
                             <th>Doctor Name</th>
                             <th>Total Price</th>
-                            <th>Employee Email Id</th>
+                            <th>Employee Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,13 +55,12 @@
                             <tr>
 
                                 <td>${order.getOrderId()}</td>
-                                <td>${order.getProductName()}</td>
                                 <td>${order.getCustomerName()}</td>
                                 <td>${order.getOrderDateTime()}</td>
                                 <td>${order.getPhoneNumber()}</td>
                                 <td>${order.getDoctorName()}</td>
                                 <td>${order.getTotalPrice()}</td>
-                                <td>${order.getEmailId()}</td>
+                                <td>${order.getEmployeeName()}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
