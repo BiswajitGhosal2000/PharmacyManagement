@@ -128,6 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:set var="price" scope="session" value="0"/>
                                 <c:forEach var="product" items="${ProductList}">
                                     <tr>
                                         <td>${product.getProductName()}</td>
@@ -135,6 +136,7 @@
                                         <td>${product.getUnitPrice()}</td>
                                         <td>${product.getPrice()}</td>
                                         <td></td>
+                                        <c:set var="price" scope="session" value="${price+product.getPrice()}"/>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -147,11 +149,11 @@
             </div>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
-                            function FetchCustomer(method) {
-                                //alert('Fetch');
-                                $.ajax({
-                                    url: method,
-                                    type: 'POST',
+                function FetchCustomer(method) {
+                    //alert('Fetch');
+                    $.ajax({
+                    url: method,
+                    type: 'POST',
                                     data: {
                                         'phoneNumber': $("#phoneNumber").val()
                                     },
