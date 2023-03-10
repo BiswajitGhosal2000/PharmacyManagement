@@ -49,10 +49,10 @@
             <result name="SUCCESS">modal.jsp</result>
         </action>
         <action name="Approve" class="com.exavalu.pharmacymgmt.models.Employee" method="doVerifyEmployee">
-            <result name="SUCCESS">VerifyEmployee.jsp</result>
+            <result name="SUCCESS">verifyEmployee.jsp</result>
         </action>
         <action name="Reject" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeHardDelete">
-            <result name="SUCCESS">VerifyEmployee.jsp</result>
+            <result name="SUCCESS">verifyEmployee.jsp</result>
         </action>
         <action name="GetCustomer" class="com.exavalu.pharmacymgmt.models.Customer" method="getCustomerByNumber">
             <result name="SUCCESS">homeEmployee.jsp</result>
@@ -74,9 +74,37 @@
             <result name="SUCCESS">homeEmployee.jsp</result>
             <result name="FAILURE">homeEmployee.jsp</result>
         </action>
+        <action name="CompleteOrder" class="com.exavalu.pharmacymgmt.models.Order" method="completeOrder">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">invoice.jsp</result>
+        </action>
         <action name="AddProduct" class="com.exavalu.pharmacymgmt.models.Product" method="addProduct">
             <result name="SUCCESS">homeEmployee.jsp</result>
             <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="RemoveProduct" class="com.exavalu.pharmacymgmt.models.Product" method="removeProduct">
+            <result name="SUCCESS">homeEmployee.jsp</result>
+            <result name="FAILURE">homeEmployee.jsp</result>
+        </action>
+        <action name="SalesReport" class="com.exavalu.pharmacymgmt.models.Order" method="salesReport">
+            <result name="SUCCESS">salesReport.jsp</result>
+            <result name="FAILURE">salesReport.jsp</result>
+        </action>
+        <action name="CustomSalesReport" class="com.exavalu.pharmacymgmt.models.Order" method="getCustomSalesReport">
+            <result name="SUCCESS">salesReport.jsp</result>
+            <result name="FAILURE">salesReport.jsp</result>
+        </action>
+        <action name="MonthlySalesReport" class="com.exavalu.pharmacymgmt.models.Order" method="getMonthlySalesReport">
+            <result name="SUCCESS">salesReport.jsp</result>
+            <result name="FAILURE">salesReport.jsp</result>
+        </action>
+        <action name="YearlySalesReport" class="com.exavalu.pharmacymgmt.models.Order" method="getYearlySalesReport">
+            <result name="SUCCESS">salesReport.jsp</result>
+            <result name="FAILURE">salesReport.jsp</result>
+        </action>
+        <action name="SendEmail" class="com.exavalu.pharmacymgmt.models.MailSender" method="sendEmailToUser">
+            <result name="SUCCESS">invoice.jsp</result>
+            <result name="FAILURE">invoice.jsp</result>
         </action>
     </package>
 </struts>

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 /**
- *
+ *Service methods to connect with the database of employee table for CURD operations 
  * @author gaura
  */
 public class EmployeeService {

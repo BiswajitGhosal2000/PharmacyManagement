@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="css/googleAuth.css">
         <title>Login with Google</title>
     </head>
-    
-    
+
+
     <body>
         <h2 class="m-5">Sign in using google</h2>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -28,9 +28,9 @@
             <p id="email"> </p>
             <button type="button" class="btn btn-danger" onclick="signOut()">SIGN OUT</button>
         </div>
+
         
-        
-        
+
         <script src="js/googleAuth.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

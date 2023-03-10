@@ -1,7 +1,7 @@
 <%-- 
     Document   : homeAdmin
     Created on : 21-Feb-2023, 2:02:03 pm
-    Author     : lokesh
+    Author     : Lokesh Reddy
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,11 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+        <title>MEDEASY - Admin Home</title>
 
-        <title>Cover Template for Bootstrap</title>
-
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Bootstrap core CSS -->
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,29 +27,17 @@
         
     </head>
 
-    <body class="text-center">
+    <body class="text-center" style=" background-image:url(images/bgMain.png);  background-repeat: no-repeat;
+    height: 100vh; background-position: center; background-size: cover;">
         <jsp:include page="menuAdmin.jsp"></jsp:include>
 
         <main id="changeableArea">
-            <div class="quote">
-                <h1 class="title">Welcome to MedEasy</h1>
+            <div class="quote register-left">
+                <img src="images/signup-logo.png" alt="xx"/>
+                <h1 class="new">Welcome to</h1>
+                <h1 class="title">MedEasy</h1>
             </div>
-        </main>
-
-        <script>
-            function change() {
-                $.ajax({
-                    url: method,
-                    data: {
-                        claimId: data
-                    },
-                                    success: function (responseText) {
-                        console.log(responseText);
-                                        $("#changeableArea").html(responseText);
-                                    }
-                });
-            }
-        </script>
+       </main>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->

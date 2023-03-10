@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 /**
- *
+ *Service methods to connect with the database of user table for login operation
  * @author Biswajit
  */
 public class LoginService {
@@ -24,7 +24,7 @@ public class LoginService {
     static Logger logger = Logger.getLogger(LoginService.class.getName());
 
     public static ArrayList doLogin(String emailId, String password) {
-        String res = "FAILURE";
+        String res;
         ArrayList login = new ArrayList();
 
         String sql = "Select * from user where emailId=? and password=?";
@@ -41,22 +41,27 @@ public class LoginService {
             if (rs.next())
             {
                 if (rs.getInt("roleId")== 1){
+                    res = "ADMIN";
+                    login.add(res);
                     Admin admin = Admin.getInstance();
                     admin.setFirstName(rs.getString("firstName"));
                     admin.setLastName(rs.getString("lastName"));
                     admin.setEmailId(rs.getString("emailId"));
                     login.add(admin);
-                    res = "ADMIN";
-                    login.add(res);
+                    
                 }else{
-                   Employee employee = Employee.getInstance();
+                    res = "EMPLOYEE";
+                    login.add(res);
+                    Employee employee = Employee.getInstance();
                     employee.setFirstName(rs.getString("firstName"));
                     employee.setLastName(rs.getString("lastName"));
                     employee.setEmailId(rs.getString("emailId"));
-                    res = "EMPLOYEE";
                     login.add(employee);
-                    login.add(res);
+                    
                 }
+            }
+            else{
+                login.add("FAILURE");
             }
         } catch (SQLException ex) {
             logger.error(ex.getMessage() + LocalDateTime.now());

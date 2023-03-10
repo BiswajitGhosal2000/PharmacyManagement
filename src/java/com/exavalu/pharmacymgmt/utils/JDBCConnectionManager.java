@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author Avijit Chattopadhyay
+ * JDBC class to establish connection with the MySQL database
+ * @author All
  */
 public class JDBCConnectionManager {
     static Logger logger = Logger.getLogger(JDBCConnectionManager.class.getName());

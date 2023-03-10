@@ -20,7 +20,7 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *
+ *Model for role based login and logout operations
  * @author Biswajit
  */
 public class Login extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
@@ -74,10 +74,10 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
 
         ArrayList login = LoginService.doLogin(this.emailId, this.password);
-        String result = login.get(1).toString();
+        String result = login.get(0).toString();
         if (result.equalsIgnoreCase("ADMIN")) {
             System.out.println("Returning Success From ADMIN Login");
-            Admin admin = (Admin) login.get(0);
+            Admin admin = (Admin) login.get(1);
             sessionMap.put("Admin", admin);
             System.out.println(admin.getFirstName());
             
@@ -93,7 +93,7 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("InventoryList", inventoryList);
         } else if (result.equalsIgnoreCase("EMPLOYEE")) {
             System.out.println("Returning Success From EMPLOYEE Login");
-            Employee employee = (Employee) login.get(0);
+            Employee employee = (Employee) login.get(1);
             sessionMap.put("Employee", employee);
             System.out.println(employee.getEmailId());
             ArrayList inventoryList = InventoryService.getAllInventory();

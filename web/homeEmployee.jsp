@@ -1,15 +1,17 @@
 <%-- 
     Document   : employeeMenu
     Created on : 27-Feb-2023, 3:08:12 am
-    Author     : sandeep kamila
+    Author     : sandeep kamila,Biswajit Ghosal, Ritwik Shaw
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Employee == null}">
+    <c:redirect url="landingPage.jsp"/>
+</c:if>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Medical Form</title>
+        <title>MedEasy - Employee Home Page</title>
         <link rel="stylesheet" href="css/homeEmployee.css"/>
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,16 +26,19 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     </head>
-    <body class="">
+    <body>
         <jsp:include page="menuEmployee.jsp"></jsp:include>
-            <main id="changeableArea">
+            <main>
                 <div class="card-group">
-                    <div id="first" class="card">
-                        <div class="card-header">
-                        <h3 class="text-center mb-2">Customer Details </h3>
-                    </div>
+                    <div id="first" class="card rounded-top border">
+                        <div class="card-header rounded-top" style="background-color: #8fddff">
+                            <h3 class="text-center mb-2">Customer Details </h3>
+                        </div>
                         <div class="card-body">
                             <form>
                                 <div class="full-input">
@@ -50,7 +55,7 @@
                             </div>
                             <div class="full-input">
                                 <label for="gender">Gender:</label>
-                                <input type="text" id="gender" name="gender" placeholder="Enter address" value="${Customer.getGender()}" required> 
+                                <input type="text" id="gender" name="gender" placeholder="Enter Gender" value="${Customer.getGender()}" required> 
                             </div>
                             <div class="full-input">
                                 <label for="emailId">Email Id:</label>
@@ -68,13 +73,13 @@
                                 <a class="btn btn-success text-white w-25" onclick="SaveCustomer('UpdateCustomer')">Update</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="btn btn-warning text-white w-25" onclick="SaveCustomer('AddCustomer')">Save</a>
+                                <a class="btn btn-warning text-black w-25" onclick="SaveCustomer('AddCustomer')">Save</a>
                             </c:otherwise>
                         </c:choose>
                     </div>
                 </div>
-                <div class="card" id="second">
-                    <div class="card-header">
+                <div class="card rounded-top" id="second">
+                    <div class="card-header rounded-top" style="background-color: #c7eeff">
                         <h3 class="text-center mb-2">Product Details </h3>
                     </div>
                     <div class="card-body">
@@ -84,42 +89,75 @@
                                 <label for="doctorName">Doctor name:</label>
                                 <input type="text" id="doctorName" name="doctorName" placeholder="Enter doctor name" value="${Order.getDoctorName()}" onchange="SaveOrder()" required>
                             </div>
-                            <div class="full-input">
-                                <label for="productNumber">Medicine:</label>
-                                <select id="productNumber" name="productNumber" required onchange="getProduct()">
-                                    <option value="" hidden>Select a medicine</option>
-                                    <c:forEach var="inventory" items="${InventoryList}">
-                                        <option value="${inventory.getProductNumber()}" <c:if test="${inventory.getProductNumber()} == ${Product.getProductNumber()}" >selected</c:if>>${inventory.getProductName()}</option>
-                                    </c:forEach>
-                                </select>
+
+                            <div class="dropdown full-input">
+                                <div id="myDropdown" class="dropdown-content">
+                                    <input type="text" placeholder="Search Product.." class="full-input m-auto" id="myInput" onkeyup="filterFunction()">
+                                    <select id="productNumber" name="productNumber" class="full-input m-auto p-1" required onchange ="getProduct()">
+                                        <option value="" hidden>Select product</option>
+                                        <c:forEach var="inventory" items="${InventoryList}">
+                                            <option value="${inventory.getProductNumber()}" <c:if test="${inventory.getProductNumber()} == ${Product.getProductNumber()}" >selected</c:if>>${inventory.getProductName()}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
                             </div>
+                            <script>
+                                function filterFunction() {
+                                    var input, filter, ul, li, a, i;
+                                    input = document.getElementById("myInput");
+                                    filter = input.value.toUpperCase();
+                                    div = document.getElementById("myDropdown");
+                                    a = div.getElementsByTagName("option");
+                                    for (i = 0; i < a.length; i++) {
+                                        txtValue = a[i].textContent || a[i].innerText;
+                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                            a[i].style.display = "";
+                                        } else {
+                                            a[i].style.display = "none";
+                                        }
+                                    }
+                                }
+                            </script>
+
                             <div class="full-input" >
                                 <label for="productName">Product Name:</label>
-                                <input type="text" id="productName" name="productName" value="${Product.getProductName()}" readonly required />
+                                <input type="text" style="background-color: #d2d5d6" id="productName" name="productName" value="${Product.getProductName()}" readonly required />
                             </div>
-                            <div class="full-input">
-                                <label for="quantity">Quantity:</label>
-                                <input type="number" id="quantity" name="quantity" min="1" required />
+                            <div class="full-input" >
+                                <label for="productName">Available Quantity:</label>
+                                <input type="text" style="background-color: #d2d5d6" value="${Product.getQuantity()}" readonly required>
                             </div>
                             <div class="full-input">
                                 <label for="unitPrice">Unit Price:</label>
-                                <input type="text" id="unitPrice" name="unitPrice" value="${Product.getUnitPrice()}" readonly required>
+                                <input type="text" style="background-color: #d2d5d6" id="unitPrice" name="unitPrice" value="${Product.getUnitPrice()}" readonly required>
                             </div>
+                            <div class="full-input">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" id="quantity" name="quantity" min = "1" value="1" required >
+                            </div>
+
                         </form>
                     </div>
                     <div class="card-footer text-center">
                         <input type="text" id="orderId" name="orderId" value="${Order.getOrderId()}" hidden required>
-                        <a class="btn btn-warning text-black" onclick="AddProduct()">Add Product</a>
+                        <c:choose>
+                            <c:when test="${not empty Order}">
+                                <a class="btn btn-warning text-black" onclick="AddProduct()">Add Product</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn btn-warning text-black disabled">Add Product</a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
+                <div class="card rounded-top">
+                    <div class="card-header rounded-top" style="background-color: #8fddff">
                         <h3 class="text-center mb-2">Order Summary</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-bordered">
                             <thead class="bg-warning">
-                                <tr>
+                                <tr class="text-center">
                                     <th>Product Name</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
@@ -130,113 +168,42 @@
                             <tbody>
                                 <c:set var="price" scope="session" value="0"/>
                                 <c:forEach var="product" items="${ProductList}">
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>${product.getProductName()}</td>
                                         <td>${product.getQuantity()}</td>
                                         <td>${product.getUnitPrice()}</td>
-                                        <td>${product.getPrice()}</td>
-                                        <td></td>
+                                        <td>₹${product.getPrice()}</td>
+                                        <td>
+                                            <i class="bi bi-x-octagon-fill"  style="cursor: pointer; color: red" onclick="deleteProduct('${product.getProductName()}',${product.getOrderId()})"></i>
+                                        </td>
                                         <c:set var="price" scope="session" value="${price+product.getPrice()}"/>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer text-center">
-                        <a class="btn btn-success text-white w-50" href="invoice.jsp" >Generate Invoice</a>
+                    <div class="card-footer">
+                        <table>
+                            <tr>
+                                <th class="pl-2 pt-0">Total Price: </th>
+                                <td class="pr-5 pt-0 pl-1">₹ ${price}</td>
+                                <td class="float-end pl-5 pt-0">
+                                    <c:choose>
+                                        <c:when test="${not empty ProductList}">
+                                            <a class="btn btn-success text-white" href="invoice.jsp" >Generate Invoice</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn btn-success text-white disabled " >Generate Invoice</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                function FetchCustomer(method) {
-                    //alert('Fetch');
-                    $.ajax({
-                    url: method,
-                    type: 'POST',
-                                    data: {
-                                        'phoneNumber': $("#phoneNumber").val()
-                                    },
-                                    success: function (responseText) {
-                                        $("#first").load(responseText);
-                                        location.reload();
-                                    }
-                                });
-                            }
-                            function SaveCustomer(method) {
-                                //alert("AddCustomer");
-                                $.ajax({
-                                    url: method,
-                                    type: 'post',
-                                    data: {
-                                        'phoneNumber': $("#phoneNumber").val(),
-                                        'customerName': $("#customerName").val(),
-                                        'age': $("#age").val(),
-                                        'gender': $("#gender").val(),
-                                        'emailId': $("#emailId").val(),
-                                        'address': $("#address").val()
-                                    },
-                                    success: function () {
-                                        //alert("responseText");
-                                        //$("").load(responseText);
-                                        location.reload();
-                                    }
-                                });
-                            }
-                            function SaveOrder() {
-                                alert("Saveorder");
-                                $.ajax({
-                                    url: 'AddOrder',
-                                    type: 'POST',
-                                    data: {
-                                        'phoneNumber': $("#phoneNumber").val(),
-                                        'customerName': $("#customerName").val(),
-                                        'address': $("#address").val(),
-                                        'doctorName': $("#doctorName").val(),
-                                        'employeeName': $("#employeeName").val()
-                                    },
-                                    success: function (responseText) {
-                                        alert(responseText);
-                                        //$("#second").load(responseText);
-                                        location.reload();
-                                    }
-                                });
-                            }
-                            function getProduct() {
-                                //alert($("#productNumber").val());
-                                $.ajax({
-                                    url: 'GetProduct',
-                                    type: 'post',
-                                    data: {
-                                        'productNumber': $("#productNumber").val()
-                                    },
-                                    success: function (responseText) {
-                                        //alert(responseText);
-                                        $("#second").load(responseText);
-                                        location.reload();
-                                    }
-                                });
-                            }
-                            function AddProduct() {
-                                //alert("SaveCustomer");
-                                $.ajax({
-                                    url: 'AddProduct',
-                                    type: 'post',
-                                    data: {
-                                        'productName': $("#productName").val(),
-                                        'quantity': $("#quantity").val(),
-                                        'unitPrice': $("#unitPrice").val(),
-                                        'orderId': $("#orderId").val()
-                                    },
-                                    success: function (responseText) {
-                                        //alert("responseText");
-                                        $("#second").load(responseText);
-                                        location.reload();
-                                    }
-                                });
-                            }
-            </script>
         </main>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="js/homeEmployee.js"></script>
     </body>
 </html>

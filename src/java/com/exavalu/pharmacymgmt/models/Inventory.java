@@ -17,8 +17,9 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *
- * @author lenovo
+ *  Model for inventory where we are creating the instance variables for inventory and the methods for CURD operations are mentioned.
+ * 
+ * @author Pratik
  */
 public class Inventory extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 

@@ -17,7 +17,7 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *
+ *Model for Product where we are creating the instance variables for product and the methods for CURD operations.
  * @author Biswajit
  */
 public class Product extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
@@ -129,6 +129,18 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
         ArrayList productList = ProductService.getProductByOrderId(this.getOrderId());
         if (!productList.isEmpty()) {
             sessionMap.put("ProductList", productList);
+            result = "SUCCESS";
+        } else {
+            logger.error("Something error Occured");
+        }
+        return result;
+    }
+    public String removeProduct() {
+        String result = "FAILURE";
+        boolean success = ProductService.removeProduct(this.getOrderId(),this.getProductName());
+        if (success) {
+            ArrayList productList = ProductService.getProductByOrderId(this.getOrderId());
+            sessionMap.put("ProductList",productList);
             result = "SUCCESS";
         } else {
             logger.error("Something error Occured");

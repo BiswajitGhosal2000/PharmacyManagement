@@ -11,11 +11,14 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inventory Pharmacy management</title>
+        <title>MedEasy - Verified Employee</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
         <!-- Bootstrap core CSS -->
@@ -27,27 +30,15 @@
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        <style>
-            body{
-            }
-            #example_wrapper{
-                width: 100%;
-                display: block;
-                margin: auto;
-            }
-        </style>
     </head>
     <body>
         <jsp:include page="menuAdmin.jsp"></jsp:include>
             <main>
-                <div class="container row justify-content-center" id="example_wrapper">
-                    <table class="table table-bordered table-striped text-center  table-responsive" id="example">
+                <div class="container p-0 m-auto" style="display: block;">
+                    <table class="table table-bordered table-striped text-center table-responsive" id="example"><!--container  row justify-content-center-->
                         <thead class="bg-info">
-                        <c:if test="${not empty EmpMsg}">
-                            <c:out value="${EmpMsg}"/>
-                        </c:if>
                         <tr>
-                            <th>Employee Id</th>
+                            <th>Emp. Id</th>
                             <th>Aadhar No</th>
                             <th>Email Id</th>
                             <th>First Name</th>
@@ -58,13 +49,16 @@
                             <th>Gender</th>
                             <th>Phone Number</th>
                             <th>D.O.B</th>
-                            <th>Qualification</th>
+                            <th>Degree</th>
                             <th>Salary</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <c:if test="${not empty EmpMsg}">
+                            <c:out value="${EmpMsg}"/>
+                        </c:if>
                         <c:forEach var="emp" items="${VerifiedEmpList}">   
                             <tr>
 
@@ -82,12 +76,12 @@
                                 <td>${emp.getQualification()}</td>
                                 <td>${emp.getSalary()}</td>
                                 <td>
-                                    <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
+                                    <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="edit">
                                         <button class="w-20 btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="DeleteEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none">
+                                    <a href="DeleteEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="delete">
                                         <button class="w-20 btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
                                     </a>
                                 </td>

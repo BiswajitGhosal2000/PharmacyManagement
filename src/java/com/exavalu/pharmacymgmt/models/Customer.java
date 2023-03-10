@@ -16,7 +16,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.exavalu.pharmacymgmt.services.CustomerService;
 
 /**
- *
+ *Model for Customer where we are creating the instance variables for customer and the methods for CURD operations are mentioned.
  * @author Biswajit
  */
 public class Customer extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
@@ -134,6 +134,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
         String result = "FAILURE";
         boolean success = CustomerService.addCustomer(this);
         if(success){
+            sessionMap.put("Customer", this);
             result="SUCCESS";
         }
         else{

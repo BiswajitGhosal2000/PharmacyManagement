@@ -3,22 +3,12 @@
     Created on : 02-Mar-2023, 2:53:12 pm
     Author     : Biswajit
 --%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function goTo(method) {
-        //alert(method);
-        $.ajax({
-            url: method,
-            success: function (responseText) {
-            console.log(responseText);
-            $("#changeableArea").html(responseText);
-            }
-        });
-    }
-</script>
+<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<nav class="navbar navbar-expand-lg navbar-primary sticky-top py-3 mb-3" style="color: white;background-image: linear-gradient(to top right, #05204b, #4c7bc7, #031a40);">
+<nav class="navbar navbar-expand-lg navbar-primary sticky-top py-2 mb-2" style="color: white;background: #1E90FF;">
     <div class="container-fluid">
+        <a class="mx-4" title="pharmacy icons"><img src="images/drugstore.png" width="40" alt="alt"/></a>
         <a class="navbar-brand text-white" href="#">MedEasy</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,3 +42,4 @@
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

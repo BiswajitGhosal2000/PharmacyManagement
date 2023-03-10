@@ -18,10 +18,52 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *
- * @author lokes
+ *Model for Order where we are creating the instance variables for customer and the methods for CURD operations and sales report are mentioned.
+ * @author lokesh
  */
 public class Order extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+
+    /**
+     * @return the orderDate
+     */
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    /**
+     * @param orderDate the orderDate to set
+     */
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public String getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     static Logger logger = Logger.getLogger(Order.class.getName());
 
@@ -34,8 +76,9 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             return order;
         }
     }
-    private String customerName, phoneNumber, doctorName,employeeName;
+    private String customerName, phoneNumber, doctorName,employeeName,startDate,endDate;
     private String orderDateTime= LocalDateTime.now().toString();
+    private String orderDate = LocalDateTime.now().toLocalDate().toString();
     private int orderId;
     private double totalPrice;
 
@@ -177,12 +220,84 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
-    public String updateOrder() {
+    public String completeOrder() {
+        System.out.println("Calling update");
         String result = "FAILURE";
         boolean success = OrderService.updateOrder(this);
         if (success) {
-            ArrayList orderList = OrderService.getAllOrder();
-            sessionMap.put("OrderList", orderList);
+//            ArrayList orderList = OrderService.getAllOrder();
+//            sessionMap.put("OrderList", orderList);
+            sessionMap.remove("Customer");
+            sessionMap.remove("Order");
+            sessionMap.remove("Product");
+            sessionMap.remove("price");
+            sessionMap.remove("totalPrice");
+            sessionMap.remove("ProductList");
+            result = "SUCCESS";
+        } else {
+            logger.error("Something error Occured");
+        }
+        return result;
+    }
+    
+    public String salesReport() {
+        String result = "FAILURE";
+        ArrayList salesOrderList = OrderService.salesReport();
+         System.out.println("Size of Sale :"+salesOrderList.size());
+         if(!salesOrderList.isEmpty()){
+              double thisDaySale = OrderService.getThisDaySale();
+              sessionMap.put("ThisDaySale", thisDaySale);
+              
+              double thisMonthSale = OrderService.getThisMonthSale();
+              sessionMap.put("ThisMonthSale", thisMonthSale);
+              
+              double thisYearSale = OrderService.getThisYearSale();
+              sessionMap.put("ThisYearSale", thisYearSale);
+              
+            sessionMap.put("salesOrderList", salesOrderList);
+            result = "SUCCESS";
+        } else {
+            logger.error("Something error Occured");
+        }
+        return result;
+    }
+    
+    public String getCustomSalesReport() {
+        String result = "FAILURE";
+        ArrayList salesOrderList = OrderService.customSalesReport(this);
+         System.out.println("Size of Sale :"+salesOrderList.size());
+         if(!salesOrderList.isEmpty()){
+              
+            sessionMap.put("salesOrderList", salesOrderList);
+            sessionMap.put("StartDate", this.getStartDate());
+            sessionMap.put("EndDate", this.getEndDate());
+            result = "SUCCESS";
+        } else {
+            logger.error("Something error Occured");
+        }
+        return result;
+    }
+    
+    public String getMonthlySalesReport() {
+        String result = "FAILURE";
+        ArrayList salesOrderList = OrderService.monthlySalesReport();
+         System.out.println("Size of Sale :"+salesOrderList.size());
+         if(!salesOrderList.isEmpty()){
+              
+            sessionMap.put("salesOrderList", salesOrderList);
+            result = "SUCCESS";
+        } else {
+            logger.error("Something error Occured");
+        }
+        return result;
+    }
+    
+    public String getYearlySalesReport() {
+        String result = "FAILURE";
+        ArrayList salesOrderList = OrderService.yearlySalesReport();
+         System.out.println("Size of Sale :"+salesOrderList.size());
+         if(!salesOrderList.isEmpty()){
+            sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {
             logger.error("Something error Occured");

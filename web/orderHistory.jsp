@@ -10,11 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Order History Pharmacy management</title>
+        <title>MedEasy - Order History</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Bootstrap core CSS -->
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,10 +34,17 @@
         </style>
     </head>
     <body>
-        <jsp:include page="menuAdmin.jsp"></jsp:include>
+        <c:choose>
+        <c:when test="${not empty Admin}">
+            <jsp:include page="menuAdmin.jsp"></jsp:include>
+        </c:when>
+        <c:when test="${not empty Employee}">
+            <jsp:include page="menuEmployee.jsp"></jsp:include>
+        </c:when>
+        </c:choose>
         <main>
             <div class="container">
-                <table class="table table-bordered table-striped text-center " id="inventoryTable">
+                <table class="table table-bordered table-striped " id="inventoryTable">
                     <thead class="bg-info">
                         <c:if test="${not empty OrderMsg}">
                             <c:out value="${OrderMsg}"/>

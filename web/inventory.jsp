@@ -10,12 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inventory Pharmacy management</title>
+        <title>MedEasy - Inventory</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
          <!--Bootstrap core CSS--> 
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,20 +35,27 @@
         </style>
     </head>
     <body>
-        <jsp:include page="menuAdmin.jsp"></jsp:include>
+        <c:choose>
+        <c:when test="${not empty Admin}">
+            <jsp:include page="menuAdmin.jsp"></jsp:include>
+        </c:when>
+        <c:when test="${not empty Employee}">
+            <jsp:include page="menuEmployee.jsp"></jsp:include>
+        </c:when>
+        </c:choose>
 
         <main>
             <div class="text-center">
-                <a class="btn btn-success w-25 p-2 " href="addProduct.jsp">Add Product</a>
+                <a class="btn btn-primary p-2 fw-bold fs-5" style="width:200px" href="addProduct.jsp" title="Add Product">Add Product&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/><path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/></svg></a>
             </div>
             <div class="container">
-                <table class="table table-bordered table-striped text-center " id="inventoryTable">
-                    <thead class="bg-warning">
-                        <c:if test="${not empty CreatedMsg}">
-                            <c:out value="${CreatedMsg}"/>
+                <table class="table table-bordered table-striped" id="inventoryTable">
+                    <thead class="bg-info">
+                        <c:if test="${not empty AddedMsg}">
+                            <c:out value="${AddedMsg}"/>
                         </c:if>
                         <tr>
-                            <th class="text-center">Product Number</th>
+                            <th class="text-center">Product No</th>
                             <th class="text-center">Product Name</th>
                             <th class="text-center">Quantity</th>
                             <th class="text-center">Unit Price</th>

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : signup
+    Created on : 24-Feb-2023, 11:20:34 am
+    Author     : PRATIK BISWAS
+--%>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -8,12 +13,12 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>MedEasy - Landing Page</title>
+        <title>MedEasy - Pharmacy Store</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
+        <link href="images/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
@@ -29,7 +34,7 @@
 
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="css/modalStyle.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Day - v4.10.0
@@ -45,14 +50,14 @@
         <section id="topbar" class="d-flex align-items-center" style="background-color: white;">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
-                    <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com"style="color: black;">support@medeasy.com</a>
-                    <i class="bi bi-phone-fill phone-icon"></i> <span style="color: black;">+91 900-7366-986</span>
+                    <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com" style="color: black;">support@medeasy.com</a>
+                    <i class="bi bi-phone-fill phone-icon"></i> <span style="color: black;">+91 934 3231 325</span>
                 </div>
                 <div class="social-links d-none d-md-block">
                     <a href="#" class="twitter"><i class="bi bi-twitter" style="color: black;"></i></a>
                     <a href="#" class="facebook"><i class="bi bi-facebook" style="color: black;"></i></a>
                     <a href="#" class="instagram"><i class="bi bi-instagram" style="color: black;"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin" style="color: black;"></i></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin" style="color: black;"></i></a>
                 </div>
             </div>
         </section>
@@ -61,7 +66,7 @@
         <header id="header" class="d-flex align-items-center" style="background-color: #1E90FF;">
             <div class="container d-flex align-items-center justify-content-between">
 
-                <h1 class="logo"><a href="index.html">MedEasy</a></h1>
+                <h1 class="logo"><a href="landingPage.jsp">MedEasy</a></h1>
                 <!--       Uncomment below if you prefer to use an image logo 
                        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -70,80 +75,73 @@
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Features</a></li>
-<!--                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                        <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>-->
+                        <!--                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                                                <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>-->
                         <li><a class="nav-link scrollto" href="#team">Reviews</a></li>
-<!--                        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="#">Drop Down 1</a></li>
-                                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                    <ul>
-                                        <li><a href="#">Deep Drop Down 1</a></li>
-                                        <li><a href="#">Deep Drop Down 2</a></li>
-                                        <li><a href="#">Deep Drop Down 3</a></li>
-                                        <li><a href="#">Deep Drop Down 4</a></li>
-                                        <li><a href="#">Deep Drop Down 5</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Drop Down 2</a></li>
-                                <li><a href="#">Drop Down 3</a></li>
-                                <li><a href="#">Drop Down 4</a></li>
-                            </ul>
-                        </li>-->
+                        <!--                        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                                                    <ul>
+                                                        <li><a href="#">Drop Down 1</a></li>
+                                                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                                                            <ul>
+                                                                <li><a href="#">Deep Drop Down 1</a></li>
+                                                                <li><a href="#">Deep Drop Down 2</a></li>
+                                                                <li><a href="#">Deep Drop Down 3</a></li>
+                                                                <li><a href="#">Deep Drop Down 4</a></li>
+                                                                <li><a href="#">Deep Drop Down 5</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="#">Drop Down 2</a></li>
+                                                        <li><a href="#">Drop Down 3</a></li>
+                                                        <li><a href="#">Drop Down 4</a></li>
+                                                    </ul>
+                                                </li>-->
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <button class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter">LOGIN</button>
-                    
+
                     <!-- Modal start -->
-                    
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                    <div class="modal fade" id="exampleModalCenter" class=" rounded bg-white shadow p-5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
 
+
                                 <div class="modal-body" style="background-color: #e0feff">
 
-                                    <button type="button" class="close mx-2" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <form class="rounded bg-white shadow p-5" action="Login" method="post">
+                                    <!--BODY-->
+
+
+                                    <form class="rounded bg-white shadow p-5 " action="Login" method="post">
+                                        <div class="register-left text-center">
+                                            <img src="images/clipart1192900.png" alt="xx"/> 
+                                        </div>
 
                                         <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
-                                        
+                                        <div class="fw-normal text-muted mb-4 text-center">
+                                            New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none" id="signupstyle">Create an Account</a>
+                                        </div>
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="emailId" name="emailId" placeholder="name@example.com">
-                                            <label for="emailId">Email address</label>
+                                            <input type="email" class="form-control" id="floatingInput inputstyle" name="emailId" placeholder="name@example.com">
+                                            <label for="floatingInput">Email address</label>
                                         </div>
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="floatingPassword inputstyle" name="password" placeholder="Password">
+                                            <label for="floatingPassword">Password</label>
                                         </div>
-<!--                                        <div class="mt-2 text-end">
-                                            <a href="#" class="text-primary fw-bold text-decoration-none">Forget Password?</a>
-                                        </div>-->
-                                        <button type="submit" class="btn btn-primary submit_btn w-100 my-4">LOG IN</button>
-                                        <div class="fw-normal text-muted mb-4 text-center">
-                                            New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none">Create an Account</a>
-                                        </div>
-
-<!--                                        <div class="text-center text-muted text-uppercase mb-3">OR</div>
-
-                                        <a href="#" class="btn btn-light login_with w-100 mb-3">
-                                            <img src="images/google-icon.png" alt="G" class="img-fluid me-3">Continue with Google
-                                        </a>-->
-
+                                        <!--                                <div class="mt-2 text-end">
+                                                                            <a href="#" class="text-primary fw-bold text-decoration-none">Forget Password?</a>
+                                                                        </div>-->
+                                        <button type="submit" class="btn btn-primary w-100 my-4" id="submit_btn">LOG IN</button>
                                     </form>
-
                                 </div>
-
                             </div>
-                        </div>
+                        </div>   
                     </div>
-                    
                     <!-- Modal end -->
-                    
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
-
             </div>
         </header><!-- End Header -->
 
@@ -621,7 +619,7 @@
                             <div class="info-box  mb-4">
                                 <i class="bx bx-phone-call"></i>
                                 <h3>Call Us</h3>
-                                <p>+91 900 7366 986</p>
+                                <p>+91 934 3231 325</p>
                             </div>
                         </div>
 
@@ -673,12 +671,12 @@
 
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-info">
-                                <h3>Day</h3>
+                                <h3>MEDEASY</h3>
                                 <p>
-                                    A108 Adam Street <br>
-                                    NY 535022, USA<br><br>
-                                    <strong>Phone:</strong> +1 5589 55488 55<br>
-                                    <strong>Email:</strong> info@example.com<br>
+                                    9A Lalit Mitra Lane, <br>
+                                    Kolkata-700004, West Bengal,India<br><br>
+                                    <strong>Phone:</strong> +91 934 3231 325<br>
+                                    <strong>Email:</strong> contact@MedEasy.com<br>
                                 </p>
                                 <div class="social-links mt-3">
                                     <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -714,7 +712,7 @@
 
                         <div class="col-lg-4 col-md-6 footer-newsletter">
                             <h4>Our Newsletter</h4>
-                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                            <p>Subscribe to our newsletter to get updates</p>
                             <form action="" method="post">
                                 <input type="email" name="email"><input type="submit" value="Subscribe">
                             </form>
@@ -727,14 +725,14 @@
 
             <div class="container">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Day</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>MedEasy</span></strong>. All Rights Reserved
                 </div>
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
                     <!-- You can delete the links only if you purchased the pro version. -->
                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
                     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/day-multipurpose-html-template-for-free/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <a href="https://bootstrapmade.com/">Group-A</a>
                 </div>
             </div>
         </footer><!-- End Footer -->

@@ -5,7 +5,8 @@
 package com.exavalu.pharmacymgmt.models;
 
 /**
- *
+ *Model for admin where we are creating the instance variables for admin. 
+ * 
  * @author gaurav
  */
 public class Admin{

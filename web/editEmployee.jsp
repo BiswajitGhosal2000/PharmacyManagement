@@ -16,7 +16,7 @@
         <meta name="author" content="">
         <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-        <title>Edit employee</title>
+        <title>MedEasy - Edit Employee</title>
 
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
@@ -36,7 +36,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-        
+
         <style>
             *{
                 margin: 0;
@@ -74,75 +74,87 @@
 
         <main role="main">
             <section>
-            <div  style="margin-top: 100px"  >
-                <!--class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center"-->
-                <div class="text-center">
-                    <img  src="images/logo4.jpg" alt="" width="280" height="200" class="mb-3">
+                <div>
+                    <!--class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center"-->
+                    <!--                <div class="text-center">
+                                        <img  src="images/logo4.jpg" alt="" width="280" height="200" class="mb-3">
+                                    </div>-->
+                    <form action="UpdateEmployee" method="Post" class="rounded bg-white shadow p-3" >              
+
+                        <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Please edit employee data</h3>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Employee ID" name="employeeId" value="${Emp.getEmployeeId()}" readonly>
+                            <label for="floatingInput">Employee ID</label>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="first name" name="firstName" value="${Emp.getFirstName()}">
+                                <label for="floatingInput">First Name</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value="${Emp.getLastName()}">
+                                <label for="floatingInput">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="emailId" name="emailId" value="${Emp.getEmailId()}">
+                            <label for="floatingInput">Email</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="pincode" name="pincode" value="${Emp.getPincode()}">
+                                <label for="floatingInput">Pin Code</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="state" name="state" value="${Emp.getState()}">
+                                <label for="floatingInput">State</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city" value="${Emp.getCity()}">
+                                <label for="floatingInput">City</label>
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <select name="gender" class="form-select" id="gender" required>
+                                <option value="" hidden>Select Gender</option>
+                                <option value="Male" <c:if test="${Emp.getGender().equalsIgnoreCase('Male')}">selected</c:if>>Male</option>  
+                                <option value="Female" <c:if test="${Emp.getGender().equalsIgnoreCase('Female')}">selected</c:if>>Female</option>                        
+                                </select>
+                                <label for="floatingInput">Gender</label>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-floating col">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="phoneNumber" name="phoneNumber" value="${Emp.getPhoneNumber()}">
+                                <label for="floatingInput">Phone</label>
+                            </div>
+
+                            <div class="form-floating col">
+                                <input type="date" class="form-control" id="floatingInput" placeholder="dob" name="dob" value="${Emp.getDob()}">
+                                <label for="floatingInput">D.O.B</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="qualification" name="qualification" value="${Emp.getQualification()}" readonly>
+                                <label for="floatingInput">qualification</label>
+                            </div>
+
+                            <div class="form-floating col">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Salary" name="salary" value="${Emp.getSalary()}">
+                                <label for="floatingInput">Basic Salary</label>
+                            </div>
+                        </div>
+                        <div class="text-center my-2">
+                            <button class="btn btn-primary submit_btn col w-25 mx-2" type="submit">SAVE</button>
+                            <a class="btn btn-danger submit_btn col w-25 mx-2" href="showEmployee.jsp">Cancel</a>
+                        </div>
+                    </form>
                 </div>
-                <form action="UpdateEmployee" method="Post" class="rounded bg-white shadow p-5" >              
-
-                    <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Please edit employee data</h3>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Employee ID" name="employeeId" value="${Emp.getEmployeeId()}" readonly>
-                        <label for="floatingInput">Employee ID</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="first name" name="firstName" value="${Emp.getFirstName()}">
-                        <label for="floatingInput">First Name</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value="${Emp.getLastName()}">
-                        <label for="floatingInput">Last Name</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="emailId" name="emailId" value="${Emp.getEmailId()}">
-                        <label for="floatingInput">Email</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="pincode" name="pincode" value="${Emp.getPincode()}">
-                        <label for="floatingInput">Pin Code</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="state" name="state" value="${Emp.getState()}">
-                        <label for="floatingInput">State</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city" value="${Emp.getCity()}">
-                        <label for="floatingInput">City</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="phoneNumber" name="phoneNumber" value="${Emp.getPhoneNumber()}">
-                        <label for="floatingInput">Phone</label>
-                    </div>
-
-                    <div class="form-floating">
-                        <select name="gender" class="form-select" id="gender" required>
-                            <option value="" hidden>Select Gender</option>
-                            <option value="Male" <c:if test="${Emp.getGender().equalsIgnoreCase('Male')}">selected</c:if>>Male</option>  
-                            <option value="Female" <c:if test="${Emp.getGender().equalsIgnoreCase('Female')}">selected</c:if>>Female</option>                        
-                        </select>
-                        <label for="floatingInput">Gender</label>
-                    </div> 
-
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="dob" name="dob" value="${Emp.getDob()}">
-                        <label for="floatingInput">D.O.B</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="qualification" name="qualification" value="${Emp.getQualification()}" readonly>
-                        <label for="floatingInput">qualification</label>
-                    </div>
-
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Salary" name="salary" value="${Emp.getSalary()}">
-                        <label for="floatingInput">Basic Salary</label>
-                    </div>
-                    <button class="btn btn-primary submit_btn w-100" type="submit">SAVE</button>
-                    <a class="btn btn-danger submit_btn w-100 mt-2" href="showEmployee.jsp">Cancel</a>
-
-                </form>
-            </div>
-                </section>
+            </section>
         </main>
 
         <!-- Bootstrap core JavaScript

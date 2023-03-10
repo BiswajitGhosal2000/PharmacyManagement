@@ -3,32 +3,25 @@
     Created on : 02-Mar-2023, 12:44:14 pm
     Author     : Biswajit
 --%>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script>
-    function goTo(method) {
-        //alert(method);
-        $.ajax({
-            url: method,
-                            success: function (responseText) {
-                console.log(responseText);
-                                $("#changeableArea").html(responseText);
-                            }
-        });
-    }
-</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>
-<nav class="navbar navbar-expand-lg navbar-primary sticky-top py-3 mb-3" style="color: white;background-image: linear-gradient(to top right, #05204b, #4c7bc7, #031a40);">
+<style>
+    *{
+    font-family: 'Poppins',sans-serif;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-primary sticky-top py-2 mb-2" style="color: white;background: #1E90FF;">
     <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">MedEasy</a>
+        <a class="mx-4" title="pharmacy icons"><img src="images/drugstore.png" width="40" alt="alt"/></a>
+        <span class="navbar-brand text-white fw-bold fs-4">MEDEASY</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse m-auto" id="navbarScroll">
             <ul class="navbar-nav me-auto my-4 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active text-warning" aria-current="page" href="homeAdmin.jsp"> Home </a>
+                    <a class="nav-link active text-light" aria-current="page" href="homeAdmin.jsp"> Home </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="inventory.jsp">Inventory</a>
@@ -37,10 +30,10 @@
                     <a class="nav-link text-light" href="showEmployee.jsp">Show Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="VerifyEmployee.jsp">Verify Employee</a>
+                    <a class="nav-link text-light" href="verifyEmployee.jsp">Verify Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="salesReport.jsp">Sales Report</a>
+                    <a class="nav-link text-light" href="SalesReport">Sales Report</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="GetAllOrder">Order History</a>

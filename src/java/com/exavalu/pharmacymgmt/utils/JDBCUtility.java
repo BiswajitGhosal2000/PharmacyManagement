@@ -12,8 +12,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author Avijit Chattopadhyay
+ *To fetch the details of property files
+ * @author All
  */
 public class JDBCUtility {
     static Logger logger = Logger.getLogger(JDBCUtility.class.getName());

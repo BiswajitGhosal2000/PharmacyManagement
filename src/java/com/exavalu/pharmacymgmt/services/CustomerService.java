@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import org.apache.log4j.Logger;
 
 /**
- *
+ *Service methods to connect with the database of customer table for CURD operations
  * @author lokes
  */
 public class CustomerService {

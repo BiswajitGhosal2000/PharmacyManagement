@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author lenovo
+ * Service methods to fetch data from API for aadhaar verification
+ * @author Pratik
  */
 public class APIService {
     public static ArrayList getAadharList() throws ParseException{

@@ -41,6 +41,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="date"],
 textarea {
     width: 96%;
 	padding: 10px;
@@ -88,8 +89,7 @@ form {
 }
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to bottom, #f0f8ff, #ffffff);
-    background-image: url(https://info.nhanow.com/hs-fs/hubfs/campaigns/2020/access/Expanding-the-Role-of-Pharmacy-Technicians.jpg?width=2250&height=1050&name=Expanding-the-Role-of-Pharmacy-Technicians.jpg);
+    background-image: url('images/bgMain.png');
     background-size: auto 113%;
 }
 
@@ -120,7 +120,7 @@ input[type="reset"]:hover {
     background-color:rgb(200, 61, 61);
 }
 
-input[type="text"]:focus {
+input[type="text"],input[type="date"]:focus {
     animation: wiggle 0.5s ease-in-out;
 }
 

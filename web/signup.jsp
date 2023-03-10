@@ -9,13 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign Up</title>
+        <title>MEDEASY - Sign Up</title>
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        
         <link rel="stylesheet" href="css/signupStyle.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
     </head>
 
 
@@ -55,10 +57,10 @@
                                         <div class="form-group">
                                             <select name="qualification" class="form-control" id="qualification" required>
                                                 <option value="" hidden>Select Highest Qualification*</option>
-                                                <option value="class10">10th pass</option>  
-                                                <option value="class12">12th pass </option>
-                                                <option value="diploma">Diploma</option>
-                                                <option value="graduate">Graduate</option>
+                                                <option value="10th Grade">10th Grade</option>  
+                                                <option value="12th Grade">12th Grade </option>
+                                                <option value="Diploma">Diploma</option>
+                                                <option value="Graduate">Graduate</option>
                                             </select>
                                             <!--<label for="floatingInput">Gender</label>-->
                                         </div>
@@ -105,6 +107,7 @@
 
                                         <!--<input type="submit" class="btnRegister"  value="Register"/>-->
                                         <button type="submit" class="btnRegister pure-button pure-button-primary">Register</button>
+                                        <a class="btnRegister pure-button btn-danger text-center" style="margin-top: 10px ;text-decoration: none" href="landingPage.jsp">Cancel</a>
 
                                         <!--<input type="submit" class="btnRegister"  value="Register"/>-->
 
