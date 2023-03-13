@@ -224,6 +224,7 @@ public class EmployeeService {
             System.out.println(ps);
             if(rs.next()){
                 emp.setEmailId(rs.getString("emailId"));
+                emp.setPassword(rs.getString("password"));
                 emp.setEmployeeId(rs.getInt("employeeId"));
                 emp.setFirstName(rs.getString("firstName"));
                 emp.setLastName(rs.getString("lastName"));

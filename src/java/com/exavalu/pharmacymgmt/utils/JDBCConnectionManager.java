@@ -3,6 +3,7 @@ package com.exavalu.pharmacymgmt.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
 
@@ -31,7 +32,11 @@ public class JDBCConnectionManager {
                 connection = DriverManager.getConnection(url + dbName, user, password);
 
         } catch (ClassNotFoundException | SQLException ex) {
-            logger.error(ex.getMessage() + LocalDateTime.now());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            // Construct the error message with date and time
+            String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
+            logger.error(errorMessage);
         }
 
         return connection;

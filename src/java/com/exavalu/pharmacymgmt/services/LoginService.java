@@ -62,6 +62,7 @@ public class LoginService {
             }
             else{
                 login.add("FAILURE");
+                logger.error("Login error");
             }
         } catch (SQLException ex) {
             logger.error(ex.getMessage() + LocalDateTime.now());

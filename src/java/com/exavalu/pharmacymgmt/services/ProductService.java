@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
@@ -20,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author RITWIK SHAW
  */
 public class ProductService {
-    private static final Logger log = Logger.getLogger(ProductService.class);
+    private static final Logger log = Logger.getLogger(ProductService.class.getName());
 
     public static boolean addProduct(Product product) {
         boolean result = false;

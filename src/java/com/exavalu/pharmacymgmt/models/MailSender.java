@@ -8,8 +8,6 @@ import com.exavalu.pharmacymgmt.utils.EnvUtility;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 import javax.mail.Message;
@@ -30,6 +28,11 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class MailSender extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
+
+    private String emailId,orderDateTime,customerName;
+    private int orderId;
+    private double totalPrice;
+    
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
@@ -44,11 +47,74 @@ public class MailSender extends ActionSupport implements ApplicationAware, Sessi
         sessionMap = (SessionMap) session;
     }
 
-    private String emailId;
-    private String htmlContent;
 
+    /**
+     * @return the customerName
+     */
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    /**
+     * @param customerName the customerName to set
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    /**
+     * @return the totalPrice
+     */
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * @param totalPrice the totalPrice to set
+     */
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    /**
+     * @return the orderDateTime
+     */
+    public String getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    /**
+     * @param orderDateTime the orderDateTime to set
+     */
+    public void setOrderDateTime(String orderDateTime) {
+        this.orderDateTime = orderDateTime;
+    }
+
+    /**
+     * @return the orderId
+     */
+    public int getOrderId() {
+        return orderId;
+    }
+
+    /**
+     * @param orderId the orderId to set
+     */
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+    
+    
     public String sendEmailToUser() throws Exception {
-        System.out.println("Receiver Email Id:"+this.getEmailId());
+        System.out.println("Receiver Email Id:"+this.getEmailId()+"Hello Mr. "+this.getCustomerName()+" Get Well Soon. Here are the order details of your recent purchase.Invoice No: "+this.getOrderId()+"Total Price: "+this.getTotalPrice()+"Invoice Date: "+this.getOrderDateTime());
         String result = "SUCCESS";
         try {
             EnvUtility envUtility = EnvUtility.getInstanceOfEnvUtility();
@@ -76,43 +142,23 @@ public class MailSender extends ActionSupport implements ApplicationAware, Sessi
 
             //setting up all the messages
             mailMessage.setFrom(new InternetAddress(fromEmail));
-            mailMessage.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("info.medeasy2023@gmail.com")); //this.getEmailId()
-//            ArrayList products = (ArrayList) sessionMap.get("ProductList");
-//            String s = "";
-//            for(int i=0;i<products.size();i++){
-//                s = s+ products.get(i).toString();
-//            }
+            mailMessage.setRecipients(Message.RecipientType.TO,InternetAddress.parse(this.getEmailId()));
             mailMessage.setSubject("Thanks for purchasing from MedEasy.");
-//            //mailMessage.setContent(products, "text/html"); //this.getHtmlContent()
-//            mailMessage.setText("Date"+LocalDateTime.now().toString());
-            mailMessage.setText("Get Well Soon");
+            mailMessage.setText("Hello,"+this.getCustomerName()+", Get Well Soon."+
+            "\n\nHere are the order details of your recent purchase:"+
+            "\n\nInvoice No: "+this.getOrderId()+
+            "\n\nTotal Price: ₹"+this.getTotalPrice()+
+            "\n\nInvoice Date: "+this.getOrderDateTime()+
+            "\n\nVisit our website:http://localhost:8080/PharmacyManagement ");
             Transport.send(mailMessage);
             
             
         } catch (AddressException ex) {
-            ex.printStackTrace();
-           System.out.println(ex.getMessage());
+            
         } catch (MessagingException ex) {
             ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
         return result;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmail(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public String getHtmlContent() {
-        return htmlContent;
-    }
-
-    public void setHtmlContent(String htmlContent) {
-        this.htmlContent = htmlContent;
     }
 }

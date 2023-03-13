@@ -45,7 +45,7 @@
 
                                     <div class="form-group last mb-2">
                                         <label for="productName">Product Name</label>
-                                        <input type="text" class="form-control" placeholder="Product Name" name="productName" value="${Product.getProductName()}" required>
+                                        <input type="text" class="form-control" placeholder="Product Name" style="text-transform: capitalize;" name="productName" value="${Product.getProductName()}" required>
                                     </div>   
                                     <div class="form-group last mb-2">
                                         <label for="quantity">Quantity</label>
@@ -56,12 +56,12 @@
                                         <input type="text" class="form-control" placeholder="Price" name="unitPrice" value="${Product.getUnitPrice()}">
                                     </div> 
                                     <div class="form-group last mb-2">
-                                        <label for="expiryDate">Expiry Date(YYYY-MM-DD)</label>
+                                        <label for="expiryDate">Expiry Date</label>
                                         <input type="date" class="form-control" name="expiryDate" value= "${Product.getExpiryDate()}" >
                                     </div> 
                                     <div class="form-group last mb-2">
                                         <label for="shelfNumber">Shelf Number</label>
-                                        <input type="text" class="form-control" placeholder="Shelf Number" name="shelfNumber" value="${Product.getShelfNumber()}">
+                                        <input type="text" class="form-control" placeholder="Shelf Number" name="shelfNumber" style="text-transform: capitalize;" value="${Product.getShelfNumber()}">
                                     </div> 
                                     <button type="submit" value="Save" class="btn btn-block py-2 btn-primary">SAVE</button>
                                     <a class="btn btn-danger text-white py-2 btn-primary w-100 mt-2" href="inventory.jsp">CANCEL</a>

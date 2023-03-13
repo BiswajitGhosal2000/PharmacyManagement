@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -22,6 +23,8 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author Pratik
  */
 public class Inventory extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+    
+    static Logger logger = Logger.getLogger(Inventory.class.getName());
 
     private static Inventory inventory = null;
 
@@ -44,40 +47,12 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
 
     @Override
     public void setApplication(Map<String, Object> application) {
-        setMap((ApplicationMap) application);
+        map = (ApplicationMap) application;
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
-        setSessionMap((SessionMap<String, Object>) (SessionMap) session);
-    }
-
-    /**
-     * @return the map
-     */
-    public ApplicationMap getMap() {
-        return map;
-    }
-
-    /**
-     * @param map the map to set
-     */
-    public void setMap(ApplicationMap map) {
-        this.map = map;
-    }
-
-    /**
-     * @return the sessionMap
-     */
-    public SessionMap<String, Object> getSessionMap() {
-        return sessionMap;
-    }
-
-    /**
-     * @param sessionMap the sessionMap to set
-     */
-    public void setSessionMap(SessionMap<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+        sessionMap = (SessionMap) session;
     }
 
     /**
@@ -165,7 +140,7 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
     }
 
     public String getAllInventory() throws SQLException {
-        String result = "FAILURE";
+        String result = "SUCCESS";
         ArrayList inventoryList = InventoryService.getAllInventory();
         if (!inventoryList.isEmpty()) {
             String createdMsg = "Item Added successfully!!";
@@ -174,6 +149,7 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
             result = "SUCCESS";
             System.out.println("returning Success from getAllInventory method");
         } else {
+            logger.error("returning Failure from getAllInventory method");
             System.out.println("returning Failure from getAllInventory method");
         }
         return result;
@@ -194,6 +170,7 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
             String error = "Item Already there !";
             sessionMap.put("Error", error);
             System.out.println("returning Failure from doInventoryAdd method");
+            logger.error("returning Failure from doInventoryAdd method");
         }
         return result;
     }
@@ -206,13 +183,12 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
         if (success) {
             String updateMsg = "updated Inventory of ProductNumber :" + this.productNumber;
             sessionMap.put("UpdateMsg", updateMsg);
-
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-
             System.out.println("returning Success from doInvenoryUpdate method");
             result = "SUCCESS";
-
+        }else{
+            logger.error("returning Failure from doInvenoryUpdate method");
         }
         return result;
     }
@@ -225,12 +201,11 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
         if (success) {
             String deleteMsg = "Inventory item deleted successfully!";
             sessionMap.put("DeleteMsg", deleteMsg);
-
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
-
             result = "SUCCESS";
-
+        }else{
+            logger.error("returning Failure from doInvenoryDelete method");
         }
         return result;
     }
@@ -238,16 +213,18 @@ public class Inventory extends ActionSupport implements ApplicationAware, Sessio
     public String getProductByNumber() throws Exception {
 
         String result = "FAILURE";
-        Inventory inventory = InventoryService.getProduct(this.getProductNumber());
+        Inventory invent = InventoryService.getProduct(this.getProductNumber());
 
-        if (inventory != null) {
+        if (invent != null) {
             String updateMsg = "Inventory item deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
-            sessionMap.put("Product", inventory);
+            sessionMap.put("Product", invent);
 
             result = "SUCCESS";
 
+        }else{
+            logger.error("returning Failure from get Product by Number method");
         }
         return result;
     }

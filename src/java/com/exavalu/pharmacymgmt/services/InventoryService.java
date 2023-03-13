@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class InventoryService {
     
-    private static final Logger log = Logger.getLogger(InventoryService.class);
+    private static final Logger log = Logger.getLogger(InventoryService.class.getName());
     
     public static ArrayList getAllInventory(){
         
@@ -40,7 +40,7 @@ public class InventoryService {
                 inventory.setUnitPrice(rs.getDouble("unitPrice"));
                 inventory.setExpiryDate(rs.getString("expiryDate"));
                 inventory.setShelfNumber(rs.getString("shelfNumber"));
-                
+        
                 inventoryList.add(inventory);
 
             }

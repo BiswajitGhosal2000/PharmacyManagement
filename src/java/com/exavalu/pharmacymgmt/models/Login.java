@@ -72,6 +72,8 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
     }
 
     public String doLogin() {
+        
+        System.out.println(this.getEmailId()+"   "+ this.getPassword());
 
         ArrayList login = LoginService.doLogin(this.emailId, this.password);
         String result = login.get(0).toString();
@@ -99,6 +101,7 @@ public class Login extends ActionSupport implements ApplicationAware, SessionAwa
             ArrayList inventoryList = InventoryService.getAllInventory();
             sessionMap.put("InventoryList", inventoryList);
         }else{
+            sessionMap.put("LoginError", "Enter Correct Credentials!");
             logger.error("Something error in login page. TIME:"+ LocalDateTime.now());
             result="FAILURE";
         }

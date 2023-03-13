@@ -7,13 +7,17 @@ package com.exavalu.pharmacymgmt.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Properties;
+import org.apache.log4j.Logger;
 
 /**
  * To fetch the details of env files
  * @author Biswajit
  */
 public class EnvUtility {
+    
+    private static final Logger log = Logger.getLogger(EnvUtility.class.getName());
 
     public static EnvUtility envUtility = null;
 
@@ -35,9 +39,13 @@ public class EnvUtility {
 
             value = prop.getProperty(param);
 
-        } catch (IOException e) {
+        } catch (IOException ex) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            // Construct the error message with date and time
+            String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
+            log.error(errorMessage);
         }
 
         return value;

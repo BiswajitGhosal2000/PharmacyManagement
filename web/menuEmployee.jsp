@@ -19,7 +19,7 @@
                     <a class="nav-link active text-warning" aria-current="page" href="homeEmployee.jsp"> Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="inventory.jsp">Inventory</a>
+                    <a class="nav-link text-light" href="GetAllInventory">Inventory</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="GetAllOrder">Order History</a>
