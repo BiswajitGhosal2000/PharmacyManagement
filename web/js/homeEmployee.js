@@ -4,7 +4,7 @@
  */
 
 function deleteProduct(ProductName,OrderId) {
-    alert('Fetch');
+//    alert('Fetch');
     $.ajax({
         url: 'RemoveProduct',
         type: 'POST',
@@ -86,7 +86,7 @@ function getProduct() {
     });
 }
 function AddProduct() {
-    alert("SaveCustomer");
+    //alert("SaveCustomer");
     $.ajax({
         url: 'AddProduct',
         type: 'POST',
@@ -97,7 +97,7 @@ function AddProduct() {
             'orderId': $("#orderId").val()
         },
         success: function (responseText) {
-            alert(responseText);
+           // alert(responseText);
 //                                                    $("#second").load(responseText);
             location.reload();
         }

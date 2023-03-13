@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Admin == null}">
+<c:redirect url="landingPage.jsp"/>
+</c:if>
 
 <!doctype html>
 <html lang="en">
@@ -35,7 +38,7 @@
         <jsp:include page="menuAdmin.jsp"></jsp:include>
             <main>
                 <div class="container p-0 m-auto" style="display: block;">
-                    <table class="table table-bordered table-striped text-center table-responsive" id="example"><!--container  row justify-content-center-->
+                    <table class="table table-bordered table-striped table-responsive" id="example"><!--container  row justify-content-center-->
                         <thead class="bg-info">
                         <tr>
                             <th>Emp. Id</th>
@@ -48,7 +51,7 @@
                             <th>Pin Code</th>
                             <th>Gender</th>
                             <th>Phone Number</th>
-                            <th>D.O.B</th>
+                            <th>Date_Of_Birth</th>
                             <th>Degree</th>
                             <th>Salary</th>
                             <th>Edit</th>
@@ -74,7 +77,7 @@
                                 <td>${emp.getPhoneNumber()}</td>
                                 <td>${emp.getDob()}</td>
                                 <td>${emp.getQualification()}</td>
-                                <td>${emp.getSalary()}</td>
+                                <td>₹${emp.getSalary()}</td>
                                 <td>
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="edit">
                                         <button class="w-20 btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>

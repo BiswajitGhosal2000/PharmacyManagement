@@ -24,13 +24,13 @@
                     <a class="nav-link active text-light" aria-current="page" href="homeAdmin.jsp"> Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="inventory.jsp">Inventory</a>
+                    <a class="nav-link text-light" href="GetAllInventory">Inventory</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="showEmployee.jsp">Show Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="verifyEmployee.jsp">Verify Employee</a>
+                    <a class="nav-link text-light" href="GetEmpList">Verify Employee</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="SalesReport">Sales Report</a>

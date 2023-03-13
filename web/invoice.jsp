@@ -37,16 +37,6 @@
                     <!-- end invoice-company -->
                     <!-- begin invoice-header -->
                     <div class="invoice-header">
-                        <!--                        <div class="invoice-from">
-                                                    <small>from</small>
-                                                    <address class="m-t-5 m-b-5">
-                                                        <strong class="text-inverse">MedEasy</strong><br>
-                                                        9A Lalit Mitra Lane<br>
-                                                        Kolkata - 700004<br>
-                                                        Phone: +91 900 7366 986<br>
-                                                        Fax: +91 900 7366 986
-                                                    </address>
-                                                </div>-->
                         <div class="invoice-to">
                             <small><i>Customer Details:</i></small>
                             <address class="m-t-5 m-b-5">
@@ -107,7 +97,7 @@
                                 <div class="invoice-price-row">
                                     <div class="sub-price" >
                                         <small>SUBTOTAL </small>
-                                        ₹<span class="text-inverse">${price}</span>
+                                        ₹<span class="text-inverse">${String.format("%.2f", price)}</span>
                                     </div>
                                     <div class="sub-price">
                                         <i class="fa fa-minus text-muted"></i>
@@ -117,7 +107,7 @@
                                         ₹<span class="text-inverse">
                                             <c:choose>
                                                 <c:when test="${price>1000}">
-                                                    <c:out value="${price/10}"/>
+                                                    <c:out value="${String.format('%.2f', price/10)}"/>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <c:out value="0"/>
@@ -131,12 +121,12 @@
                                 <small>TOTAL</small> ₹<span class="f-w-600" id="finalPrice">
                                     <c:choose>
                                         <c:when test="${price>1000}">
-                                            <c:out value="${price - price/10}"/>
-                                            <c:set var="totalPrice" value="${price - price/10}"/>
+                                            <c:out value="${String.format('%.2f', price - price/10)}"/>
+                                            <c:set var="totalPrice" value="${String.format('%.2f', price - price/10)}"/>
                                         </c:when>
                                         <c:otherwise>
-                                            <c:out value="${price}"/>
-                                            <c:set var="totalPrice" value="${price}"/>
+                                            <c:out value="${String.format('%.2f', price)}"/>
+                                            <c:set var="totalPrice" value="${String.format('%.2f', price)}"/>
                                         </c:otherwise>
                                     </c:choose>
                                 </span>
@@ -166,15 +156,11 @@
                     <!-- end invoice-footer -->
                     
             <div class="text-center">
-                <a href="javascript:;" onclick="window.print();sendEmail('${Customer.getEmailId()}');completeOrder(${Order.getOrderId()},${totalPrice})" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
+                <a href="javascript:;" onclick="window.print();sendEmail('${Customer.getEmailId()}',${totalPrice},${Order.getOrderId()},'${Order.getOrderDateTime()}','${Customer.getCustomerName()}');completeOrder(${Order.getOrderId()},${totalPrice})" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
             </div>
                 </div>
             </div>
         </div>
-        <!--    <form action="mailto:ghosalbiswajit11@gmail.com" method="POST" enctype="text/plain">
-                    <input type="text" name="Message" value="Thanks For Purchasing from MedEasy GET WELL SOON" hidden>
-                    <input type="submit" value="Send"> 
-                </form>-->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
                     function completeOrder(orderId, totalPrice) {
@@ -193,13 +179,17 @@
                             }
                         });
                     }
-                    function sendEmail(emailId) {
+                    function sendEmail(emailId,totalPrice,orderId,orderDateTime,customerName) {
                         alert("sendEmail");
                         $.ajax({
                             url: 'SendEmail',
                             type: 'POST',
                             data: {
-                                'emailId': emailId
+                                'emailId': emailId,
+                                'totalPrice': totalPrice,
+                                'orderId': orderId,
+                                'orderDateTime': orderDateTime,
+                                'customerName':customerName
                             },
                             success: function () {
                                 alert("sendEmail");

@@ -7,6 +7,7 @@ package com.exavalu.pharmacymgmt.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Properties;
 import org.apache.log4j.Logger;
@@ -40,7 +41,11 @@ public class JDBCUtility {
 
         } catch (IOException ex) {
             // TODO Auto-generated catch block
-            logger.error(ex.getMessage() + LocalDateTime.now());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            // Construct the error message with date and time
+            String errorMessage = timestamp.toString() + ": " + ex.getMessage();
+            System.out.println(errorMessage);
+            logger.error(errorMessage);
         }
 
         return value;

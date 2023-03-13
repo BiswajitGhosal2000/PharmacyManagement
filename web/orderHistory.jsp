@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${not (Admin != null or Employee != null)}">
+<c:redirect url="landingPage.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
@@ -68,7 +71,7 @@
                                 <td>${order.getOrderDateTime()}</td>
                                 <td>${order.getPhoneNumber()}</td>
                                 <td>${order.getDoctorName()}</td>
-                                <td>${order.getTotalPrice()}</td>
+                                <td>₹${order.getTotalPrice()}</td>
                                 <td>${order.getEmployeeName()}</td>
                             </tr>
                         </c:forEach>

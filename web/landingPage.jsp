@@ -5,7 +5,7 @@
 --%>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +35,7 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="css/modalStyle.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- =======================================================
         * Template Name: Day - v4.10.0
@@ -44,13 +45,13 @@
         ======================================================== -->
     </head>
 
-    <body>
+    <body id="body">
 
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center" style="background-color: white;">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
-                    <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com" style="color: black;">support@medeasy.com</a>
+                    <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com" style="color: black;">info.medeasy2023@gmail.com</a>
                     <i class="bi bi-phone-fill phone-icon"></i> <span style="color: black;">+91 934 3231 325</span>
                 </div>
                 <div class="social-links d-none d-md-block">
@@ -67,41 +68,20 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <h1 class="logo"><a href="landingPage.jsp">MedEasy</a></h1>
-                <!--       Uncomment below if you prefer to use an image logo 
-                       <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
                 <nav id="navbar" class="navbar" >
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Features</a></li>
-                        <!--                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                                                <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>-->
                         <li><a class="nav-link scrollto" href="#team">Reviews</a></li>
-                        <!--                        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                                                    <ul>
-                                                        <li><a href="#">Drop Down 1</a></li>
-                                                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                                            <ul>
-                                                                <li><a href="#">Deep Drop Down 1</a></li>
-                                                                <li><a href="#">Deep Drop Down 2</a></li>
-                                                                <li><a href="#">Deep Drop Down 3</a></li>
-                                                                <li><a href="#">Deep Drop Down 4</a></li>
-                                                                <li><a href="#">Deep Drop Down 5</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a href="#">Drop Down 2</a></li>
-                                                        <li><a href="#">Drop Down 3</a></li>
-                                                        <li><a href="#">Drop Down 4</a></li>
-                                                    </ul>
-                                                </li>-->
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
-                    <button class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter">LOGIN</button>
+                    <button class="btn btn-primary border rounded m-3 my-sm-0" data-toggle="modal" data-target="#exampleModalCenter" id="login-btn">LOGIN</button>
 
                     <!-- Modal start -->
 
-                    <div class="modal fade" id="exampleModalCenter" class=" rounded bg-white shadow p-5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalCenter" class =" rounded bg-white shadow p-5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -113,27 +93,30 @@
                                     <!--BODY-->
 
 
-                                    <form class="rounded bg-white shadow p-5 " action="Login" method="post">
+                                    <form class="rounded bg-white shadow p-5 " action="Login" method="POST">
                                         <div class="register-left text-center">
                                             <img src="images/clipart1192900.png" alt="xx"/> 
                                         </div>
-
                                         <h3 class="text-dark fw-bolder fs-4 mb-2 text-center">Sign In to MedEasy</h3>
                                         <div class="fw-normal text-muted mb-4 text-center">
                                             New Here? <a href="signup.jsp" class="text-primary fw-bold text-decoration-none" id="signupstyle">Create an Account</a>
                                         </div>
+                                        <c:if test="${not empty LoginError}">
+                                            <div class="alert alert-warning alert-dismissible fade show w-100" role="alert">
+                                                <c:out value="${LoginError}"/>
+                                                <c:remove var="LoginError" scope="session" />
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </c:if>
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="floatingInput inputstyle" name="emailId" placeholder="name@example.com">
-                                            <label for="floatingInput">Email address</label>
+                                            <input type="email" class="form-control" id="emailId" name="emailId" placeholder="userName@gmail.com" required>
+                                            <label for="emailId">Email address</label>
                                         </div>
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="floatingPassword inputstyle" name="password" placeholder="Password">
-                                            <label for="floatingPassword">Password</label>
+                                            <input type="password" class="form-control" minlength="8" id="password" name="password" placeholder="Password" required>
+                                            <label for="password">Password</label>
                                         </div>
-                                        <!--                                <div class="mt-2 text-end">
-                                                                            <a href="#" class="text-primary fw-bold text-decoration-none">Forget Password?</a>
-                                                                        </div>-->
-                                        <button type="submit" class="btn btn-primary w-100 my-4" id="submit_btn">LOG IN</button>
+                                        <button type="submit" class="btn btn-primary w-100 my-4"  id="submit_btn">LOG IN</button>
                                     </form>
                                 </div>
                             </div>
@@ -322,205 +305,6 @@
                 </div>
             </section><!-- End Services Section -->
 
-            <!--     ======= Cta Section ======= 
-                <section id="cta" class="cta">
-                  <div class="container" data-aos="zoom-in">
-            
-                    <div class="text-center">
-                      <h3>Call To Action</h3>
-                      <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                      <a class="cta-btn" href="#">Call To Action</a>
-                    </div>
-            
-                  </div>
-                </section> End Cta Section 
-            
-                 ======= Portfolio Section ======= 
-                <section id="portfolio" class="portfolio">
-                  <div class="container">
-            
-                    <div class="section-title">
-                      <span>Portfolio</span>
-                      <h2>Portfolio</h2>
-                      <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
-                    </div>
-            
-                    <div class="row" data-aos="fade-up">
-                      <div class="col-lg-12 d-flex justify-content-center">
-                        <ul id="portfolio-flters">
-                          <li data-filter="*" class="filter-active">All</li>
-                          <li data-filter=".filter-app">App</li>
-                          <li data-filter=".filter-card">Card</li>
-                          <li data-filter=".filter-web">Web</li>
-                        </ul>
-                      </div>
-                    </div>
-            
-                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="150">
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>App 1</h4>
-                          <p>App</p>
-                          <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Web 3</h4>
-                          <p>Web</p>
-                          <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>App 2</h4>
-                          <p>App</p>
-                          <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Card 2</h4>
-                          <p>Card</p>
-                          <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Web 2</h4>
-                          <p>Web</p>
-                          <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>App 3</h4>
-                          <p>App</p>
-                          <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Card 1</h4>
-                          <p>Card</p>
-                          <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Card 3</h4>
-                          <p>Card</p>
-                          <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                          <h4>Web 3</h4>
-                          <p>Web</p>
-                          <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                          <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                        </div>
-                      </div>
-            
-                    </div>
-            
-                  </div>
-                </section> End Portfolio Section 
-            
-                 ======= Pricing Section ======= 
-                <section id="pricing" class="pricing">
-                  <div class="container">
-            
-                    <div class="section-title">
-                      <span>Pricing</span>
-                      <h2>Pricing</h2>
-                      <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
-                    </div>
-            
-                    <div class="row">
-            
-                      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
-                        <div class="box">
-                          <h3>Free</h3>
-                          <h4><sup>$</sup>0<span> / month</span></h4>
-                          <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li class="na">Pharetra massa</li>
-                            <li class="na">Massa ultricies mi</li>
-                          </ul>
-                          <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                          </div>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in">
-                        <div class="box featured">
-                          <h3>Business</h3>
-                          <h4><sup>$</sup>19<span> / month</span></h4>
-                          <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li>Pharetra massa</li>
-                            <li class="na">Massa ultricies mi</li>
-                          </ul>
-                          <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                          </div>
-                        </div>
-                      </div>
-            
-                      <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
-                        <div class="box">
-                          <h3>Developer</h3>
-                          <h4><sup>$</sup>29<span> / month</span></h4>
-                          <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li>Pharetra massa</li>
-                            <li>Massa ultricies mi</li>
-                          </ul>
-                          <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                          </div>
-                        </div>
-                      </div>
-            
-                    </div>
-            
-                  </div>
-                </section> End Pricing Section -->
-
             <!-- ======= Team Section ======= -->
             <section id="team" class="team">
                 <div class="container">
@@ -611,7 +395,7 @@
                             <div class="info-box  mb-4">
                                 <i class="bx bx-envelope"></i>
                                 <h3>Email Us</h3>
-                                <p>contact@MedEasy.com</p>
+                                <p>info.medeasy2023@gmail.com</p>
                             </div>
                         </div>
 
@@ -632,7 +416,7 @@
                         </div>
 
                         <div class="col-lg-6">
-                            <form action="https://formspree.io/f/xvonaenq" method="POST" class="php-email-form">
+                            <form action="https://formspree.io/f/xknazbjb" method="POST" class="php-email-form">
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -676,7 +460,7 @@
                                     9A Lalit Mitra Lane, <br>
                                     Kolkata-700004, West Bengal,India<br><br>
                                     <strong>Phone:</strong> +91 934 3231 325<br>
-                                    <strong>Email:</strong> contact@MedEasy.com<br>
+                                    <strong>Email:</strong> info.medeasy2023@gmail.com<br>
                                 </p>
                                 <div class="social-links mt-3">
                                     <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>

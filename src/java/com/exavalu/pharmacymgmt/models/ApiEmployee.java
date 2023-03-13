@@ -11,49 +11,36 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *Model for fetching aadhaar details of employees using API call
+ * Model for fetching Aadhaar details of employees using API call
+ *
  * @author Pratik
  */
-public class ApiEmployee extends ActionSupport implements ApplicationAware, SessionAware, Serializable{
+public class ApiEmployee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
     
-    private String aadharNo;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private String gender;
-    private String dob;
+    private String aadharNo,firstName,lastName,address,city,state,gender,dob;
     private int index;
+    
+    static Logger logger = Logger.getLogger(ApiEmployee.class.getName());
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     
     @Override
     public void setApplication(Map<String, Object> application) {
-        setMap((ApplicationMap) application);
+        map = (ApplicationMap) application;
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
-        setSessionMap((SessionMap<String, Object>) (SessionMap) session);
+        sessionMap = (SessionMap) session;
     }
     
-    public String getApiEmployee()
-    {
-        ApiEmployee apiEmployee;
-        apiEmployee = APIService.getApiEmployeeByAadharNo(this);
-        sessionMap.put("ApiEmp", apiEmployee);
-        ArrayList empList = EmployeeService.getAllEmployees();
-        sessionMap.put("EmpList", empList);
-        sessionMap.put("index", this.index);
-        return "SUCCESS";
-    }
 
     /**
      * @return the aadharNo
@@ -154,34 +141,6 @@ public class ApiEmployee extends ActionSupport implements ApplicationAware, Sess
     }
 
     /**
-     * @return the map
-     */
-    public ApplicationMap getMap() {
-        return map;
-    }
-
-    /**
-     * @param map the map to set
-     */
-    public void setMap(ApplicationMap map) {
-        this.map = map;
-    }
-
-    /**
-     * @return the sessionMap
-     */
-    public SessionMap<String, Object> getSessionMap() {
-        return sessionMap;
-    }
-
-    /**
-     * @param sessionMap the sessionMap to set
-     */
-    public void setSessionMap(SessionMap<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-
-    /**
      * @return the index
      */
     public int getIndex() {
@@ -207,5 +166,21 @@ public class ApiEmployee extends ActionSupport implements ApplicationAware, Sess
      */
     public void setDob(String dob) {
         this.dob = dob;
+    }
+    
+    public String getApiEmployee() {
+        String result = "FAILURE";
+        try {
+            ApiEmployee apiEmployee;
+            apiEmployee = APIService.getApiEmployeeByAadharNo(this);
+            sessionMap.put("ApiEmp", apiEmployee);
+            ArrayList empList = EmployeeService.getAllEmployees();
+            sessionMap.put("EmpList", empList);
+            sessionMap.put("index", this.index);
+            result = "SUCCESS";
+        } catch (Exception ex) {
+            logger.error("Something error occured during API data fetch");
+        }
+        return result;
     }
 }
