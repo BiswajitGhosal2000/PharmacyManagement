@@ -24,20 +24,21 @@
                     <a class="nav-link active text-light" aria-current="page" href="homeAdmin.jsp"> Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="GetAllInventory">Inventory</a>
+                    <a class="nav-link text-light" href="GetEmpList">Verify Employee</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="showEmployee.jsp">Show Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="GetEmpList">Verify Employee</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="SalesReport">Sales Report</a>
+                    <a class="nav-link text-light" href="GetAllInventory">Inventory</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="GetAllOrder">Order History</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="SalesReport">Sales Report</a>
+                </li>
+                
             </ul>
             <div class="nav-item dropdown ">
                 <a class="nav-link dropdown-item" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -13,13 +13,25 @@ import org.apache.log4j.Logger;
 
 /**
  * To fetch the details of env files
+ *
  * @author Biswajit
  */
-public class EnvUtility {
-    
+public final class EnvUtility {
+
     private static final Logger log = Logger.getLogger(EnvUtility.class.getName());
 
     public static EnvUtility envUtility = null;
+
+    private EnvUtility() {
+        // Private constructor
+    }
+
+    public static EnvUtility getInstanceOfEnvUtility() {
+        if (envUtility == null) {
+            return new EnvUtility();
+        }
+        return envUtility;
+    }
 
     // in this class we will have static methods to get the connection params
     public String getPropertyValue(String param) {
@@ -31,35 +43,24 @@ public class EnvUtility {
 
             String path = EnvUtility.class.getClassLoader().getResource(".env").getPath();
 
-            BufferedReader input = new BufferedReader(new FileReader(path));
+            try (BufferedReader input = new BufferedReader(new FileReader(path))) {
 
-            Properties prop = new Properties();
+                Properties prop = new Properties();
 
-            prop.load(input);
+                prop.load(input);
 
-            value = prop.getProperty(param);
+                value = prop.getProperty(param);
+            }
 
         } catch (IOException ex) {
             // TODO Auto-generated catch block
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             // Construct the error message with date and time
             String errorMessage = timestamp.toString() + ": " + ex.getMessage();
-            System.out.println(errorMessage);
+            //System.out.println(errorMessage);
             log.error(errorMessage);
         }
 
         return value;
     }
-
-    private EnvUtility() {
-        // Private constructor
-    }
-
-    public static EnvUtility getInstanceOfEnvUtility() {
-        if (envUtility == null) {
-            envUtility = new EnvUtility();
-        }
-        return envUtility;
-    }
-
 }

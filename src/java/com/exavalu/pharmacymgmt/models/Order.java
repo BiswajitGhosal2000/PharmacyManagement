@@ -4,48 +4,38 @@
  */
 package com.exavalu.pharmacymgmt.models;
 
+import com.exavalu.pharmacymgmt.services.CustomerService;
 import com.exavalu.pharmacymgmt.services.OrderService;
+import com.exavalu.pharmacymgmt.services.ProductService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *Model for Order where we are creating the instance variables for customer and the methods for CURD operations and sales report are mentioned.
  * @author lokesh
  */
-public class Order extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+public class Order extends ActionSupport implements SessionAware, Serializable {
     
     static Logger logger = Logger.getLogger(Order.class.getName());
-
-    private static Order order = null;
-
-    public static Order getInstance() {
-        if (order == null) {
-            return new Order();
-        } else {
-            return order;
-        }
-    }
-    private String customerName, phoneNumber, doctorName,employeeName,startDate,endDate;
+    
+    private String customerName;
+    private String phoneNumber;
+    private String doctorName;
+    private String employeeName;
+    private String startDate;
+    private String endDate;
     private String orderDateTime= LocalDateTime.now().toString();
     private int orderId;
     private double totalPrice;
 
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
 
     @Override
     public void setSession(Map<String, Object> session) {
@@ -79,7 +69,6 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
     
     /**
      * @return the orderId
@@ -181,11 +170,10 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     }
 
     public String addOrder() {
-        System.out.println("Add Order");
         String result = "FAILURE";
         Order order2 = OrderService.addOrder(this);
         if (order2 != null) {
-            System.out.println("Order ID"+order2.getOrderId());
+            //System.out.println("Order ID"+order2.getOrderId());
             sessionMap.put("Order",order2);
             result = "SUCCESS";
         } else {
@@ -196,7 +184,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
 
     public String getAllOrder() {
         String result = "FAILURE";
-        ArrayList orderList = OrderService.getAllOrder();
+        List orderList = OrderService.getAllOrder();
         if (!orderList.isEmpty()) {
             sessionMap.put("OrderList", orderList);
             result = "SUCCESS";
@@ -224,10 +212,27 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
     
+    public String getInvoiceDetails() {
+        String result = "FAILURE";
+        Order odr = OrderService.getOrderDetails(this.getOrderId());
+        if (odr != null) {
+            System.out.println("Running");
+            sessionMap.put("Order", odr);
+            Customer customer = CustomerService.getCustomerByNumber(this.getPhoneNumber());
+            sessionMap.put("Customer", customer);
+            List productList = ProductService.getProductByOrderId(this.getOrderId());
+            sessionMap.put("ProductList", productList);
+            result = "SUCCESS";
+        } else {
+            logger.error("returning Failure from getAllOrder method");
+        }
+        return result;
+    }
+    
     public String salesReport() {
         String result = "FAILURE";
-        ArrayList salesOrderList = OrderService.salesReport();
-         System.out.println("Size of Sale :"+salesOrderList.size());
+        List salesOrderList = OrderService.salesReport();
+         //System.out.println("Size of Sale :"+salesOrderList.size());
          if(!salesOrderList.isEmpty()){
               double thisDaySale = OrderService.getThisDaySale();
               sessionMap.put("ThisDaySale", thisDaySale);
@@ -248,8 +253,8 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     
     public String getCustomSalesReport() {
         String result = "FAILURE";
-        ArrayList salesOrderList = OrderService.customSalesReport(this);
-         System.out.println("Size of Sale :"+salesOrderList.size());
+        List salesOrderList = OrderService.customSalesReport(this);
+        //System.out.println("Size of Sale :"+salesOrderList.size());
          if(!salesOrderList.isEmpty()){
               
             sessionMap.put("salesOrderList", salesOrderList);
@@ -264,10 +269,9 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     
     public String getMonthlySalesReport() {
         String result = "FAILURE";
-        ArrayList salesOrderList = OrderService.monthlySalesReport();
-         System.out.println("Size of Sale :"+salesOrderList.size());
+        List salesOrderList = OrderService.monthlySalesReport();
+        //System.out.println("Size of Sale :"+salesOrderList.size());
          if(!salesOrderList.isEmpty()){
-              
             sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {
@@ -278,9 +282,9 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
     
     public String getYearlySalesReport() {
         String result = "FAILURE";
-        ArrayList salesOrderList = OrderService.yearlySalesReport();
-         System.out.println("Size of Sale :"+salesOrderList.size());
-         if(!salesOrderList.isEmpty()){
+        List salesOrderList = OrderService.yearlySalesReport();
+        //System.out.println("Size of Sale :"+salesOrderList.size());
+        if(!salesOrderList.isEmpty()){
             sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {

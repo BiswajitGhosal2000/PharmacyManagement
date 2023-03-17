@@ -60,6 +60,7 @@
                             <th>Doctor Name</th>
                             <th>Total Price</th>
                             <th>Employee Name</th>
+                            <c:if test="${ Employee != null}"><th>Print</th></c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,6 +74,9 @@
                                 <td>${order.getDoctorName()}</td>
                                 <td>₹${order.getTotalPrice()}</td>
                                 <td>${order.getEmployeeName()}</td>
+                                <c:if test="${ Employee != null}">
+                                <td class="text-center"><a href="PrintInvoice?orderId=${order.getOrderId()}&phoneNumber=${order.getPhoneNumber()}"><i class="bi bi-printer-fill"></i></a></td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>

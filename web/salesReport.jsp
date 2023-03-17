@@ -11,8 +11,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -40,35 +38,35 @@
             <div id="bodyDiv">
                 <div class="container-fluid" >
                     <div class="row" >
-                        <div class="navbar navbar-default navbar-static-top col-md-2 d-none rounded ml-2  d-md-block sidebar" style="position:fixed; background: #1e90ff;width: 230px"> 
+                        <div class="navbar navbar-default navbar-static-top col-md-2 d-none rounded ml-2  d-md-block sidebar vh-100" style="position:fixed; background: #1e90ff;width: 230px"> 
                             <div class="sidebar-sticky">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link active text-white" href="#">
-                                            <span data-feather="home"></span>
+                                        <a class="nav-link active text-white fw-bold fs-4 mt-1" href="#">
+                                            <span class="fs-3" data-feather="home"></span>
                                             Dashboard <span class="sr-only">(current)</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="SalesReport">
+                                    <li class="nav-item" hidden>
+                                        <a class="nav-link text-white fw-bold fs-5 mt-1" href="SalesReport">
                                             <span data-feather="shopping-cart"></span>
                                             Orders
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" onclick="getSalesReport()" style="cursor: pointer">
+                                        <a class="nav-link text-white fs-5 mt-1" onclick="getSalesReport()" style="cursor: pointer">
                                             <span data-feather="bar-chart-2"></span>
                                             Daily
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" onclick="getMonthlySalesReport()" style="cursor: pointer">
+                                        <a class="nav-link text-white fs-5 mt-1" onclick="getMonthlySalesReport()" style="cursor: pointer">
                                             <span data-feather="bar-chart-2"></span>
                                             Monthly
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" onclick="getYearlySalesReport()" style="cursor: pointer">
+                                        <a class="nav-link text-white fs-5 mt-1" onclick="getYearlySalesReport()" style="cursor: pointer">
                                             <span data-feather="bar-chart-2"></span>
                                             Yearly
                                         </a>
@@ -229,7 +227,7 @@
             <!-- Bootstrap core JavaScript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"></script>')</script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../js/vendor/popper.min.js"></script>
         <script src="../../dist/js/bootstrap.min.js"></script>
 

@@ -4,37 +4,31 @@
  */
 package com.exavalu.pharmacymgmt.models;
 
-import com.exavalu.pharmacymgmt.services.InventoryService;
 import com.exavalu.pharmacymgmt.services.ProductService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *Model for Product where we are creating the instance variables for product and the methods for CURD operations.
  * @author Biswajit
  */
-public class Product extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+public class Product extends ActionSupport implements SessionAware, Serializable {
     
     static Logger logger = Logger.getLogger(Product.class.getName());
     
     private String productName;
-    private int quantity,orderId;
-    private double unitPrice,price;
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
+    private int quantity;
+    private int orderId;
+    private double unitPrice;
+    private double price;
+    
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
 
     @Override
     public void setSession(Map<String, Object> session) {
@@ -115,7 +109,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
         String result = "FAILURE";
         boolean success = ProductService.addProduct(this);
         if (success) {
-            ArrayList productList = ProductService.getProductByOrderId(this.getOrderId());
+            List productList = ProductService.getProductByOrderId(this.getOrderId());
             sessionMap.put("ProductList",productList);
             result = "SUCCESS";
         } else {
@@ -125,7 +119,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
     }
     public String getProductByOrderId() {
         String result = "FAILURE";
-        ArrayList productList = ProductService.getProductByOrderId(this.getOrderId());
+        List productList = ProductService.getProductByOrderId(this.getOrderId());
         if (!productList.isEmpty()) {
             sessionMap.put("ProductList", productList);
             result = "SUCCESS";
@@ -138,7 +132,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
         String result = "FAILURE";
         boolean success = ProductService.removeProduct(this.getOrderId(),this.getProductName());
         if (success) {
-            ArrayList productList = ProductService.getProductByOrderId(this.getOrderId());
+            List productList = ProductService.getProductByOrderId(this.getOrderId());
             sessionMap.put("ProductList",productList);
             result = "SUCCESS";
         } else {

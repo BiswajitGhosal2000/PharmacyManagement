@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="form-floating">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="emailId" name="emailId" value="${Emp.getEmailId()}">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="emailId" name="emailId" value="${Emp.getEmailId()}" readonly>
                             <label for="floatingInput">Email</label>
                         </div>
 

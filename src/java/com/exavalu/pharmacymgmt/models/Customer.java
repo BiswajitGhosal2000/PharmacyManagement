@@ -9,9 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 import com.exavalu.pharmacymgmt.services.CustomerService;
 
@@ -19,28 +17,17 @@ import com.exavalu.pharmacymgmt.services.CustomerService;
  *Model for Customer where we are creating the instance variables for customer and the methods for CURD operations are mentioned.
  * @author Biswajit
  */
-public class Customer extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+public class Customer extends ActionSupport implements SessionAware, Serializable {
     
-    private static Customer customer = null;
-
-    public static Customer getInstance() {
-        if (customer == null) {
-            return new Customer();
-        }
-            return customer;
-    }
-    
-    private String phoneNumber, customerName,emailId,gender,address;
+    private String phoneNumber;
+    private String customerName; 
+    private String emailId;
+    private String gender;
+    private String address;
     private int age;
     
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     static Logger logger = Logger.getLogger(Customer.class.getName());
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
 
     @Override
     public void setSession(Map<String, Object> session) {

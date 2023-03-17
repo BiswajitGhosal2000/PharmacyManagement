@@ -47,10 +47,10 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <input type="text" name="firstName" class="form-control" placeholder="First Name *" minlength="3" style="text-transform: capitalize;" required/>
+                                                <input type="text" name="firstName" class="form-control" placeholder="First Name *" minlength="3" required/>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="text" name="lastName" class="form-control" placeholder="Last Name *" minlength="3" style="text-transform: capitalize;" required/>
+                                                <input type="text" name="lastName" class="form-control" placeholder="Last Name *" minlength="3" required/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -174,7 +174,6 @@
                                                                 console.log(`The pincode ${pincode} is located in ${city}, ${state}.`);
                                                             })
                                                             .catch(error => alert("Please Enter Correct Pincode", error));
-
                                                 }
         </script>
     </body>
