@@ -9,12 +9,10 @@ import com.exavalu.pharmacymgmt.services.EmployeeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
@@ -22,25 +20,25 @@ import org.apache.struts2.interceptor.SessionAware;
  *
  * @author Pratik
  */
-public class ApiEmployee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+public class ApiEmployee extends ActionSupport implements  SessionAware, Serializable {
     
-    private String aadharNo,firstName,lastName,address,city,state,gender,dob;
+    private String aadharNo;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private String gender;
+    private String dob;
     private int index;
     
     static Logger logger = Logger.getLogger(ApiEmployee.class.getName());
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-    
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
 
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
     }
-    
 
     /**
      * @return the aadharNo
@@ -174,7 +172,7 @@ public class ApiEmployee extends ActionSupport implements ApplicationAware, Sess
             ApiEmployee apiEmployee;
             apiEmployee = APIService.getApiEmployeeByAadharNo(this);
             sessionMap.put("ApiEmp", apiEmployee);
-            ArrayList empList = EmployeeService.getAllEmployees();
+            List empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
             sessionMap.put("index", this.index);
             result = "SUCCESS";

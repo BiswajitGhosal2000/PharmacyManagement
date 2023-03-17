@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${Admin == null}">
-<c:redirect url="landingPage.jsp"/>
+    <c:redirect url="landingPage.jsp"/>
 </c:if>
 
 <!doctype html>
@@ -21,7 +21,7 @@
         <!-- Favicons -->
         <link href="images/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-        
+
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
         <!-- Bootstrap core CSS -->
@@ -40,25 +40,25 @@
                 <div class="container p-0 m-auto" style="display: block;">
                     <table class="table table-bordered table-striped table-responsive" id="example"><!--container  row justify-content-center-->
                         <thead class="bg-info">
-                        <tr>
-                            <th>Emp. Id</th>
-                            <th>Aadhar No</th>
-                            <th>Email Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Pin Code</th>
-                            <th>Gender</th>
-                            <th>Phone Number</th>
-                            <th>Date_Of_Birth</th>
-                            <th>Degree</th>
-                            <th>Salary</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                            <tr>
+                                <th>Emp. Id</th>
+                                <th>Aadhar No</th>
+                                <th>Email Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Pin Code</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Date_Of_Birth</th>
+                                <th>Degree</th>
+                                <th>Salary</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <c:if test="${not empty EmpMsg}">
                             <c:out value="${EmpMsg}"/>
                         </c:if>
@@ -80,12 +80,12 @@
                                 <td>₹${emp.getSalary()}</td>
                                 <td>
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="edit">
-                                        <button class="w-20 btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
+                                        <button class=" btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
                                 </td>
-                                <td>
-                                    <a href="DeleteEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="delete">
-                                        <button class="w-20 btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
+                                <td class="text-center">
+                                    <a onclick="deleteEmployee(${emp.getEmployeeId()})" class=" text-danger" title="delete">
+                                        <button class=" btn-sm btn-danger text-center"><i class="bi bi-trash"></i></button>
                                     </a>
                                 </td>
                             </tr>
@@ -93,14 +93,32 @@
                     </tbody>
                 </table>
             </div>
-            <script src =  "js/bootstrap.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src ="js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    $('#example').DataTable();
-                });
+                                        $(document).ready(function () {
+                                            $('#example').DataTable();
+                                        });
+            </script>
+            <script>
+                function deleteEmployee(employeeId) {
+                    const result = confirm("Are you sure you want to delete?");
+                    if (result) {
+                        $.ajax({
+                            url: 'DeleteEmployee',
+                            type: 'POST',
+                            data: {
+                                'employeeId': employeeId
+                            },
+                            success: function () {
+                                alert("Employee Deleted Successfully");
+                                location.reload();
+                            }
+                        });
+                    }
+                }
             </script>
         </main>
     </body>

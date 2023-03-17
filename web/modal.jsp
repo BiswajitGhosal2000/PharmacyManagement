@@ -44,16 +44,30 @@
                                    </c:if>
                                    text-success  fw-bold text-decoration-none">${ApiEmp.getCity()}</span>
         </div>
-    </div>   
-
+    </div>
+        
     <div class="row">
+        <div class="col fw-normal text-muted mb-4">
+            DOB: <br><span class="text-primary fw-bold text-decoration-none">${EmpList.get(index).getDob()}</span>
+        </div>
+        <div class="col fw-normal text-muted mb-4">
+            Aadhar DOB: <br><span class="
+                                   <c:if test="${!(EmpList.get(index).getDob().equalsIgnoreCase(ApiEmp.getDob()))}">
+                                       text-danger
+                                   </c:if>
+                                   text-success  fw-bold text-decoration-none">${ApiEmp.getDob()}</span>
+        </div>
+    </div>
+
+<!--    <div class="row">
         <div class="col fw-normal text-muted mb-4">
             DOB: <span class="text-primary fw-bold text-decoration-none">${EmpList.get(index).getDob()}</span>
         </div>
         <div class="col fw-normal text-muted mb-4">
             Aadhar DOB: <span class="text-primary fw-bold text-decoration-none">${ApiEmp.getDob()}</span>
         </div>
-    </div>
+    </div>-->
+
     <div class="row">
         <div class="col fw-normal text-muted mb-4">
             Qualification: <span class="text-primary fw-bold text-decoration-none">${EmpList.get(index).getQualification()}</span>

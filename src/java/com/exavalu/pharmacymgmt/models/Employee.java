@@ -10,11 +10,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -22,9 +22,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
@@ -33,30 +31,28 @@ import org.apache.struts2.interceptor.SessionAware;
  *
  * @author gaurav
  */
-public class Employee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+public class Employee extends ActionSupport implements SessionAware, Serializable {
 
     static Logger logger = Logger.getLogger(Employee.class.getName());
 
     private int employeeId;
-    private String firstName, lastName, city, state, pincode, gender, phoneNumber, dob, salary, emailId, password, qualification;
-    private String startdate, endDate, aadharNo;
+    private String firstName;
+    private String lastName;
+    private String city;
+    private String state;
+    private String pincode;
+    private String gender;
+    private String phoneNumber;
+    private String dob;
+    private String salary;
+    private String emailId;
+    private String password;
+    private String qualification;
+    private String startdate;
+    private String endDate;
+    private String aadharNo;
 
-    private static Employee employee = null;
-
-    public static Employee getInstance() {
-        if (employee == null) {
-            return new Employee();
-        }
-        return employee;
-    }
-
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
 
     @Override
     public void setSession(Map<String, Object> session) {
@@ -274,20 +270,6 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     }
 
     /**
-     * @return the employee
-     */
-    public static Employee getEmployee() {
-        return employee;
-    }
-
-    /**
-     * @param aEmployee the employee to set
-     */
-    public static void setEmployee(Employee aEmployee) {
-        employee = aEmployee;
-    }
-
-    /**
      * @return the qualification
      */
     public String getQualification() {
@@ -301,6 +283,23 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         this.qualification = qualification;
     }
 
+    public String doEmployeeAdd() throws SQLException {
+        String result = "FAILURE";
+        boolean success = EmployeeService.addEmployee(this);
+        if (success) {
+            String createdMsg = "Congratulation You've registered successfully !!\n Wait for the email confirmation";
+            sessionMap.put("CreatedMsg", createdMsg);
+            result = "SUCCESS";
+            //System.out.println("returning Success from doEmployeeAdd method");
+        } else {
+            String createdMsg = "Your Email Id is already registered !!\nYou can login !";
+            sessionMap.put("CreatedMsg", createdMsg);
+            logger.error("Returning Failure in the Add Employee");
+            //System.out.println("returning Failure from doEmployeeAdd method");
+        }
+        return result;
+    }
+
     public String doEmployeeUpdate() throws Exception {
 
         String result = "FAILURE";
@@ -308,36 +307,32 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
 
         if (success) {
             String updateMsg = "updated Employee of EmployeeId :" + this.getEmployeeId();
-            System.out.println(updateMsg);
+            //System.out.println(updateMsg);
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = EmployeeService.getAllVerfiedEmployees();
+            List empList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", empList);
 
-            System.out.println("returning Success from doEmployeeUpdate method");
+            //System.out.println("returning Success from doEmployeeUpdate method");
             result = "SUCCESS";
 
-        }else{
+        } else {
             logger.error("Returning Failure in the Update Employee");
         }
         return result;
     }
 
     public String doEmployeeDelete() throws Exception {
-
+        //System.err.println("Delete employee");
         String result = "FAILURE";
         boolean success = EmployeeService.deleteEmployee(this);
-
         if (success) {
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
-
-            ArrayList empList = EmployeeService.getAllVerfiedEmployees();
+            List empList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", empList);
-
             result = "SUCCESS";
-
-        }else{
+        } else {
             logger.error("Returning Failure in the delete Employee");
         }
         return result;
@@ -354,36 +349,18 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
-            ArrayList empList = EmployeeService.getAllEmployees();
+            List empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
-            System.out.println("EMPLIST" + empList.size());
+            //System.out.println("EMPLIST" + empList.size());
 
-            ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
+            List vempList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", vempList);
 
             result = "SUCCESS";
 
-        }else{
+        } else {
             logger.error("Returning Failure in the hard delete Employee");
         }
-        return result;
-    }
-
-    public String doEmployeeAdd() throws SQLException {
-        String result = "FAILURE";
-        boolean success = EmployeeService.addEmployee(this);
-        if (success) {
-            String createdMsg = "Congratulation You've registered successfully !!\n Wait for the email confirmation";
-            sessionMap.put("CreatedMsg", createdMsg);
-            result = "SUCCESS";
-            System.out.println("returning Success from doEmployeeAdd method");
-        } else {
-            logger.error("Returning Failure in the Add Employee");
-            System.out.println("returning Failure from doEmployeeAdd method");
-        }
-        ArrayList empList = EmployeeService.getAllEmployees();
-        sessionMap.put("EmpList", empList);
-
         return result;
     }
 
@@ -393,24 +370,24 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         if (emp != null) {
             sessionMap.put("Emp", emp);
             result = "SUCCESS";
-            System.out.println("returning Success from getEmployee By Id method");
+            //System.out.println("returning Success from getEmployee By Id method");
         } else {
-           logger.error("Returning Failure in the get Employee by Id");
-            System.out.println("returning Failure from getEmployee By Id method");
+            logger.error("Returning Failure in the get Employee by Id");
+            //System.out.println("returning Failure from getEmployee By Id method");
         }
         return result;
     }
-    
+
     public String getAllEmployee() throws SQLException {
         String result = "FAILURE";
-        ArrayList empList = EmployeeService.getAllEmployees();
+        List empList = EmployeeService.getAllEmployees();
         if (!empList.isEmpty()) {
             sessionMap.put("EmpList", empList);
             result = "SUCCESS";
-            System.out.println("returning Success from getAllEmployee method");
+            //System.out.println("returning Success from getAllEmployee method");
         } else {
-           logger.error("Returning Failure in the getAllEmployee");
-            System.out.println("returning Failure from getAllEmployee method");
+            logger.error("Returning Failure in the getAllEmployee");
+            //System.out.println("returning Failure from getAllEmployee method");
         }
         return result;
     }
@@ -423,32 +400,31 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         if (success) {
             Employee emp = EmployeeService.getEmployeeById(this.getEmployeeId());
             sendEmailToEmployee(emp, 1);
-            ArrayList empList = EmployeeService.getAllEmployees();
+            List empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
-            System.out.println("EMPLIST" + empList.size());
+            //System.out.println("EMPLIST" + empList.size());
 
-            ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
+            List vempList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", vempList);
 
-            System.out.println("returning Success from doVerifyEmployee method");
+            //System.out.println("returning Success from doVerifyEmployee method");
             result = "SUCCESS";
 
-        }else{
+        } else {
             logger.error("Returning Failure in the Verify Employee");
         }
         return result;
     }
 
     public void sendEmailToEmployee(Employee employee, int num) throws Exception {
-        System.out.println(" Email Id:" + employee.getEmailId() + "Password: " + employee.getPassword() + "Hello Mr. " + employee.getFirstName() + " " + employee.getLastName());
-//        String result = "SUCCESS";
+        //System.out.println(" Email Id:" + employee.getEmailId() + "Password: " + employee.getPassword() + "Hello Mr. " + employee.getFirstName() + " " + employee.getLastName());
         try {
             EnvUtility envUtility = EnvUtility.getInstanceOfEnvUtility();
 
             String fromEmail = envUtility.getPropertyValue("fromEmail");
             final String mailpassword = envUtility.getPropertyValue("password");
             final String userName = envUtility.getPropertyValue("userName");
-            System.out.println(fromEmail + " : " + mailpassword + " : " + userName);
+            //System.out.println(fromEmail + " : " + mailpassword + " : " + userName);
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -474,7 +450,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
                 mailMessage.setText("Hello, " + employee.getFirstName() + " " + employee.getLastName() + ","
                         + "\n\nCongratulations you're hired as an employee in MedEasy."
                         + "\n\nUser Name: " + employee.getEmailId()
-                        + "\n\nPassword: " + employee.getPassword()
+                        //                        + "\n\nPassword: " + employee.getPassword()
                         + "\n\nPlease don't share your password with anyone"
                         + "\n\nClick Here: " + "http://localhost:8080/PharmacyManagement"
                 );
@@ -495,10 +471,9 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
                 Transport.send(mailMessage);
             }
         } catch (AddressException ex) {
-           logger.error(ex.getMessage());
-        } catch (MessagingException ex) {
-            logger.error(ex.getMessage());
-            System.out.println(ex.getMessage());
+            if (logger.isDebugEnabled()) {
+                logger.debug(ex.getMessage() + "found @" + LocalDateTime.now());
+            }
         }
     }
 }

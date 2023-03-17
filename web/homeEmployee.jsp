@@ -88,7 +88,7 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <input type="text" id="employeeName" name="employeeName" value="${Employee.getFirstName()}${Employee.getLastName()}" hidden required>
+                            <input type="text" id="employeeName" name="employeeName" value="${Employee.getFirstName()} ${Employee.getLastName()}" hidden required>
                             <div class="full-input">
                                 <label for="doctorName">Doctor name:</label>
                                 <input type="text" id="doctorName" name="doctorName" placeholder="Enter doctor name" value="${Order.getDoctorName()}" onchange="SaveOrder()" required>
@@ -170,7 +170,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:set var="price" scope="session" value="0"/>
+                                <c:set var="price" scope="page" value="0"/>
                                 <c:forEach var="product" items="${ProductList}">
                                     <tr class="text-center">
                                         <td>${product.getProductName()}</td>
@@ -180,7 +180,7 @@
                                         <td>
                                             <i class="bi bi-x-octagon-fill"  style="cursor: pointer; color: red" onclick="deleteProduct('${product.getProductName()}',${product.getOrderId()})"></i>
                                         </td>
-                                        <c:set var="price" scope="session" value="${price+product.getPrice()}"/>
+                                        <c:set var="price" scope="page" value="${price+product.getPrice()}"/>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -191,7 +191,7 @@
                             <tr>
                                 <th class="pl-2 pt-0">Total Price: </th>
                                 <td class="pr-5 pt-0 pl-1">₹ 
-                                    <c:out value="${price}"/></td>
+                                    <c:out value="${Math.round(price*100.0)/100.0}"/></td>
                                 <td class="float-end pl-5 pt-0">
                                     <c:choose>
                                         <c:when test="${not empty ProductList}">

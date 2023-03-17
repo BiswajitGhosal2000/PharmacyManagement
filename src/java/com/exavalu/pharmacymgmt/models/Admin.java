@@ -10,16 +10,12 @@ package com.exavalu.pharmacymgmt.models;
  * @author gaurav
  */
 public class Admin{
-    private static Admin admin = null;
 
-    public static Admin getInstance() {
-        if (admin == null) {
-            return new Admin();
-        }
-        return admin;
-    }
-
-    private String emailId,password,firstName,lastName,phoneNumber;
+    private String emailId;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
 
     /**
      * @return the emailId
@@ -90,12 +86,4 @@ public class Admin{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    /**
-     * @return the admin
-     */
-    public static Admin getAdmin() {
-        return admin;
-    }
-
 }

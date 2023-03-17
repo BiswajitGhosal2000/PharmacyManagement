@@ -1,19 +1,26 @@
 <%-- 
-    Document   : VerifyEmployee
+    Document   : verifyEmployee
     Created on : 22-Feb-2023, 2:18:27 pm
-    Author     : lenovo
+    Author     : Pratik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Admin == null}">
+<c:redirect url="landingPage.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Verify Employee</title>
+        <title>MedEasy - Verify Employee</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet">
         <link href="css/verify-employee.css" rel="stylesheet">
+
+        <!-- Favicons -->
+        <link href="images/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
@@ -24,7 +31,7 @@
 
             function show(aadharNo, i, empId)
             {
-                alert('responseText');
+                //alert('responseText');
                 $.ajax({
                                         url: 'ApiCall',
                     type: 'post',
@@ -33,9 +40,9 @@
                         'index': i
                                         },
                                         success: function (responseText) {
-                        alert(responseText);
+                        //alert(responseText);
                         $("#modalText").html(responseText);
-                        
+
                     }                                        
                                 });
 
@@ -56,10 +63,10 @@
             <header>
                 <div class="container">
                     <!--        Table-->
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead class="bg-warning">
+                    <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">
+                        <thead class="bg-primary text-white">
                             <tr>
-                                <th>Employee Id</th>
+                                <th>Emp Id</th>
                                 <th>Aadhar No</th>
                                 <th>Email Id</th>
                                 <th>First Name</th>
@@ -69,7 +76,7 @@
                                 <th>Pin Code</th>
                                 <th>Gender</th>
                                 <th>Phone Number</th>
-                                <th>D.O.B</th>
+                                <th>DateOfBirth</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -89,14 +96,14 @@
                                 <td>${emp.getPhoneNumber()}</td>
                                 <td>${emp.getDob()}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-success" data-toggle="modal" onclick="show(${emp.getAadharNo()},<%=i%>,${emp.getEmployeeId()})" data-target="#exampleModalCenter">Verify</button>
+                                    <button class="btn btn-sm text-white" style="background-color: #15b34e" data-toggle="modal" onclick="show(${emp.getAadharNo()},<%=i%>,${emp.getEmployeeId()})" data-target="#exampleModalCenter">Verify</button>
                                     <%i++;%>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
-
                 </table>
+            </div>
         </header>
         <!--        Table End-->
 
@@ -120,7 +127,7 @@
                                 <div id="modalText">
                                 </div>
                                 <div class="form-floating mb-1">
-                                    <input type="number" class="form-control" id="floatingInput" min="12000" name="salary" required>
+                                    <input type="number" class="form-control" id="floatingInput" min="12000" name="salary" value="12000" required>
                                     <label for="floatingInput">Salary</label>
                                 </div>
                                 <input type="number" class="form-control" id="eid" name="employeeId" hidden>
@@ -135,7 +142,11 @@
 
 
         <!--Modal End-->
-
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

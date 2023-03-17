@@ -89,6 +89,10 @@
             <result name="SUCCESS">homeEmployee.jsp</result>
             <result name="FAILURE">invoice.jsp</result>
         </action>
+        <action name="PrintInvoice" class="com.exavalu.pharmacymgmt.models.Order" method="getInvoiceDetails">
+            <result name="SUCCESS">invoice.jsp</result>
+            <result name="FAILURE">invoice.jsp</result>
+        </action>
         <action name="AddProduct" class="com.exavalu.pharmacymgmt.models.Product" method="addProduct">
             <result name="SUCCESS">homeEmployee.jsp</result>
             <result name="FAILURE">homeEmployee.jsp</result>
