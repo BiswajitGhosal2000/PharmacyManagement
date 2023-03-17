@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.exavalu.pharmacymgmt.services;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.exavalu.pharmacymgmt.models.ApiEmployee;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,12 +14,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 /**
  * Service methods to fetch data from API for aadhaar verification
  * @author Pratik
  */
 public class APIService {
+    static Logger logger = Logger.getLogger(APIService.class.getName());
     public static ArrayList getAadharList() throws ParseException{
         
         ArrayList<ApiEmployee> apiEmpList = new ArrayList();
@@ -76,13 +76,13 @@ public class APIService {
                     System.out.println("Size of Aadhar list: "+apiEmpList.size());
                 }
 
-	  } catch (MalformedURLException e) {
+	  } catch (MalformedURLException ex) {
 
-		e.printStackTrace();
+		logger.error(ex.getMessage());
 
-	  } catch (IOException e) {
+	  } catch (IOException ex) {
 
-		e.printStackTrace();
+		logger.error(ex.getMessage());
 
 	  }
          return apiEmpList;
@@ -109,7 +109,7 @@ public class APIService {
                 }
             }
         } catch (ParseException ex) {
-            Logger.getLogger(APIService.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex.getMessage());
         }
         if(result==false)
         {

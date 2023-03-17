@@ -1,12 +1,12 @@
 <%-- 
     Document   : salesReport
     Created on : 26-Feb-2023, 7:43:34 pm
-    Author     : RITWIK SHAW
+    Author     : Gaurav Kumar, Pratik Biswas, Lokesh Reddy
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<c:if test="">
-
+<c:if test="${Admin == null}">
+<c:redirect url="landingPage.jsp"/>
 </c:if>
 <!doctype html>
 <html lang="en">
@@ -30,8 +30,6 @@
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-
-
         <script defer src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
         <script src="js/script.js"></script>
@@ -42,7 +40,7 @@
             <div id="bodyDiv">
                 <div class="container-fluid" >
                     <div class="row" >
-                        <div class="navbar navbar-default navbar-static-top col-md-2 d-none rounded ml-2  d-md-block sidebar" style="position:fixed; background: #1583b3;width: 200px"> 
+                        <div class="navbar navbar-default navbar-static-top col-md-2 d-none rounded ml-2  d-md-block sidebar" style="position:fixed; background: #1e90ff;width: 230px"> 
                             <div class="sidebar-sticky">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -176,20 +174,18 @@
                         <div class="border bg-light rounded p-2 my-2">
                             <canvas class="my-3" id="myChart" width="900" height="380"></canvas>
                         </div>
-                                    <div class="pb-lg-5 form-row rounded border p-5 m-auto bg-light" style="border-left:5px solid #1583b3;" id="customList">
-
+                        <div class="pb-lg-5 form-row rounded border p-5 m-auto bg-light" style="border-left:5px solid #1583b3;" id="customList">
                             <div class="form-group col-md-2 mx-5">
                                 <label for="startDate" class="h4">Start Date</label>
-                                <input class="form-control" value="${StartDate}" id="startDate" type="date" name="startDate" placeholder="Start Date" required>
+                                <input class="form-control" value="${StartDate}" id="startDate" type="text" name="startDate" placeholder="Start Date" required>
                             </div>
                             <div class="form-group col-md-2 mx-5">
                                 <label for="endDate" class="h4">End Date</label>
-                                <input class="form-control" value="${EndDate}" id="endDate" type="date" name="endDate" placeholder="End Date" required>
+                                <input class="form-control" value="${EndDate}" id="endDate" type="text" name="endDate" placeholder="End Date" required>
                             </div>
                             <div class="col-auto col-md-3" style="margin-top: 38px;">
                                 <button class="btn btn-primary" onclick="getCustomSalesReport()">Submit</button>
                             </div>
-
                         </div>
                         <div class="p-5 border mt-4 rounded bg-light">
                             <h2>Order List</h2>
@@ -198,13 +194,15 @@
                                     <tr>
                                         <th>Order Date</th>
                                         <th>Total Price</th>
+                                        <th hidden></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="order" items="${salesOrderList}">   
                                         <tr>
                                             <td>${order.getOrderDateTime()}</td>
-                                            <td>${order.getTotalPrice()}</td>
+                                            <td hidden>${order.getTotalPrice()}</td>
+                                            <td>₹${order.getTotalPrice()}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -213,9 +211,7 @@
                     </main>
                 </div>
             </div>
-
-
-            <script src =  "js/bootstrap.min.js"></script>
+            <script src ="js/bootstrap.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -385,6 +381,35 @@
                     }
                                 }
                         });</script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>
+            
+            $(document).ready(function() {
+                let date = new Date();
+                                                let year = date.getFullYear();
+                                                let month = date.getMonth() + 1;
+                                                let day = date.getDate();
+                                                let maxDt = year + "-" + month + "-" + day;
+    jQuery("#startDate").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        maxDate: maxDt,
+        onClose: function( selectedDate ) {
+        jQuery( "#endDate" ).datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    jQuery("#endDate").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        maxDate: maxDt,
+        onClose: function( selectedDate ) {
+        jQuery( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
+        }
+    });
+});</script>
     </div>
 </body>
 </html>

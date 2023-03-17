@@ -138,7 +138,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
             result="SUCCESS";
         }
         else{
-            logger.error("Something error Occured");
+            logger.error("Something error Occured during adding new Customer");
         }
         return result;
     }
@@ -152,7 +152,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
             result="SUCCESS";
         }
         else{
-            logger.error("Something error Occured");
+            logger.error("Something error Occured during getting the Customer by mobile number");
         }
         return result;
     }
@@ -165,7 +165,7 @@ public class Customer extends ActionSupport implements ApplicationAware, Session
             result="SUCCESS";
         }
         else{
-            logger.error("Something error Occured");
+            logger.error("Something error Occured during updating the Customer");
         }
         return result;
     }

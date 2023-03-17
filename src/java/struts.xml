@@ -14,7 +14,7 @@
             <result name="SUCCESS">landingPage.jsp</result>
         </action>
         <action name="SignUp" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeAdd">
-            <result name="SUCCESS">landingPage.jsp</result>
+            <result name="SUCCESS">signup.jsp</result>
             <result name="FAILURE">signup.jsp</result>
         </action>
         <action name="EditEmployee" class="com.exavalu.pharmacymgmt.models.Employee" method="getEmployeeById">
@@ -33,9 +33,13 @@
             <result name="SUCCESS">orderHistory.jsp</result>
             <result name="FAILURE">homeAdmin.jsp</result>
         </action>
-        <action name="AddProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="doInventoryAdd">
+        <action name="AddInventory" class="com.exavalu.pharmacymgmt.models.Inventory" method="doInventoryAdd">
             <result name="SUCCESS">inventory.jsp</result>
             <result name="FAILURE">addProduct.jsp</result>
+        </action>
+        <action name="GetAllInventory" class="com.exavalu.pharmacymgmt.models.Inventory" method="getAllInventory">
+            <result name="SUCCESS">inventory.jsp</result>
+            <!--<result name="FAILURE">addProduct.jsp</result>-->
         </action>
         <action name="EditProduct" class="com.exavalu.pharmacymgmt.models.Inventory" method="getProductByNumber">
             <result name="SUCCESS">editProduct.jsp</result>
@@ -47,12 +51,19 @@
         </action>
         <action name="ApiCall" class="com.exavalu.pharmacymgmt.models.ApiEmployee" method="getApiEmployee">
             <result name="SUCCESS">modal.jsp</result>
+            <result name="FAILURE">modal.jsp</result>
+        </action>
+        <action name="GetEmpList" class="com.exavalu.pharmacymgmt.models.Employee" method="getAllEmployee">
+            <result name="SUCCESS">verifyEmployee.jsp</result>
+            <result name="FAILURE">verifyEmployee.jsp</result>
         </action>
         <action name="Approve" class="com.exavalu.pharmacymgmt.models.Employee" method="doVerifyEmployee">
             <result name="SUCCESS">verifyEmployee.jsp</result>
+            <result name="FAILURE">verifyEmployee.jsp</result>
         </action>
         <action name="Reject" class="com.exavalu.pharmacymgmt.models.Employee" method="doEmployeeHardDelete">
             <result name="SUCCESS">verifyEmployee.jsp</result>
+            <result name="FAILURE">verifyEmployee.jsp</result>
         </action>
         <action name="GetCustomer" class="com.exavalu.pharmacymgmt.models.Customer" method="getCustomerByNumber">
             <result name="SUCCESS">homeEmployee.jsp</result>

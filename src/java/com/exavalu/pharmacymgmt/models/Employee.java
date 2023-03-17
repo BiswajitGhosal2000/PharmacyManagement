@@ -5,12 +5,22 @@
 package com.exavalu.pharmacymgmt.models;
 
 import com.exavalu.pharmacymgmt.services.EmployeeService;
+import com.exavalu.pharmacymgmt.utils.EnvUtility;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -18,7 +28,9 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
- *Model for employee where we are creating the instance variables for employee and the methods for CURD operations are mentioned.
+ * Model for employee where we are creating the instance variables for employee
+ * and the methods for CURD operations are mentioned.
+ *
  * @author gaurav
  */
 public class Employee extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
@@ -26,7 +38,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     static Logger logger = Logger.getLogger(Employee.class.getName());
 
     private int employeeId;
-    private String firstName, lastName, city, state, pincode, gender, phoneNumber, dob, salary, emailId, password,qualification;
+    private String firstName, lastName, city, state, pincode, gender, phoneNumber, dob, salary, emailId, password, qualification;
     private String startdate, endDate, aadharNo;
 
     private static Employee employee = null;
@@ -274,7 +286,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
     public static void setEmployee(Employee aEmployee) {
         employee = aEmployee;
     }
-    
+
     /**
      * @return the qualification
      */
@@ -305,6 +317,8 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             System.out.println("returning Success from doEmployeeUpdate method");
             result = "SUCCESS";
 
+        }else{
+            logger.error("Returning Failure in the Update Employee");
         }
         return result;
     }
@@ -323,27 +337,34 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
 
             result = "SUCCESS";
 
+        }else{
+            logger.error("Returning Failure in the delete Employee");
         }
         return result;
     }
+
     public String doEmployeeHardDelete() throws Exception {
 
         String result = "FAILURE";
+        Employee emp = EmployeeService.getEmployeeById(this.getEmployeeId());
         boolean success = EmployeeService.hardDeleteEmployee(this);
 
         if (success) {
+            sendEmailToEmployee(emp, 0);
             String updateMsg = "deleted successfully!";
             sessionMap.put("UpdateMsg", updateMsg);
 
             ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
-            System.out.println("EMPLIST"+empList.size());
-            
+            System.out.println("EMPLIST" + empList.size());
+
             ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", vempList);
 
             result = "SUCCESS";
 
+        }else{
+            logger.error("Returning Failure in the hard delete Employee");
         }
         return result;
     }
@@ -352,12 +373,12 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         String result = "FAILURE";
         boolean success = EmployeeService.addEmployee(this);
         if (success) {
-            String createdMsg = "Employee created successfully!!";
+            String createdMsg = "Congratulation You've registered successfully !!\n Wait for the email confirmation";
             sessionMap.put("CreatedMsg", createdMsg);
             result = "SUCCESS";
             System.out.println("returning Success from doEmployeeAdd method");
         } else {
-            logger.error("Something went error");
+            logger.error("Returning Failure in the Add Employee");
             System.out.println("returning Failure from doEmployeeAdd method");
         }
         ArrayList empList = EmployeeService.getAllEmployees();
@@ -365,6 +386,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
 
         return result;
     }
+
     public String getEmployeeById() throws SQLException {
         String result = "FAILURE";
         Employee emp = EmployeeService.getEmployeeById(this.getEmployeeId());
@@ -373,30 +395,110 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             result = "SUCCESS";
             System.out.println("returning Success from getEmployee By Id method");
         } else {
-            logger.error("Something went error");
+           logger.error("Returning Failure in the get Employee by Id");
             System.out.println("returning Failure from getEmployee By Id method");
         }
         return result;
     }
     
+    public String getAllEmployee() throws SQLException {
+        String result = "FAILURE";
+        ArrayList empList = EmployeeService.getAllEmployees();
+        if (!empList.isEmpty()) {
+            sessionMap.put("EmpList", empList);
+            result = "SUCCESS";
+            System.out.println("returning Success from getAllEmployee method");
+        } else {
+           logger.error("Returning Failure in the getAllEmployee");
+            System.out.println("returning Failure from getAllEmployee method");
+        }
+        return result;
+    }
+
     public String doVerifyEmployee() throws Exception {
 
         String result = "FAILURE";
         boolean success = EmployeeService.verifyEmployee(this);
 
         if (success) {
-            
+            Employee emp = EmployeeService.getEmployeeById(this.getEmployeeId());
+            sendEmailToEmployee(emp, 1);
             ArrayList empList = EmployeeService.getAllEmployees();
             sessionMap.put("EmpList", empList);
-            System.out.println("EMPLIST"+empList.size());
-            
+            System.out.println("EMPLIST" + empList.size());
+
             ArrayList vempList = EmployeeService.getAllVerfiedEmployees();
             sessionMap.put("VerifiedEmpList", vempList);
 
             System.out.println("returning Success from doVerifyEmployee method");
             result = "SUCCESS";
 
+        }else{
+            logger.error("Returning Failure in the Verify Employee");
         }
         return result;
+    }
+
+    public void sendEmailToEmployee(Employee employee, int num) throws Exception {
+        System.out.println(" Email Id:" + employee.getEmailId() + "Password: " + employee.getPassword() + "Hello Mr. " + employee.getFirstName() + " " + employee.getLastName());
+//        String result = "SUCCESS";
+        try {
+            EnvUtility envUtility = EnvUtility.getInstanceOfEnvUtility();
+
+            String fromEmail = envUtility.getPropertyValue("fromEmail");
+            final String mailpassword = envUtility.getPropertyValue("password");
+            final String userName = envUtility.getPropertyValue("userName");
+            System.out.println(fromEmail + " : " + mailpassword + " : " + userName);
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "25");
+
+            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(userName, mailpassword);
+                }
+            });
+
+            if (num == 1) {
+                Message mailMessage = new MimeMessage(session);
+
+                //setting up all the messages
+                mailMessage.setFrom(new InternetAddress(fromEmail));
+                mailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employee.getEmailId()));
+                mailMessage.setSubject("Welcome to MedEasy Family.");
+                mailMessage.setText("Hello, " + employee.getFirstName() + " " + employee.getLastName() + ","
+                        + "\n\nCongratulations you're hired as an employee in MedEasy."
+                        + "\n\nUser Name: " + employee.getEmailId()
+                        + "\n\nPassword: " + employee.getPassword()
+                        + "\n\nPlease don't share your password with anyone"
+                        + "\n\nClick Here: " + "http://localhost:8080/PharmacyManagement"
+                );
+                Transport.send(mailMessage);
+            } else {
+                Message mailMessage = new MimeMessage(session);
+
+                //setting up all the messages
+                mailMessage.setFrom(new InternetAddress(fromEmail));
+                mailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employee.getEmailId()));
+                mailMessage.setSubject("An Update on your recent MedEasy Application");
+                mailMessage.setText("Hello, " + employee.getFirstName() + " " + employee.getLastName() + ","
+                        + "\n\nThank You for taking the time to apply for the job in MedEasy."
+                        + "\n\nSorry your application is rejected due to details verification mismatch."
+                        + "\n\nYou can apply again through the given url with valid details."
+                        + "\n\nClick Here: " + "http://localhost:8080/PharmacyManagement"
+                );
+                Transport.send(mailMessage);
+            }
+        } catch (AddressException ex) {
+           logger.error(ex.getMessage());
+        } catch (MessagingException ex) {
+            logger.error(ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
     }
 }

@@ -32,7 +32,7 @@
                 <h3 class="text-center text-danger">${Error}</h3>
             </c:if>
 
-            <form action="AddProduct" method="POST">
+            <form action="AddInventory" method="POST">
 
                 <div class="Hero">
                     <h1 class="text-primary">Add Product</h1>

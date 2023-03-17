@@ -4,6 +4,7 @@
  */
 package com.exavalu.pharmacymgmt.models;
 
+import com.exavalu.pharmacymgmt.services.InventoryService;
 import com.exavalu.pharmacymgmt.services.ProductService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,6 +22,24 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author Biswajit
  */
 public class Product extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+    
+    static Logger logger = Logger.getLogger(Product.class.getName());
+    
+    private String productName;
+    private int quantity,orderId;
+    private double unitPrice,price;
+    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
+    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
+
+    @Override
+    public void setApplication(Map<String, Object> application) {
+        map = (ApplicationMap) application;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        sessionMap = (SessionMap) session;
+    }
 
     /**
      * @return the price
@@ -92,26 +111,6 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
         this.orderId = orderId;
     }
 
-    static Logger logger = Logger.getLogger(Product.class.getName());
-    
-    private String productName;
-    private int quantity,orderId;
-    private double unitPrice,price;
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
-    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        sessionMap = (SessionMap) session;
-    }
-
-    
-
     public String addProduct() {
         String result = "FAILURE";
         boolean success = ProductService.addProduct(this);
@@ -120,7 +119,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
             sessionMap.put("ProductList",productList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from addProduct method");
         }
         return result;
     }
@@ -131,7 +130,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
             sessionMap.put("ProductList", productList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from getProductByOrderId method");
         }
         return result;
     }
@@ -143,7 +142,7 @@ public class Product extends ActionSupport implements ApplicationAware, SessionA
             sessionMap.put("ProductList",productList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from removeProduct method");
         }
         return result;
     }

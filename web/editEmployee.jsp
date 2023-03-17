@@ -89,11 +89,11 @@
                         <div class="row">
 
                             <div class="form-floating col">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="first name" name="firstName" value="${Emp.getFirstName()}">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="first name" style="text-transform: capitalize;" name="firstName" value="${Emp.getFirstName()}">
                                 <label for="floatingInput">First Name</label>
                             </div>
                             <div class="form-floating col">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="last name" name="lastName" value="${Emp.getLastName()}">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="last name" style="text-transform: capitalize;" name="lastName" value="${Emp.getLastName()}">
                                 <label for="floatingInput">Last Name</label>
                             </div>
                         </div>

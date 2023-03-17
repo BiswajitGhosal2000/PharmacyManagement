@@ -29,7 +29,6 @@
         <!-- Favicons -->
         <link href="images/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
     </head>
     <body>
         <jsp:include page="menuEmployee.jsp"></jsp:include>
@@ -55,7 +54,12 @@
                             </div>
                             <div class="full-input">
                                 <label for="gender">Gender:</label>
-                                <input type="text" id="gender" name="gender" placeholder="Enter Gender" value="${Customer.getGender()}" required> 
+                                <select name="gender" class="form-select" id="gender" required>
+                                    <option value="" hidden>Select Gender</option>
+                                    <option value="Male" <c:if test="${Customer.getGender().equalsIgnoreCase('Male')}">selected</c:if>>Male</option>  
+                                    <option value="Female" <c:if test="${Customer.getGender().equalsIgnoreCase('Female')}">selected</c:if>>Female</option>                        
+                                </select>
+                                    <!--<input type="text" id="gender" name="gender" placeholder="Enter Gender" value="${Customer.getGender()}" required>--> 
                             </div>
                             <div class="full-input">
                                 <label for="emailId">Email Id:</label>
@@ -63,7 +67,7 @@
                             </div>
                             <div class="full-input">
                                 <label for="address">Address:</label>
-                                <input type="text" id="address" name="address" placeholder="Enter address" value="${Customer.getAddress()}" required>
+                                <input type="text" id="address" name="address" placeholder="Enter address"  value="${Customer.getAddress()}" required>
                             </div>
                         </form>
                     </div>
@@ -171,7 +175,7 @@
                                     <tr class="text-center">
                                         <td>${product.getProductName()}</td>
                                         <td>${product.getQuantity()}</td>
-                                        <td>${product.getUnitPrice()}</td>
+                                        <td>₹${product.getUnitPrice()}</td>
                                         <td>₹${product.getPrice()}</td>
                                         <td>
                                             <i class="bi bi-x-octagon-fill"  style="cursor: pointer; color: red" onclick="deleteProduct('${product.getProductName()}',${product.getOrderId()})"></i>
@@ -186,7 +190,8 @@
                         <table>
                             <tr>
                                 <th class="pl-2 pt-0">Total Price: </th>
-                                <td class="pr-5 pt-0 pl-1">₹ ${price}</td>
+                                <td class="pr-5 pt-0 pl-1">₹ 
+                                    <c:out value="${price}"/></td>
                                 <td class="float-end pl-5 pt-0">
                                     <c:choose>
                                         <c:when test="${not empty ProductList}">

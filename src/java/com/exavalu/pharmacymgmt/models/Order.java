@@ -22,19 +22,34 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author lokesh
  */
 public class Order extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+    
+    static Logger logger = Logger.getLogger(Order.class.getName());
 
-    /**
-     * @return the orderDate
-     */
-    public String getOrderDate() {
-        return orderDate;
+    private static Order order = null;
+
+    public static Order getInstance() {
+        if (order == null) {
+            return new Order();
+        } else {
+            return order;
+        }
+    }
+    private String customerName, phoneNumber, doctorName,employeeName,startDate,endDate;
+    private String orderDateTime= LocalDateTime.now().toString();
+    private int orderId;
+    private double totalPrice;
+
+    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
+    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
+
+    @Override
+    public void setApplication(Map<String, Object> application) {
+        map = (ApplicationMap) application;
     }
 
-    /**
-     * @param orderDate the orderDate to set
-     */
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    @Override
+    public void setSession(Map<String, Object> session) {
+        sessionMap = (SessionMap) session;
     }
 
     /**
@@ -65,36 +80,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
         this.endDate = endDate;
     }
 
-    static Logger logger = Logger.getLogger(Order.class.getName());
-
-    private static Order order = null;
-
-    public static Order getInstance() {
-        if (order == null) {
-            return new Order();
-        } else {
-            return order;
-        }
-    }
-    private String customerName, phoneNumber, doctorName,employeeName,startDate,endDate;
-    private String orderDateTime= LocalDateTime.now().toString();
-    private String orderDate = LocalDateTime.now().toLocalDate().toString();
-    private int orderId;
-    private double totalPrice;
-
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
-    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
-    @Override
-    public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        sessionMap = (SessionMap) session;
-    }
-
+    
     /**
      * @return the orderId
      */
@@ -203,7 +189,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("Order",order2);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from get addOrder method");
         }
         return result;
     }
@@ -215,7 +201,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("OrderList", orderList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from getAllOrder method");
         }
         return result;
     }
@@ -225,8 +211,6 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
         String result = "FAILURE";
         boolean success = OrderService.updateOrder(this);
         if (success) {
-//            ArrayList orderList = OrderService.getAllOrder();
-//            sessionMap.put("OrderList", orderList);
             sessionMap.remove("Customer");
             sessionMap.remove("Order");
             sessionMap.remove("Product");
@@ -235,7 +219,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.remove("ProductList");
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from completeOrder method");
         }
         return result;
     }
@@ -257,7 +241,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from salesReport method");
         }
         return result;
     }
@@ -273,7 +257,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("EndDate", this.getEndDate());
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from getCustomSalesReport method");
         }
         return result;
     }
@@ -287,7 +271,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+           logger.error("returning Failure from getMonthlySalesReport method");
         }
         return result;
     }
@@ -300,7 +284,7 @@ public class Order extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("salesOrderList", salesOrderList);
             result = "SUCCESS";
         } else {
-            logger.error("Something error Occured");
+            logger.error("returning Failure from getYearlySalesReport method");
         }
         return result;
     }

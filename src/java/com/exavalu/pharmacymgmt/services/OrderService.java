@@ -153,9 +153,7 @@ public class OrderService {
         ArrayList salesOrderList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT sum(totalPrice) as totalPrice,substring(orderDateTime,1,10) as orderDateTime "
-                    + "FROM orders group by orderDateTime having orderDateTime "
-                    + "between ? and ? order by orderDateTime";
+            String sql = "SELECT round(sum(totalPrice),2) as totalPrice,substring(orderDateTime,1,10) as orderDate FROM orders group by orderDate having orderDate between ? and ? order by orderDate;";
             System.err.println("Start date = "+o.getStartDate());
             System.err.println("End date = "+o.getEndDate());
             
@@ -167,7 +165,7 @@ public class OrderService {
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Order order = Order.getInstance();
-                order.setOrderDateTime(rs.getString("orderDateTime"));
+                order.setOrderDateTime(rs.getString("orderDate"));
                 order.setTotalPrice(rs.getDouble("totalPrice"));
                 salesOrderList.add(order);
             }
