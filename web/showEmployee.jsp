@@ -78,7 +78,7 @@
                                 <td>${emp.getDob()}</td>
                                 <td>${emp.getQualification()}</td>
                                 <td>₹${emp.getSalary()}</td>
-                                <td>
+                                <td class="text-center">
                                     <a href="EditEmployee?employeeId=${emp.getEmployeeId()}" class=" text-decoration-none" title="edit">
                                         <button class=" btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>
