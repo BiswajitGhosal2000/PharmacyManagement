@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
  * Service methods to connect with the database of employee table for CURD
  * operations
  *
- * @author gaura
+ * @author pavan
  */
 public class EmployeeService {
 
@@ -169,24 +169,24 @@ public class EmployeeService {
         try (Connection con = JDBCConnectionManager.getConnection()) {
             try (PreparedStatement ps = con.prepareStatement(sql)) {
                 //System.out.println(ps);
-                try(ResultSet rs = ps.executeQuery()){
-                while (rs.next()) {
-                    Employee emp = new Employee();
-                    emp.setEmailId(rs.getString("emailId"));
-                    emp.setEmployeeId(rs.getInt("employeeId"));
-                    emp.setFirstName(rs.getString("firstName"));
-                    emp.setLastName(rs.getString("lastName"));
-                    emp.setCity(rs.getString("city"));
-                    emp.setState(rs.getString("state"));
-                    emp.setPincode(rs.getString("pincode"));
-                    emp.setGender(rs.getString("gender"));
-                    emp.setPhoneNumber(rs.getString("phoneNumber"));
-                    emp.setDob(rs.getString("dob"));
-                    emp.setAadharNo(rs.getString("aadharNo"));
-                    emp.setQualification(rs.getString("qualification"));
-                    empList.add(emp);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Employee emp = new Employee();
+                        emp.setEmailId(rs.getString("emailId"));
+                        emp.setEmployeeId(rs.getInt("employeeId"));
+                        emp.setFirstName(rs.getString("firstName"));
+                        emp.setLastName(rs.getString("lastName"));
+                        emp.setCity(rs.getString("city"));
+                        emp.setState(rs.getString("state"));
+                        emp.setPincode(rs.getString("pincode"));
+                        emp.setGender(rs.getString("gender"));
+                        emp.setPhoneNumber(rs.getString("phoneNumber"));
+                        emp.setDob(rs.getString("dob"));
+                        emp.setAadharNo(rs.getString("aadharNo"));
+                        emp.setQualification(rs.getString("qualification"));
+                        empList.add(emp);
+                    }
                 }
-            }
             }
         } catch (SQLException ex) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -275,13 +275,10 @@ public class EmployeeService {
     }
 
     public static boolean verifyEmployee(Employee emp) {
-
         boolean result = false;
         try (Connection con = JDBCConnectionManager.getConnection()) {
             String sql = "UPDATE employee SET salary = ?,startDate=?, status=1 WHERE employeeId = ?";
-
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-
                 preparedStatement.setString(1, emp.getSalary());
                 preparedStatement.setString(2, LocalDateTime.now().toString());
                 preparedStatement.setInt(3, emp.getEmployeeId());
@@ -302,15 +299,12 @@ public class EmployeeService {
             logger.error(errorMessage);
         }
         return result;
-
     }
 
     public static boolean hardDeleteEmployee(Employee emp) {
-
         boolean result = false;
         try (Connection con = JDBCConnectionManager.getConnection()) {
             String sql = "DELETE from employee WHERE employeeId = ?;";
-
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.setInt(1, emp.getEmployeeId());
                 int row = preparedStatement.executeUpdate();
@@ -326,6 +320,5 @@ public class EmployeeService {
             logger.error(errorMessage);
         }
         return result;
-
     }
 }

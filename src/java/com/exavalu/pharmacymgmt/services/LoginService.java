@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * Service methods to connect with the database of user table for login
  * operation
  *
- * @author Biswajit
+ * @author lokesh
  */
 public class LoginService {
 

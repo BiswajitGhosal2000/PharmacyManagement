@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
 /**
  *Model For sending mail to the user
- * @author Biswajit
+ * @author pavan
  */
 public class MailSender extends ActionSupport implements Serializable {
 

@@ -15,7 +15,7 @@ import com.exavalu.pharmacymgmt.services.CustomerService;
 
 /**
  *Model for Customer where we are creating the instance variables for customer and the methods for CURD operations are mentioned.
- * @author Biswajit
+ * @author pavan
  */
 public class Customer extends ActionSupport implements SessionAware, Serializable {
     

@@ -16,7 +16,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *Model for Product where we are creating the instance variables for product and the methods for CURD operations.
- * @author Biswajit
+ * @author mavanth
  */
 public class Product extends ActionSupport implements SessionAware, Serializable {
     

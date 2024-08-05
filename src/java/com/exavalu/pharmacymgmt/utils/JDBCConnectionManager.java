@@ -28,7 +28,6 @@ public class JDBCConnectionManager {
             String password = jdbcUtility.getPropertyValue("pass");
             String dbName = jdbcUtility.getPropertyValue("dbName");
             String url = jdbcUtility.getPropertyValue("url");
-            System.out.println(user + password + dbName + url);
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url + dbName, user, password);
 

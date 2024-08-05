@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * Service methods to connect with the database of products table for CURD
  * operations
  *
- * @author RITWIK SHAW
+ * @author lokesh
  */
 public class ProductService {
 

@@ -23,7 +23,7 @@ import org.apache.struts2.interceptor.SessionAware;
 /**
  * Model for role based login and logout operations
  *
- * @author Biswajit
+ * @author chandhu
  */
 public class Login extends ActionSupport implements SessionAware, Serializable {
 

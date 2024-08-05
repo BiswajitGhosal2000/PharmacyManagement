@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * Service methods to connect with the database of inventory table for CURD
  * operations
  *
- * @author Pratik
+ * @author mavanth
  */
 public class InventoryService {
 

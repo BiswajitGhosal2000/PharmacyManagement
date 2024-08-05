@@ -18,7 +18,7 @@ import org.apache.struts2.interceptor.SessionAware;
 /**
  * Model for fetching Aadhaar details of employees using API call
  *
- * @author Pratik
+ * @author lokesh
  */
 public class ApiEmployee extends ActionSupport implements  SessionAware, Serializable {
     

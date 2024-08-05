@@ -1,7 +1,7 @@
 <%-- 
     Document   : inventory
     Created on : 24-Feb-2023, 12:24:18 pm
-    Author     : Biswajit
+    Author     : pavan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -76,7 +76,7 @@
                                 <td>₹${product.getUnitPrice()}</td>
                                 <td>${product.getExpiryDate()}</td>
                                 <td>${product.getShelfNumber()}</td>
-                                <td>
+                                <td class="text-center">
                                     <a href="EditProduct?productNumber=${product.getProductNumber()}" class=" text-decoration-none">
                                         <button class="w-20 btn btn-sm btn-info text-center"><i class="bi bi-pencil-square"></i></button>
                                     </a>

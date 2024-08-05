@@ -1,7 +1,7 @@
 <%-- 
     Document   : invoice
     Created on : 02-Mar-2023, 8:58:40 pm
-    Author     : RITWIK SHAW
+    Author     : pavan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +27,7 @@
                     <div class="invoice-company text-inverse f-w-600">
                         <span class="pull-right hidden-print"></span>
                         MEDEASY PHARMACY<br>
-                      <small>9A Lalit Mitra Lane, Kolkata-700004<br></small>
+                      <small>benz circle, vijayawada, 520010<br></small>
                         <!--+91 934 3231 325-->
                     </div>
                     <!-- end invoice-company -->

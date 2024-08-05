@@ -18,7 +18,7 @@ import org.apache.struts2.interceptor.SessionAware;
 /**
  *  Model for inventory where we are creating the instance variables for inventory and the methods for CURD operations are mentioned.
  * 
- * @author Pratik
+ * @author lokesh
  */
 public class Inventory extends ActionSupport implements SessionAware, Serializable {
     

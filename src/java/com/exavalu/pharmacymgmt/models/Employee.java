@@ -29,7 +29,7 @@ import org.apache.struts2.interceptor.SessionAware;
  * Model for employee where we are creating the instance variables for employee
  * and the methods for CURD operations are mentioned.
  *
- * @author gaurav
+ * @author mavanth
  */
 public class Employee extends ActionSupport implements SessionAware, Serializable {
 

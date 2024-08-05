@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 /**
  * Service methods to fetch data from API for aadhaar verification
  *
- * @author Pratik
+ * @author chandhu
  */
 public class APIService {
 

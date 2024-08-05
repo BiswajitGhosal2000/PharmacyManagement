@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : 21-Feb-2023, 12:11:42 pm
-    Author     : RITWIK SHAW
+    Author     : mavanth
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -140,7 +140,7 @@
                         <div class="row">
                             <div class="form-floating col">
                                 <input type="text" class="form-control" id="floatingInput" placeholder="qualification" name="qualification" value="${Emp.getQualification()}" readonly>
-                                <label for="floatingInput">qualification</label>
+                                <label for="floatingInput">Qualification</label>
                             </div>
 
                             <div class="form-floating col">
